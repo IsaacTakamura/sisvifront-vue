@@ -13,12 +13,6 @@
         <li class="nav-item">
           <router-link to="/registro" class="nav-link" href="#">Registro</router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/empleados" class="nav-link" href="#">Empleados</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/registrarEmpleado" class="nav-link" href="#">Crear Empleados</router-link>
-        </li>
         <li>
           <router-link to="/historial" class="nav-link" href="#">Historial de Mantenimiento</router-link>
         </li>
