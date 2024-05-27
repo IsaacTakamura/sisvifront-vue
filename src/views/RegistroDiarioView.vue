@@ -175,7 +175,7 @@ export default {
     },
     methods: {
         fetchVehicles() {
-            axios.get(`http://localhost:8063/api/vehiculos/listar`)
+            axios.get(`http://localhost:8069/api/vehiculos/listar`)
                 .then(response => {
                     this.vehicles = response.data;
                     // Filtra los vehículos inmediatamente después de obtenerlos
