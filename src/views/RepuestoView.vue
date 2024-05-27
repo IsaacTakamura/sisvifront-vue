@@ -7,24 +7,35 @@
         <div class="input-row">
           <div class="input-group">
             <label for="codigo-interno">Filtro por Codigo Interno</label>
-            <input id="codigo-interno" type="text">
+            <input id="codigo-interno" type="text" v-model="filtroCodigoInterno">
           </div>
           <div class="input-group">
             <label for="descripcion">Filtro por Descripcion</label>
-            <input id="descripcion" type="text">
+            <input id="descripcion" type="text" v-model="filtroDescripcion">
           </div>
         </div>
-        <table>
-      <thead>
-        <tr>
-          <th>Registro</th>
-          <th>Código Interno</th>
-          <th>Descripción del Repuesto</th>
-          <th>Stock</th>
-        </tr>
-      </thead>
+        <table class="tabla-repuestos">
+          <thead>
+      <tr>
+        <th>ID</th>
+        <th>Código Interno</th>
+        <th>Descripción</th>
+        <th>Fabricante</th>
+        <th>Fecha de Fabricación</th>
+        <th>Cantidad en Stock</th>
+      </tr>
+    </thead>
       <tbody>
-        <!-- Tus filas de datos van aquí -->
+        <tr v-for="(repuesto, index) in repuestosFiltrados" :key="index">
+          <td>{{ repuesto.id }}</td>
+          <td>{{ repuesto.codigoInterno }}</td>
+          <td>{{ repuesto.descripcion }}</td>
+          <td>{{ repuesto.fabricante }}</td>
+          <td>{{ repuesto.fechaFabricacion }}</td>
+          <td>{{ repuesto.cantidadStock }}</td>
+
+
+        </tr>
       </tbody>
     </table>
         
@@ -39,6 +50,41 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios';
+export default {
+  data() {
+    return {
+      repuestos: [],
+      filtroCodigoInterno: '',
+      filtroDescripcion: '',
+      selectedRow: null,
+    };
+  },
+  computed: {
+    repuestosFiltrados() {
+      return this.repuestos.filter(repuesto =>
+        repuesto.codigoInterno.includes(this.filtroCodigoInterno) &&
+        repuesto.descripcion.includes(this.filtroDescripcion)
+      );
+    },
+  },
+  methods: {
+    selectRow(repuesto) {
+      this.selectedRow = repuesto;
+    },
+    async fetchRepuestos() {
+      const url = 'http://localhost:8069/api/repuestos/listar'; 
+      const response = await axios.get(url);
+      this.repuestos = response.data;
+    },
+  },
+  created() {
+    this.fetchRepuestos();
+  },
+};
+</script>
 
 <style scoped>
 .container {
@@ -91,6 +137,25 @@ table {
     border: none;
     cursor: pointer;
   }
+  .tabla-repuestos {
+  width: 100%; 
+  border-collapse: collapse; 
+}
+
+.tabla-repuestos th, .tabla-repuestos td {
+  border: 1px solid #ddd; 
+  padding: 8px; 
+  text-align: center; 
+}
+
+.tabla-repuestos th {
+  background-color: #f2f2f2; 
+}
+  
+.tabla-repuestos tr:hover {
+  background-color: #f5f5f5; 
+  cursor: pointer;
+}
 
   
 
