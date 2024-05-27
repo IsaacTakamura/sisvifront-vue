@@ -19,6 +19,15 @@
         <li class="nav-item">
           <router-link to="/registrarEmpleado" class="nav-link" href="#">Crear Empleados</router-link>
         </li>
+        <li>
+          <router-link to="/historial" class="nav-link" href="#">Historial de Mantenimiento</router-link>
+        </li>
+        <li>
+          <router-link to="/repuesto" class="nav-link" href="#">Repuesto Ingresar</router-link>
+        </li>
+        <li>
+          <router-link to="/gestion" class="nav-link" href="#">Repuesto</router-link>
+        </li>
     
       </ul>
       
