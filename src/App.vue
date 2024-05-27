@@ -11,7 +11,7 @@
           <router-link to="/ficha" class="nav-link active" aria-current="page" href="#">Ficha Técnica</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/registrarDepartamento" class="nav-link" href="#">Crear Departamento</router-link>
+          <router-link to="/registro" class="nav-link" href="#">Registro</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/empleados" class="nav-link" href="#">Empleados</router-link>
