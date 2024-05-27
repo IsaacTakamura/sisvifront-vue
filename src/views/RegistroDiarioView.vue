@@ -13,7 +13,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="vehicle in filteredVehicles" :key="vehicle.id">
+                        <tr v-for="vehicle in filteredVehicles" :key="vehicle.id" @click="selectVehicle(vehicle)">
                             <td>{{ vehicle.placa }}</td>
                             <td>{{ vehicle.marca }}</td>
                         </tr>
@@ -24,13 +24,14 @@
             <div class="col-5 border p-3">
                 <h5>FICHA TECNICA</h5>
                 <div class="d-flex flex-column vh-100">
-                    <div class="border p-3" style="background-color: gray; flex: 0 0 30%;">
+                    <div class="border p-3" :style="{backgroundImage: `url(${selectedVehicle.img})`, backgroundSize: 'cover', flex: '0 0 30%'}">
                         <!-- Aquí va la imagen del carro -->
-                        <img v-if="selectedVehicle" :src="selectedVehicle.image" alt="Car image">
+                        <img v-if="imageUrl" :src="imageUrl" alt="Imagen seleccionada" class="uploaded-image">
                     </div>
                     <div class="border p-3" style="flex: 0 0 10%;">
                         <!-- Aquí va la ruta de la imagen -->
-                        <input type="file" @change="updateImage">
+                        <input type="file" @change="onFileChange">
+
                     </div>
                     <div class="border p-3" style="flex: 0 0 60%;">
                         <!-- Aquí van los detalles del carro -->
@@ -38,15 +39,15 @@
                             <div class="row">
                                 <div class="col">
                                     <label>Placa:</label>
-                                    <input type="text" :value="selectedVehicle.placa" readonly>
+                                    <input type="text" :value="selectedVehicle ? selectedVehicle.placa : ''" readonly>
                                     <label>Cliente:</label>
                                     <input type="text" :value="selectedVehicle.cliente" readonly>
                                     <label>Documento:</label>
                                     <input type="text" :value="selectedVehicle.documento" readonly>
                                     <label>Número de Motor:</label>
-                                    <input type="text" :value="selectedVehicle.numeroMotor" readonly>
+                                    <input type="text" :value="selectedVehicle.numMotor" readonly>
                                     <label>Número de Serie:</label>
-                                    <input type="text" :value="selectedVehicle.numeroSerie" readonly>
+                                    <input type="text" :value="selectedVehicle.numSerie" readonly>
                                     <label>Marca:</label>
                                     <input type="text" :value="selectedVehicle.marca" readonly>
                                 </div>
@@ -54,7 +55,7 @@
                                     <label>Modelo:</label>
                                     <input type="text" :value="selectedVehicle.modelo" readonly>
                                     <label>Año de Fabricación:</label>
-                                    <input type="text" :value="selectedVehicle.anoFabricacion" readonly>
+                                    <input type="text" :value="selectedVehicle.anioFabricacion" readonly>
                                     <label>Color:</label>
                                     <input type="text" :value="selectedVehicle.color" readonly>
                                     <label>Kilometraje:</label>
@@ -132,7 +133,8 @@
                         </div>
                         <div class="form-group">
                             <label for="kilometraje" class="col-sm-2 col-form-label">Kilometraje Ingreso</label>
-                            <input type="number" id="kilometraje" v-model="mantenimiento.kilometrajeIngresado" class="form-control">
+                            <input type="number" id="kilometraje" v-model="mantenimiento.kilometrajeIngresado"
+                                class="form-control">
                         </div>
                         <div class="division">
                             <!-- espacio vacio para que no este muy pegado -->
@@ -156,6 +158,7 @@ export default {
             search: '',
             vehicles: [],
             filteredVehicles: [],
+            imageUrl: null,
             mantenimiento: {
                 id: 0,
                 idVehiculo: 0,
@@ -174,6 +177,17 @@ export default {
         }
     },
     methods: {
+        onFileChange(e) {
+            const file = e.target.files[0];
+            this.createImageUrl(file);
+        },
+        createImageUrl(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                this.imageUrl = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
         fetchVehicles() {
             axios.get(`http://localhost:8069/api/vehiculos/listar`)
                 .then(response => {
@@ -193,20 +207,26 @@ export default {
             // Código para registrar una nueva placa
         },
         guardarIngreso() {
-            axios.post('http://localhost:8066/api/mantenimiento/ingreso/guardar', this.mantenimiento)
+            axios.post('http://localhost:8069/api/mantenimiento/ingreso/guardar', this.mantenimiento)
                 .then(response => {
                     console.log(response);
                 })
                 .catch(error => {
                     console.log(error);
                 });
-        }
+        },
+        selectVehicle(vehicle) {
+            this.selectedVehicle = vehicle;
+        },
 
     },
     created() {
         // Obtiene los vehículos cuando se crea el componente
         this.fetchVehicles();
-    }
+    },
+    selectVehicle(vehicle) {
+        this.vehicleSelected = vehicle;
+    },
 }
 </script>
 
@@ -220,5 +240,10 @@ label {
     display: block;
     color: black;
 
+}
+
+.uploaded-image {
+    max-width: 100%;
+    height: auto;
 }
 </style>
