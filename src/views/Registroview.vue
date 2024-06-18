@@ -60,6 +60,7 @@
             <th>Estado</th>
           </tr>
         </thead>
+        
         <tbody>
           <tr v-for="driver in filteredDrivers" :key="driver.id">
             <td>{{ driver.id }}</td>
