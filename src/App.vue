@@ -22,6 +22,9 @@
         <li>
           <router-link to="/gestion" class="nav-link" href="#">Repuesto</router-link>
         </li>
+        <li>
+          <router-link to="/registrou" class="nav-link" href="#">Registros</router-link>
+        </li>
     
       </ul>
       

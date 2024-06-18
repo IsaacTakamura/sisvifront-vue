@@ -6,7 +6,7 @@ import AboutView from '../views/AboutView.vue'
 import HistorialMantenimientoView from '../views/HistorialMantenimientoView.vue'
 import RepuestoIngresoView from '../views/RepuestoIngresoView.vue'
 import RepuestoView from '../views/RepuestoView.vue'
-
+import Registroview from '../views/Registroview.vue'
 const routes = [
   {
     path: '/',
@@ -47,6 +47,12 @@ const routes = [
     path: '/gestion',
     name: 'gestion',
     component: RepuestoView
+  },
+
+  {
+    path: '/registrou',
+    name: 'registrou',
+    component: Registroview
   }
 ]
 const router = createRouter({
