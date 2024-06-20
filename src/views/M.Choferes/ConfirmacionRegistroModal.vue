@@ -1,0 +1,83 @@
+<template>
+    <div v-if="isVisible" class="modal-overlay" @click.self="close">
+      <div class="modal-content">
+        <h3>Confirmar Registro</h3>
+        <p>¿Está seguro de que desea registrar este chofer?</p>
+        <div class="modal-buttons">
+          <button class="modal-button confirm-button" @click="confirm">Aceptar</button>
+          <button class="modal-button cancel-button" @click="close">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    props: {
+      isVisible: Boolean
+    },
+    methods: {
+      close() {
+        this.$emit('close');
+      },
+      confirm() {
+        this.$emit('confirm');
+      }
+    }
+  }
+  </script>
+  
+  <style scoped>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .modal-button {
+    width: 100px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirm-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .cancel-button {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .modal-button:hover {
+    opacity: 0.8;
+  }
+  </style>
+  

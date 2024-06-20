@@ -2,7 +2,7 @@
   <div class="centered-container">
     <button @click="toggleRegistrationForm" class="btn btn-primary">Registrar Chofer</button>
     <div v-if="showRegistrationForm" class="registration-form">
-      <form @submit.prevent="registerDriver" class="form">
+      <form @submit.prevent="confirmRegisterDriver" class="form">
         <div class="form-group">
           <label for="primerNombre" class="form-label">Primer Nombre</label>
           <input type="text" id="primerNombre" v-model="driver.primerNombre" required class="form-control">
@@ -20,7 +20,7 @@
           <input type="text" id="apellidoMaterno" v-model="driver.apellidoMaterno" class="form-control">
         </div>
         <div class="form-group">
-          <label for="dni" class="form-label" >DNI</label>
+          <label for="dni" class="form-label">DNI</label>
           <input type="text" id="dni" v-model="driver.dni" required class="form-control">
         </div>
         <div class="form-group">
@@ -80,27 +80,29 @@
           <td>{{ driver.licenciaConducir }}</td>
           <td>{{ formatDate(driver.fechaVencimientoLicencia) }}</td>
           <td>
+            <button @click="editDriver(driver.id)" class="btn btn-sm btn-warning">Editar</button>
             <button @click="deleteDriver(driver.id)" class="btn btn-sm btn-danger">Eliminar</button>
           </td>
         </tr>
       </tbody>
     </table>
-    <confirmation-modal
-      :isVisible="showModal"
-      message="¿Estás seguro de que deseas eliminar este chofer?"
-      @confirm="confirmDelete"
-      @cancel="closeModal"
-    />
+    <confirmation-modal :isVisible="showModal" message="¿Estás seguro de que deseas eliminar este chofer?" @confirm="confirmDelete" @cancel="closeModal" />
+    <editar-chofer-modal :isVisible="showEditModal" :driver="selectedDriver" @close="closeEditModal" @save="updateDriver" />
+    <confirmacion-registro-modal :isVisible="showConfirmRegisterModal" @close="closeConfirmRegisterModal" @confirm="registerDriver" />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import ConfirmationModal from './ConfirmationModal.vue';
+import ConfirmationModal from './M.Choferes/ConfirmationModal.vue';
+import EditarChoferModal from './M.Choferes/EditarChoferModal.vue';
+import ConfirmacionRegistroModal from './M.Choferes/ConfirmacionRegistroModal.vue';
 
 export default {
   components: {
-    ConfirmationModal
+    ConfirmationModal,
+    EditarChoferModal,
+    ConfirmacionRegistroModal
   },
   data() {
     return {
@@ -121,7 +123,10 @@ export default {
       showRegistrationForm: false,
       currentDriverId: null,
       dateError: false,
-      dateErrorMessage: 'La licencia está vencida.'
+      dateErrorMessage: 'La licencia está vencida.',
+      showEditModal: false,
+      selectedDriver: {},
+      showConfirmRegisterModal: false
     };
   },
   computed: {
@@ -140,24 +145,38 @@ export default {
         })
         .catch(error => console.error("Error fetching drivers:", error));
     },
+    confirmRegisterDriver() {
+      if (!this.driver.primerNombre || !this.driver.apellidoPaterno || !this.driver.dni || !this.driver.licenciaConducir || !this.driver.categoriaLicencia || !this.driver.fechaVencimientoLicencia || !this.driver.telefono) {
+        window.alert('Por favor, complete todos los campos obligatorios.');
+        return;
+      }
+      this.showConfirmRegisterModal = true;
+    },
     registerDriver() {
-    if (!this.driver.primerNombre || !this.driver.apellidoPaterno || !this.driver.dni || !this.driver.licenciaConducir || !this.driver.categoriaLicencia || !this.driver.fechaVencimientoLicencia || !this.driver.telefono) {
-      window.alert('Por favor, complete todos los campos obligatorios.');
-      return;
-    }
-    if (!this.isFutureDate(this.driver.fechaVencimientoLicencia)) {
-      this.dateError = true;
-      return;
-    }
-    this.dateError = false;
-    axios.post('http://localhost:8069/api/choferes/guardar', this.driver)
-      .then(response => {
-        this.fetchDrivers();
-        this.driver = {};
-        this.showRegistrationForm = false;
-      })
-      .catch(error => console.error("Failed to register driver:", error));
-  },
+      if (!this.isFutureDate(this.driver.fechaVencimientoLicencia)) {
+        this.dateError = true;
+        return;
+      }
+      this.dateError = false;
+      axios.post('http://localhost:8069/api/choferes/guardar', this.driver)
+        .then(response => {
+          this.fetchDrivers();
+          this.driver = {
+            primerNombre: '',
+            segundoNombre: '',
+            apellidoPaterno: '',
+            apellidoMaterno: '',
+            dni: '',
+            licenciaConducir: '',
+            categoriaLicencia: '',
+            fechaVencimientoLicencia: '',
+            telefono: ''
+          };
+          this.showRegistrationForm = false;
+          this.showConfirmRegisterModal = false;
+        })
+        .catch(error => console.error("Failed to register driver:", error));
+    },
     deleteDriver(id) {
       this.currentDriverId = id;
       this.showModal = true;
@@ -172,6 +191,29 @@ export default {
     },
     closeModal() {
       this.showModal = false;
+    },
+    closeConfirmRegisterModal() {
+      this.showConfirmRegisterModal = false;
+    },
+    editDriver(id) {
+      axios.get(`http://localhost:8069/api/choferes/listar/${id}`)
+        .then(response => {
+          this.selectedDriver = response.data;
+          this.showEditModal = true;
+        })
+        .catch(error => console.error("Error fetching driver:", error));
+    },
+    updateDriver(driver) {
+      axios.put(`http://localhost:8069/api/choferes/actualizar/${driver.id}`, driver)
+        .then(response => {
+          this.fetchDrivers();
+          this.showEditModal = false;
+        })
+        .catch(error => console.error("Failed to update driver:", error));
+    },
+    closeEditModal() {
+      this.showEditModal = false;
+      this.selectedDriver = {};
     },
     formatDate(dateString) {
       if (!dateString) return 'No disponible';
@@ -202,55 +244,81 @@ export default {
 .form-group {
   margin-bottom: 1rem;
 }
+
 .form-control {
-  width: 70%;  /* Ajusta el ancho de los inputs a 70% */
+  width: 70%;
+  /* Ajusta el ancho de los inputs a 70% */
   padding: 0.375rem 0.75rem;
-  margin: auto; 
-  text-align: center; /* Center text inside inputs */
+  margin: auto;
+  text-align: center;
+  /* Center text inside inputs */
 }
+
 .form-label {
-  width: 100%; /* O ajusta según tu preferencia */
-  padding-right: 10px; /* Espacio a la derecha del label */
-  margin-right: 10px; /* Añade más espacio a la derecha */
-  text-align: center; /* Alinea el texto a la derecha */
+  width: 100%;
+  /* O ajusta según tu preferencia */
+  padding-right: 10px;
+  /* Espacio a la derecha del label */
+  margin-right: 10px;
+  /* Añade más espacio a la derecha */
+  text-align: center;
+  /* Alinea el texto a la derecha */
 }
+
 .registration-form {
-  width: 45%; /* Ajusta el ancho según sea necesario */
+  width: 45%;
+  /* Ajusta el ancho según sea necesario */
   margin: 1rem auto;
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 0.25rem;
-  background-color: #f8f9fa; /* Light grey background */
-  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+  background-color: #f8f9fa;
+  /* Light grey background */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
 }
-.btn-primary, .btn-secondary {
+
+.btn-primary,
+.btn-secondary {
   width: auto;
   padding: 0.5rem 1rem;
   margin: 0.2rem;
 }
-.btn-success, .btn-secondary {
-  width: 150px; /* Set a common width */
-  height: 50px; /* Set a common height */
+
+.btn-success,
+.btn-secondary {
+  width: 150px;
+  /* Set a common width */
+  height: 50px;
+  /* Set a common height */
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  box-sizing: border-box; /* Ensure padding and border are included in the dimensions */
+  box-sizing: border-box;
+  /* Ensure padding and border are included in the dimensions */
 }
+
 .btn-danger {
   width: auto;
   padding: 0.5rem 1rem;
   margin-top: 1rem;
-  background-color: #f44336; /* Red for danger actions */
+  background-color: #f44336;
+  /* Red for danger actions */
   border: none;
 }
+
 .table {
-  margin-top: 2rem; /* More space above the table */
+  margin-top: 2rem;
+  /* More space above the table */
 }
+
 .button-group {
   display: flex;
-  justify-content: center; /* Center buttons horizontally */
-  gap: 10px; /* Space between buttons */
+  justify-content: center;
+  /* Center buttons horizontally */
+  gap: 10px;
+  /* Space between buttons */
   margin-top: 20px;
 }
 
