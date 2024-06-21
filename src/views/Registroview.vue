@@ -5,44 +5,53 @@
       <form @submit.prevent="confirmRegisterDriver" class="form">
         <div class="form-group">
           <label for="primerNombre" class="form-label">Primer Nombre</label>
-          <input type="text" id="primerNombre" v-model="driver.primerNombre" required class="form-control">
+          <input type="text" id="primerNombre" v-model="driver.primerNombre" class="form-control">
+          <p v-if="errors.primerNombre" class="text-danger error-message">{{ errors.primerNombre }}</p>
         </div>
         <div class="form-group">
           <label for="segundoNombre" class="form-label">Segundo Nombre</label>
           <input type="text" id="segundoNombre" v-model="driver.segundoNombre" class="form-control">
+          <p v-if="errors.segundoNombre" class="text-danger error-message">{{ errors.segundoNombre }}</p>
         </div>
         <div class="form-group">
           <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
-          <input type="text" id="apellidoPaterno" v-model="driver.apellidoPaterno" required class="form-control">
+          <input type="text" id="apellidoPaterno" v-model="driver.apellidoPaterno" class="form-control">
+          <p v-if="errors.apellidoPaterno" class="text-danger error-message">{{ errors.apellidoPaterno }}</p>
         </div>
         <div class="form-group">
           <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
           <input type="text" id="apellidoMaterno" v-model="driver.apellidoMaterno" class="form-control">
+          <p v-if="errors.apellidoMaterno" class="text-danger error-message">{{ errors.apellidoMaterno }}</p>
         </div>
         <div class="form-group">
           <label for="dni" class="form-label">DNI</label>
-          <input type="text" id="dni" v-model="driver.dni" required class="form-control">
+          <input type="text" id="dni" v-model="driver.dni" class="form-control">
+          <p v-if="errors.dni" class="text-danger error-message">{{ errors.dni }}</p>
         </div>
         <div class="form-group">
           <label for="licenciaConducir" class="form-label">Licencia de Conducir</label>
-          <input type="text" id="licenciaConducir" v-model="driver.licenciaConducir" required class="form-control">
+          <input type="text" id="licenciaConducir" v-model="driver.licenciaConducir" class="form-control">
+          <p v-if="errors.licenciaConducir" class="text-danger error-message">{{ errors.licenciaConducir }}</p>
         </div>
         <div class="form-group">
           <label for="categoriaLicencia" class="form-label">Categoría de Licencia</label>
-          <select id="categoriaLicencia" v-model="driver.categoriaLicencia" required class="form-control">
+          <select id="categoriaLicencia" v-model="driver.categoriaLicencia" class="form-control">
             <option value="A">A</option>
             <option value="B">B</option>
             <option value="C">C</option>
           </select>
+          <p v-if="errors.categoriaLicencia" class="text-danger error-message">{{ errors.categoriaLicencia }}</p>
         </div>
         <div class="form-group">
           <label for="fechaVencimientoLicencia" class="form-label">Fecha de Vencimiento de Licencia</label>
-          <input type="date" id="fechaVencimientoLicencia" v-model="driver.fechaVencimientoLicencia" required class="form-control">
-          <p v-if="dateError" class="text-danger">{{ dateErrorMessage }}</p>
+          <input type="date" id="fechaVencimientoLicencia" v-model="driver.fechaVencimientoLicencia" class="form-control">
+          <p v-if="errors.fechaVencimientoLicencia" class="text-danger error-message">{{ errors.fechaVencimientoLicencia }}</p>
+          <p v-if="dateError" class="text-danger error-message">{{ dateErrorMessage }}</p>
         </div>
         <div class="form-group">
           <label for="telefono" class="form-label">Teléfono</label>
           <input type="text" id="telefono" v-model="driver.telefono" class="form-control">
+          <p v-if="errors.telefono" class="text-danger error-message">{{ errors.telefono }}</p>
         </div>
         <div class="button-group">
           <button type="submit" class="btn btn-success">Registrar</button>
@@ -126,16 +135,27 @@ export default {
       dateErrorMessage: 'La licencia está vencida.',
       showEditModal: false,
       selectedDriver: {},
-      showConfirmRegisterModal: false
+      showConfirmRegisterModal: false,
+      errors: {}
     };
   },
   computed: {
     filteredDrivers() {
-      return this.drivers.filter(driver =>
-        driver.primerNombre.toLowerCase().includes(this.search.toLowerCase()) ||
-        driver.segundoNombre.toLowerCase().includes(this.search.toLowerCase())
+    return this.drivers.filter(driver => {
+      const searchTerm = this.search.toLowerCase();
+      return (
+        driver.primerNombre.toLowerCase().includes(searchTerm) ||
+        driver.segundoNombre.toLowerCase().includes(searchTerm) ||
+        driver.apellidoPaterno.toLowerCase().includes(searchTerm) ||
+        driver.apellidoMaterno.toLowerCase().includes(searchTerm) ||
+        driver.dni.toLowerCase().includes(searchTerm) ||
+        driver.telefono.toLowerCase().includes(searchTerm) ||
+        driver.categoriaLicencia.toLowerCase().includes(searchTerm) ||
+        driver.licenciaConducir.toLowerCase().includes(searchTerm) ||
+        this.formatDate(driver.fechaVencimientoLicencia).toLowerCase().includes(searchTerm)
       );
-    }
+    });
+  }
   },
   methods: {
     fetchDrivers() {
@@ -146,11 +166,52 @@ export default {
         .catch(error => console.error("Error fetching drivers:", error));
     },
     confirmRegisterDriver() {
-      if (!this.driver.primerNombre || !this.driver.apellidoPaterno || !this.driver.dni || !this.driver.licenciaConducir || !this.driver.categoriaLicencia || !this.driver.fechaVencimientoLicencia || !this.driver.telefono) {
-        window.alert('Por favor, complete todos los campos obligatorios.');
-        return;
+      this.errors = {};
+      let valid = true;
+
+      if (!this.driver.primerNombre) {
+        this.errors.primerNombre = 'Por favor, ingrese el primer nombre.';
+        valid = false;
       }
-      this.showConfirmRegisterModal = true;
+      if (!this.driver.segundoNombre) {
+        this.errors.segundoNombre = 'Por favor, ingrese el segundo nombre.';
+        valid = false;
+      }
+      if (!this.driver.apellidoPaterno) {
+        this.errors.apellidoPaterno = 'Por favor, ingrese el apellido paterno.';
+        valid = false;
+      }
+      if (!this.driver.apellidoMaterno) {
+        this.errors.apellidoMaterno = 'Por favor, ingrese el apellido materno.';
+        valid = false;
+      }
+      if (!this.driver.dni) {
+        this.errors.dni = 'Por favor, ingrese el DNI.';
+        valid = false;
+      }
+      if (!this.driver.licenciaConducir) {
+        this.errors.licenciaConducir = 'Por favor, ingrese la licencia de conducir.';
+        valid = false;
+      }
+      if (!this.driver.categoriaLicencia) {
+        this.errors.categoriaLicencia = 'Por favor, seleccione la categoría de licencia.';
+        valid = false;
+      }
+      if (!this.driver.fechaVencimientoLicencia) {
+        this.errors.fechaVencimientoLicencia = 'Por favor, seleccione la fecha de vencimiento de la licencia.';
+        valid = false;
+      } else if (!this.isFutureDate(this.driver.fechaVencimientoLicencia)) {
+        this.dateError = true;
+        valid = false;
+      }
+      if (!this.driver.telefono) {
+        this.errors.telefono = 'Por favor, ingrese el número de teléfono.';
+        valid = false;
+      }
+
+      if (valid) {
+        this.showConfirmRegisterModal = true;
+      }
     },
     registerDriver() {
       if (!this.isFutureDate(this.driver.fechaVencimientoLicencia)) {
@@ -199,6 +260,7 @@ export default {
       axios.get(`http://localhost:8069/api/choferes/listar/${id}`)
         .then(response => {
           this.selectedDriver = response.data;
+          this.selectedDriver.fechaVencimientoLicencia = this.formatDateForInput(this.selectedDriver.fechaVencimientoLicencia);
           this.showEditModal = true;
         })
         .catch(error => console.error("Error fetching driver:", error));
@@ -223,6 +285,14 @@ export default {
         month: 'long',
         day: 'numeric'
       });
+    },
+    formatDateForInput(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
     },
     isFutureDate(dateString) {
       const today = new Date();
@@ -326,5 +396,15 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.text-danger {
+  color: red;
+  font-size: 0.875rem;
+}
+
+.error-message {
+  text-align: center;
+  margin-top: 0.25rem;
 }
 </style>
