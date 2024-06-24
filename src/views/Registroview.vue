@@ -44,8 +44,10 @@
         </div>
         <div class="form-group">
           <label for="fechaVencimientoLicencia" class="form-label">Fecha de Vencimiento de Licencia</label>
-          <input type="date" id="fechaVencimientoLicencia" v-model="driver.fechaVencimientoLicencia" class="form-control">
-          <p v-if="errors.fechaVencimientoLicencia" class="text-danger error-message">{{ errors.fechaVencimientoLicencia }}</p>
+          <input type="date" id="fechaVencimientoLicencia" v-model="driver.fechaVencimientoLicencia"
+            class="form-control">
+          <p v-if="errors.fechaVencimientoLicencia" class="text-danger error-message">{{ errors.fechaVencimientoLicencia
+            }}</p>
           <p v-if="dateError" class="text-danger error-message">{{ dateErrorMessage }}</p>
         </div>
         <div class="form-group">
@@ -95,9 +97,12 @@
         </tr>
       </tbody>
     </table>
-    <confirmation-modal :isVisible="showModal" message="¿Estás seguro de que deseas eliminar este chofer?" @confirm="confirmDelete" @cancel="closeModal" />
-    <editar-chofer-modal :isVisible="showEditModal" :driver="selectedDriver" @close="closeEditModal" @save="updateDriver" />
-    <confirmacion-registro-modal :isVisible="showConfirmRegisterModal" @close="closeConfirmRegisterModal" @confirm="registerDriver" />
+    <confirmation-modal :isVisible="showModal" message="¿Estás seguro de que deseas eliminar este chofer?"
+      @confirm="confirmDelete" @cancel="closeModal" />
+    <editar-chofer-modal :isVisible="showEditModal" :driver="selectedDriver" @close="closeEditModal"
+      @save="updateDriver" />
+    <confirmacion-registro-modal :isVisible="showConfirmRegisterModal" @close="closeConfirmRegisterModal"
+      @confirm="registerDriver" />
   </div>
 </template>
 
@@ -141,21 +146,21 @@ export default {
   },
   computed: {
     filteredDrivers() {
-    return this.drivers.filter(driver => {
-      const searchTerm = this.search.toLowerCase();
-      return (
-        driver.primerNombre.toLowerCase().includes(searchTerm) ||
-        driver.segundoNombre.toLowerCase().includes(searchTerm) ||
-        driver.apellidoPaterno.toLowerCase().includes(searchTerm) ||
-        driver.apellidoMaterno.toLowerCase().includes(searchTerm) ||
-        driver.dni.toLowerCase().includes(searchTerm) ||
-        driver.telefono.toLowerCase().includes(searchTerm) ||
-        driver.categoriaLicencia.toLowerCase().includes(searchTerm) ||
-        driver.licenciaConducir.toLowerCase().includes(searchTerm) ||
-        this.formatDate(driver.fechaVencimientoLicencia).toLowerCase().includes(searchTerm)
-      );
-    });
-  }
+      return this.drivers.filter(driver => {
+        const searchTerm = this.search.toLowerCase();
+        return (
+          driver.primerNombre.toLowerCase().includes(searchTerm) ||
+          driver.segundoNombre.toLowerCase().includes(searchTerm) ||
+          driver.apellidoPaterno.toLowerCase().includes(searchTerm) ||
+          driver.apellidoMaterno.toLowerCase().includes(searchTerm) ||
+          driver.dni.toLowerCase().includes(searchTerm) ||
+          driver.telefono.toLowerCase().includes(searchTerm) ||
+          driver.categoriaLicencia.toLowerCase().includes(searchTerm) ||
+          driver.licenciaConducir.toLowerCase().includes(searchTerm) ||
+          this.formatDate(driver.fechaVencimientoLicencia).toLowerCase().includes(searchTerm)
+        );
+      });
+    }
   },
   methods: {
     fetchDrivers() {
@@ -219,7 +224,12 @@ export default {
         return;
       }
       this.dateError = false;
-      axios.post('http://localhost:8069/api/choferes/guardar', this.driver)
+
+      // Ajustar la fecha sumando un día
+      const driverCopy = { ...this.driver };
+      driverCopy.fechaVencimientoLicencia = this.adjustDate(driverCopy.fechaVencimientoLicencia);
+
+      axios.post('http://localhost:8069/api/choferes/guardar', driverCopy)
         .then(response => {
           this.fetchDrivers();
           this.driver = {
@@ -266,7 +276,10 @@ export default {
         .catch(error => console.error("Error fetching driver:", error));
     },
     updateDriver(driver) {
-      axios.put(`http://localhost:8069/api/choferes/actualizar/${driver.id}`, driver)
+      const driverCopy = { ...driver };
+      driverCopy.fechaVencimientoLicencia = this.adjustDate(driverCopy.fechaVencimientoLicencia);
+
+      axios.put(`http://localhost:8069/api/choferes/actualizar/${driverCopy.id}`, driverCopy)
         .then(response => {
           this.fetchDrivers();
           this.showEditModal = false;
@@ -300,6 +313,11 @@ export default {
       const inputDate = new Date(dateString);
       return inputDate > today;
     },
+    adjustDate(dateString) {
+      const date = new Date(dateString);
+      date.setDate(date.getDate() + 1);
+      return date.toISOString().split('T')[0];
+    },
     toggleRegistrationForm() {
       this.showRegistrationForm = !this.showRegistrationForm;
     }
@@ -309,6 +327,7 @@ export default {
   }
 }
 </script>
+
 
 <style scoped>
 .form-group {
