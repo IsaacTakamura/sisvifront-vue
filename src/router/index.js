@@ -7,6 +7,8 @@ import HistorialMantenimientoView from '../views/HistorialMantenimientoView.vue'
 import RepuestoIngresoView from '../views/RepuestoIngresoView.vue'
 import RepuestoView from '../views/RepuestoView.vue'
 import Registroview from '../views/Registroview.vue'
+import UbicacionVehiculoView from '../views/UbicacionVehiculoView.vue'
+
 const routes = [
   {
     path: '/',
@@ -53,6 +55,12 @@ const routes = [
     path: '/registrou',
     name: 'registrou',
     component: Registroview
+  },
+
+  {
+    path: '/ubicacionv',
+    name: 'ubicacionv',
+    component: UbicacionVehiculoView
   }
 ]
 const router = createRouter({
