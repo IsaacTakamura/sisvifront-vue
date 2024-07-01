@@ -8,14 +8,7 @@
                         <input type="text" id="placa" v-model="form.placa" class="form-control">
                     </div>
                     <!-- Repite el patrón anterior para los demás campos -->
-                    <div class="form-group">
-                        <label for="cliente">CLIENTE</label>
-                        <input type="text" id="cliente" v-model="form.cliente" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="dniRuc">DNI/RUC</label>
-                        <input type="text" id="dniRuc" v-model="form.dniRuc" class="form-control">
-                    </div>
+
                     <div class="form-group">
                         <label for="nMotor">N_MTOR</label>
                         <input type="text" id="nMotor" v-model="form.nMotor" class="form-control">
@@ -55,7 +48,10 @@
                     </div>
                     <div class="form-group">
                         <label for="transmision">TRANSMISION</label>
-                        <input type="text" id="transmision" v-model="form.transmision" class="form-control">
+                        <select id="combustible" v-model="form.transmision" class="form-control">
+                            <option value="Automatica">Automatica</option>
+                            <option value="Manual">Manual</option>
+                        </select>
                     </div>
                     <!-- ... -->
                     <button type="submit" class="btn btn-primary">Guardar</button>
@@ -63,10 +59,12 @@
             </div>
             <div class="col">
                 <div class="form-group">
-                    
+
                     <div class="col">
                         <div class="form-group">
-                            <label for="img"> <H4>IMAGEN</H4> </label><br><br>
+                            <label for="img">
+                                <H4>IMAGEN</H4>
+                            </label><br><br>
                             <input type="file" id="imagen" @change="onFileChange" class="img-fluid" hidden>
                             <div v-if="form.img" class="image-preview">
                                 <img :src="imagePreview" class="img-fluid">
@@ -90,10 +88,9 @@
 export default {
     data() {
         return {
+            // Inicialización del objeto form con los campos vacíos o valores por defecto
             form: {
                 placa: '',
-                cliente: '',
-                dniRuc: '',
                 nMotor: '',
                 nSerie: '',
                 marca: '',
@@ -104,25 +101,72 @@ export default {
                 tipoCombustible: '',
                 transmision: '',
                 img: null,
-                estado: true,
-                fechaRegistro: '',
-                fechaModificacion: '',
                 imagePreview: null,
-            }
-            
+            },
+            imagePreview: null, // Para la vista previa de la imagen
         };
     },
     methods: {
-        submitForm() {
-            // Aquí puedes enviar los datos del formulario a tu servidor
+        // Método para limpiar el formulario y la vista previa de la imagen
+        clearForm() {
+            this.form = {
+                placa: '',
+                nMotor: '',
+                nSerie: '',
+                marca: '',
+                modelo: '',
+                anioFabricacion: '',
+                color: '',
+                kilometraje: '',
+                tipoCombustible: '',
+                transmision: '',
+                img: null,
+                imagePreview: null,
+            };
+            this.imagePreview = null;
         },
+        // Método para manejar el cambio de archivo de imagen
         onFileChange(e) {
             const file = e.target.files[0];
             this.form.img = file;
             this.imagePreview = URL.createObjectURL(file);
         },
+        // Método para activar el input de archivo
         selectImage() {
             document.getElementById('imagen').click();
+        },
+        // Método para enviar el formulario
+        submitForm() {
+            const formData = {
+                placa: this.form.placa,
+                numMotor: this.form.nMotor, // Asegúrate de que las claves coincidan con las esperadas por tu backend
+                numSerie: this.form.nSerie,
+                marca: this.form.marca,
+                modelo: this.form.modelo,
+                anioFabricacion: parseInt(this.form.anioFabricacion, 10),
+                color: this.form.color,
+                kilometraje: parseInt(this.form.kilometraje, 10),
+                tipoCombustible: this.form.tipoCombustible,
+                transmision: this.form.transmision,
+                img: this.form.img // Asegúrate de manejar correctamente la carga de archivos en tu backend
+            };
+
+            fetch('http://localhost:8069/api/vehiculos/registar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    // Aquí puedes manejar la respuesta, como mostrar un mensaje de éxito
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    // Manejar el error, por ejemplo, mostrando un mensaje de error
+                });
         }
     }
 }

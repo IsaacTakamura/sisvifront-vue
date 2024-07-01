@@ -11,19 +11,13 @@
           <router-link to="/ficha" class="nav-link active" aria-current="page" href="#">Ficha Técnica</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/registro" class="nav-link" href="#">Registro</router-link>
+          <router-link to="/registraractivos" class="nav-link" href="#">Activos</router-link>
         </li>
         <li>
           <router-link to="/historial" class="nav-link" href="#">Historial de Mantenimiento</router-link>
         </li>
         <li>
           <router-link to="/repuesto" class="nav-link" href="#">Repuesto Ingresar</router-link>
-        </li>
-        <li>
-          <router-link to="/gestion" class="nav-link" href="#">Repuesto</router-link>
-        </li>
-        <li>
-          <router-link to="/registrou" class="nav-link" href="#">Registrar Usuario</router-link>
         </li>
 
         <li>

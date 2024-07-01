@@ -8,6 +8,7 @@ import RepuestoIngresoView from '../views/RepuestoIngresoView.vue'
 import RepuestoView from '../views/RepuestoView.vue'
 import Registroview from '../views/Registroview.vue'
 import UbicacionVehiculoView from '../views/UbicacionVehiculoView.vue'
+import RegistrarActivosView from '../views/RegistrarActivos.vue' 
 
 const routes = [
   {
@@ -15,6 +16,11 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+   {
+    path: '/registraractivos',
+    name: 'registraractivos',
+    component: RegistrarActivosView
+   },
   {
     path: '/ficha',
     name: 'ficha',
