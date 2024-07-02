@@ -40,20 +40,17 @@
                                 <div class="col">
                                     <label>Placa:</label>
                                     <input type="text" :value="selectedVehicle ? selectedVehicle.placa : ''" readonly>
-                                    <label>Cliente:</label>
-                                    <input type="text" :value="selectedVehicle.cliente" readonly>
-                                    <label>Documento:</label>
-                                    <input type="text" :value="selectedVehicle.documento" readonly>
                                     <label>Número de Motor:</label>
                                     <input type="text" :value="selectedVehicle.numMotor" readonly>
                                     <label>Número de Serie:</label>
                                     <input type="text" :value="selectedVehicle.numSerie" readonly>
                                     <label>Marca:</label>
                                     <input type="text" :value="selectedVehicle.marca" readonly>
-                                </div>
-                                <div class="col">
                                     <label>Modelo:</label>
                                     <input type="text" :value="selectedVehicle.modelo" readonly>
+                                </div>
+                                <div class="col">
+                                    
                                     <label>Año de Fabricación:</label>
                                     <input type="text" :value="selectedVehicle.anioFabricacion" readonly>
                                     <label>Color:</label>
