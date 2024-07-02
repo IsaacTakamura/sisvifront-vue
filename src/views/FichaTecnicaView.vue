@@ -151,7 +151,7 @@ export default {
                 img: this.form.img // Asegúrate de manejar correctamente la carga de archivos en tu backend
             };
 
-            fetch('http://localhost:8069/api/vehiculos/registar', {
+            fetch('http://localhost:8069/api/vehiculos/registrar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -169,6 +169,7 @@ export default {
                 });
         }
     }
+    
 }
 </script>
 

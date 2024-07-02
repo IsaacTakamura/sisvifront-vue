@@ -24,9 +24,13 @@
             <div class="col-5 border p-3">
                 <h5>FICHA TECNICA</h5>
                 <div class="d-flex flex-column vh-100">
-                    <div class="border p-3" :style="{backgroundImage: `url(${selectedVehicle.img})`, backgroundSize: 'cover', flex: '0 0 30%'}">
+                    <div class="border p-3"
+                        :style="{ backgroundImage: `url(${selectedVehicle.img})`, backgroundSize: 'cover', flex: '0 0 30%' }">
                         <!-- Aquí va la imagen del carro -->
                         <img v-if="imageUrl" :src="imageUrl" alt="Imagen seleccionada" class="uploaded-image">
+                        <div :style="{ backgroundImage: 'url(' + imageUrl + ')' }">
+                            <!-- Contenido aquí -->
+                        </div>
                     </div>
                     <div class="border p-3" style="flex: 0 0 10%;">
                         <!-- Aquí va la ruta de la imagen -->
@@ -50,7 +54,7 @@
                                     <input type="text" :value="selectedVehicle.modelo" readonly>
                                 </div>
                                 <div class="col">
-                                    
+
                                     <label>Año de Fabricación:</label>
                                     <input type="text" :value="selectedVehicle.anioFabricacion" readonly>
                                     <label>Color:</label>
@@ -68,75 +72,75 @@
                 </div>
             </div>
             <div class="col">
-
-                <div class="row">
-                    <div class="row border p-3">
-                        <h5>HISTORIAL DE MANTENIMIENTO</h5>
-                        <div style="overflow-x: auto;">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Fecha de Salida</th>
-                                        <th>Nivel de Daño</th>
-                                        <th>Nivel de Combustible</th>
-                                        <th>Nivel de Aceite</th>
-                                        <th>Kilometraje de Salida</th>
-                                        <th>Observaciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="mantenimiento in mantenimientos" :key="mantenimiento.id">
-                                        <td>{{ mantenimiento.fechaSalida }}</td>
-                                        <td>{{ mantenimiento.nivelDanio }}</td>
-                                        <td>{{ mantenimiento.nivelCombustible }}</td>
-                                        <td>{{ mantenimiento.nivelAceite }}</td>
-                                        <td>{{ mantenimiento.kilometrajeSalida }}</td>
-                                        <td>{{ mantenimiento.observaciones }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                
+                <div class="row border p-3">
+                    <h5>HISTORIAL DE MANTENIMIENTO</h5>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>F-Salida</th>
+                                    <th>Nvl-Daño</th>
+                                    <th>Nvl-Combustible</th>
+                                    <th>Nvl-Aceite</th>
+                                    <th>Km-Salida</th>
+                                    <th>Observaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="mantenimientos in mantenimientos" :key="mantenimientos.id">
+                                    <td>{{ mantenimientos.fechaSalida }}</td>
+                                    <td>{{ mantenimientos.nivelDanio }}</td>
+                                    <td>{{ mantenimientos.nivelCombustible }}</td>
+                                    <td>{{ mantenimientos.nivelAceite }}</td>
+                                    <td>{{ mantenimientos.kilometrajeSalida }}</td>
+                                    <td>{{ mantenimientos.observaciones }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+                </div>
+                <div class="row">
                     <div class="division">
                         <!-- espacio vacio para que no este muy pegado -->
                     </div>
                     <div class="row border p-3">
-                        <h5>REGISTRAR INGRESO</h5>
+                        <h5>REGISTRAR INGRESO</h5><br>
                         <!-- Contenido de la segunda mitad -->
-                        <div class="form-group row">
-                            <label for="ingreso" class="col-sm-2 col-form-label">N°Ingreso</label>
-                            <div class="col-sm-10">
-                                <input type="number" id="ingreso" v-model="mantenimiento.id" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="placa" class="col-sm-2 col-form-label">N°de Placa</label>
-                            <div class="col-sm-10">
-                                <input type="number" id="placa" v-model="mantenimiento.idVehiculo" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="fecha" class="col-sm-2 col-form-label">Fecha</label>
-                            <div class="col-sm-10">
-                                <input type="date" id="fecha" v-model="mantenimiento.fechaIngreso" readonly
+                        <div class="form-group">
+                            <label for="placaVehiculo" class="col-sm-2 col-form-label-row">N°de Placa</label>
+                            <div class="col-sm-7">
+                                <input type="text" id="placaVehiculo" v-model="mantenimiento.placaVehiculo"
                                     class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="chofer" class="col-sm-2 col-form-label">Chofer</label>
-                            <div class="col-sm-10">
-                                <input type="number" id="chofer" v-model="mantenimiento.idChofer" class="form-control">
-                            </div>
+                            </div><br>
                         </div>
                         <div class="form-group">
-                            <label for="kilometraje" class="col-sm-2 col-form-label">Kilometraje Ingreso</label>
-                            <input type="number" id="kilometraje" v-model="mantenimiento.kilometrajeIngresado"
-                                class="form-control">
+                            <label for="dniChofer" class="col-sm-2 col-form-label-row">DNI Chofer</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="dniChofer" v-model="mantenimiento.dniChofer"
+                                    class="form-control">
+                            </div><br>
+                        </div>
+                        <div class="form-group">
+                            <label for="kilometrajeIngresado" class="col-sm-2 col-form-label-row">Kilometraje ingresado</label>
+                            <div class="col-sm-10">
+                                <input type="number" id="kilometrajeIngresado"
+                                    v-model="mantenimiento.kilometrajeIngresado" class="form-control">
+                            </div><br>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="observaciones" class="col-sm-2 col-form-label-row">observaciones</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="observaciones" v-model="mantenimiento.observaciones"
+                                    class="form-control">
+                            </div>
                         </div>
                         <div class="division">
                             <!-- espacio vacio para que no este muy pegado -->
                         </div>
                         <button @click="guardarIngreso" class="btn btn-primary">Registrar Ingreso</button>
+                        <label for="">*La placa y el DNI deben existir en la base de datos*</label>
                     </div>
                 </div>
             </div>
@@ -155,17 +159,18 @@ export default {
             search: '',
             vehicles: [],
             filteredVehicles: [],
-            imageUrl: null,
+            imageUrl: '',
             mantenimiento: {
-                id: 0,
-                idVehiculo: 0,
-                idChofer: 0,
-                fechaIngreso: '',
+                placaVehiculo: '',
+                dniChofer: '',
                 kilometrajeIngresado: 0,
                 observaciones: '',
-                estado: true
-            }
+            },
+            mantenimientos: []
         }
+    },
+    mounted() {
+        this.fetchImageData();
     },
     watch: {
         // Actualiza la lista filtrada cada vez que cambia el valor de 'search'
@@ -215,6 +220,15 @@ export default {
         selectVehicle(vehicle) {
             this.selectedVehicle = vehicle;
         },
+        fetchImageData() {
+            axios.get('http://localhost:8069/api/vehiculos/listar')
+                .then(response => {
+                    this.imageUrl = response.data;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
 
     },
     created() {
@@ -224,6 +238,7 @@ export default {
     selectVehicle(vehicle) {
         this.vehicleSelected = vehicle;
     },
+
 }
 </script>
 
