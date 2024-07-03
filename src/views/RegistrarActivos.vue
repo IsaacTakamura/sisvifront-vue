@@ -17,9 +17,11 @@
 
 <script>
 export default {
+  // Se define la propiedad sections con un arreglo de objetos que contienen la información de cada sección
   name: 'App',
   data() {
     return {
+      // Se define la propiedad sections con un arreglo de objetos que contienen la información de cada sección
       sections: [
         { title: 'REGISTRAR VEHICULO', image: require('../assets/vehicle.png'), button: 'REGISTRAR', route: '/registro' },
         { title: 'REGISTRAR CONDUCTOR', image: require('../assets/driver.png'), button: 'REGISTRAR', route: '/registrou' },
@@ -27,6 +29,7 @@ export default {
       ]
     }
   },
+  // Se define el método navigate que recibe un objeto item y redirige a la ruta especificada en el objeto
   methods: {
     navigate(item) {
       if (item.route) {

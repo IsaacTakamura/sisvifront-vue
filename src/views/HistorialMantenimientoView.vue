@@ -100,6 +100,7 @@
 <script>
 import axios from 'axios';
 export default {
+  // Se define la propiedad sections con un arreglo de objetos que contienen la información de cada sección
   data() {
     return {
       mantenimientos: [],
@@ -109,11 +110,13 @@ export default {
       mantenimientoSeleccionado: null,
     };
   },
+  // Se define el método navigate que recibe un objeto item y redirige a la ruta especificada en el objeto
   computed: {
     mantenimientosFiltrados() {
       return this.mantenimientos.filter(mantenimiento => mantenimiento.placa && mantenimiento.placa.includes(this.filtroPlaca));
     },
   },
+  // Se define el método navigate que recibe un objeto item y redirige a la ruta especificada en el objeto
   methods: {
     async fetchVehicles() {
       const url = 'http://localhost:8069/api/mantenimiento/salida/listar';
@@ -131,13 +134,16 @@ export default {
     this.choferes = response.data;
   },
 
+  // Método para obtener un vehículo por su id
   getVehiculo(id) {
     return this.vehiculos.find(vehiculo => vehiculo.id === id);
   },
+  // Método para obtener un chofer por su id
   getChofer(id) {
     return this.choferes.find(chofer => chofer.id === id);
   },
   },
+  // Se define el método navigate que recibe un objeto item y redirige a la ruta especificada en el objeto
   created() {
     this.fetchVehicles();
     this.fetchVehiculos();

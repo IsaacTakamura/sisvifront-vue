@@ -153,6 +153,7 @@ import axios from 'axios';
 
 export default {
     data() {
+        // Inicializa selectedVehicle con un objeto vacío
         return {
             selectedVehicle: {}, // Inicializa selectedVehicle con un objeto vacío
             // Resto del código
@@ -169,6 +170,7 @@ export default {
             mantenimientos: []
         }
     },
+    // Método que se ejecuta cuando el componente se monta
     mounted() {
         this.fetchImageData();
     },
@@ -179,10 +181,12 @@ export default {
         }
     },
     methods: {
+        // Método para manejar el cambio de imagen
         onFileChange(e) {
             const file = e.target.files[0];
             this.createImageUrl(file);
         },
+        // Método para crear la URL de la imagen
         createImageUrl(file) {
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -190,24 +194,27 @@ export default {
             };
             reader.readAsDataURL(file);
         },
+        // Método para obtener los vehículos
         fetchVehicles() {
             axios.get(`http://localhost:8069/api/vehiculos/listar`)
                 .then(response => {
                     this.vehicles = response.data;
                     // Filtra los vehículos inmediatamente después de obtenerlos
                     this.filterVehicles();
-                })
+                }) // Captura cualquier error y lo muestra en la consola
                 .catch(error => {
                     console.error(error);
                 });
-        },
+        }, // Método para filtrar los vehículos
         filterVehicles() {
             // Filtra los vehículos basándose en el valor de 'search'
             this.filteredVehicles = this.vehicles.filter(vehicle => vehicle.placa.includes(this.search));
         },
+        // Método para registrar una nueva placa
         registerNewPlate() {
             // Código para registrar una nueva placa
         },
+        // Método para guardar un ingreso
         guardarIngreso() {
             axios.post('http://localhost:8069/api/mantenimiento/ingreso/guardar', this.mantenimiento)
                 .then(response => {
@@ -217,9 +224,11 @@ export default {
                     console.log(error);
                 });
         },
+        // Método para seleccionar un vehículo
         selectVehicle(vehicle) {
             this.selectedVehicle = vehicle;
         },
+        // Método para obtener la imagen de un vehículo
         fetchImageData() {
             axios.get('http://localhost:8069/api/vehiculos/listar')
                 .then(response => {
@@ -231,10 +240,12 @@ export default {
         }
 
     },
+    // Método que se ejecuta cuando el componente se monta
     created() {
         // Obtiene los vehículos cuando se crea el componente
         this.fetchVehicles();
     },
+    // Método para seleccionar un vehículo
     selectVehicle(vehicle) {
         this.vehicleSelected = vehicle;
     },

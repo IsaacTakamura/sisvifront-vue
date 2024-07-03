@@ -119,6 +119,7 @@ export default {
     ConfirmacionRegistroModal
   },
   data() {
+    // Inicializa los datos del componente
     return {
       drivers: [],
       driver: {
@@ -144,6 +145,7 @@ export default {
       errors: {}
     };
   },
+  // Calcula los choferes filtrados por el término de búsqueda
   computed: {
     filteredDrivers() {
       return this.drivers.filter(driver => {
@@ -162,6 +164,8 @@ export default {
       });
     }
   },
+  // Métodos del componente
+  // Se ejecutan al interactuar con el componente
   methods: {
     fetchDrivers() {
       axios.get('http://localhost:8069/api/choferes/listar')
@@ -170,6 +174,7 @@ export default {
         })
         .catch(error => console.error("Error fetching drivers:", error));
     },
+    // Método para confirmar el registro de un chofer
     confirmRegisterDriver() {
       this.errors = {};
       let valid = true;
@@ -218,6 +223,7 @@ export default {
         this.showConfirmRegisterModal = true;
       }
     },
+    // Método para registrar un chofer
     registerDriver() {
       if (!this.isFutureDate(this.driver.fechaVencimientoLicencia)) {
         this.dateError = true;
@@ -248,10 +254,12 @@ export default {
         })
         .catch(error => console.error("Failed to register driver:", error));
     },
+    // Método para eliminar un chofer
     deleteDriver(id) {
       this.currentDriverId = id;
       this.showModal = true;
     },
+    // Método para confirmar la eliminación de un chofer
     confirmDelete() {
       axios.delete(`http://localhost:8069/api/choferes/eliminar/${this.currentDriverId}`)
         .then(response => {
@@ -260,12 +268,15 @@ export default {
         })
         .catch(error => console.error("Error deleting driver:", error));
     },
+    // Método para cerrar el modal de confirmación
     closeModal() {
       this.showModal = false;
     },
+    // Método para cerrar el modal de confirmación de registro
     closeConfirmRegisterModal() {
       this.showConfirmRegisterModal = false;
     },
+    // Método para editar un chofer
     editDriver(id) {
       axios.get(`http://localhost:8069/api/choferes/listar/${id}`)
         .then(response => {
@@ -275,6 +286,7 @@ export default {
         })
         .catch(error => console.error("Error fetching driver:", error));
     },
+    // Método para actualizar un chofer
     updateDriver(driver) {
       const driverCopy = { ...driver };
       driverCopy.fechaVencimientoLicencia = this.adjustDate(driverCopy.fechaVencimientoLicencia);
@@ -286,10 +298,12 @@ export default {
         })
         .catch(error => console.error("Failed to update driver:", error));
     },
+    // Método para cerrar el modal de edición
     closeEditModal() {
       this.showEditModal = false;
       this.selectedDriver = {};
     },
+    // Método para formatear una fecha
     formatDate(dateString) {
       if (!dateString) return 'No disponible';
       const date = new Date(dateString);
@@ -299,6 +313,7 @@ export default {
         day: 'numeric'
       });
     },
+    // Método para formatear una fecha para un input de tipo date
     formatDateForInput(dateString) {
       if (!dateString) return '';
       const date = new Date(dateString);
@@ -307,21 +322,25 @@ export default {
       const day = String(date.getDate()).padStart(2, '0');
       return `${year}-${month}-${day}`;
     },
+    // Método para verificar si una fecha es futura
     isFutureDate(dateString) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       const inputDate = new Date(dateString);
       return inputDate > today;
     },
+    // Método para ajustar una fecha sumando un día
     adjustDate(dateString) {
       const date = new Date(dateString);
       date.setDate(date.getDate() + 1);
       return date.toISOString().split('T')[0];
     },
+    // Método para mostrar u ocultar el formulario de registro
     toggleRegistrationForm() {
       this.showRegistrationForm = !this.showRegistrationForm;
     }
   },
+  // Método que se ejecuta al cargar el componente
   created() {
     this.fetchDrivers();
   }

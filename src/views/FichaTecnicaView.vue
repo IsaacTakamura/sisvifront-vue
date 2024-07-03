@@ -150,7 +150,7 @@ export default {
                 transmision: this.form.transmision,
                 img: this.form.img // Asegúrate de manejar correctamente la carga de archivos en tu backend
             };
-
+            // Envía los datos al backend
             fetch('http://localhost:8069/api/vehiculos/registrar', {
                 method: 'POST',
                 headers: {
