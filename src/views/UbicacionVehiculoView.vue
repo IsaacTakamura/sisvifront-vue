@@ -1,11 +1,15 @@
 <template>
+  <!-- Contenedor principal para el registro diario -->
   <div class="registro-diario">
     <div class="contenedor">
+      <!-- Sección para seleccionar la placa del vehículo -->
       <div class="seleccionar-placa">
         <h2 class="title">Seleccionar Placa</h2>
+        <!-- Filtro de búsqueda para la placa -->
         <label class="centered-label">1. Filtrar por Placa:</label>
         <input type="text" v-model="filtroPlaca" placeholder="Filtrar por placa"
           class="form-control my-3 filtro-placa" />
+        <!-- Lista de placas filtradas -->
         <label class="centered-label">2. Seleccionar Placa</label>
         <div class="lista-contenedor">
           <ul class="list-group mb-3 lista-scrollable">
@@ -16,10 +20,10 @@
           </ul>
         </div>
       </div>
+      <!-- Sección de ficha técnica del vehículo seleccionado -->
       <div v-if="vehiculoSeleccionado" class="ficha-tecnica">
         <h2 class="title">Ficha Técnica</h2>
-        <img :src="`http://localhost:8069/path/to/images/${vehiculoSeleccionado.img}`" alt="Imagen del vehículo"
-          class="img-fluid centered-image" />
+        <!-- Formulario para mostrar la información del vehículo seleccionado -->
         <form class="ficha-form">
           <div class="form-group">
             <label for="placa" class="form-label centered-label">Placa</label>
@@ -73,8 +77,10 @@
           </div>
         </form>
       </div>
+      <!-- Sección para mostrar la última ubicación del vehículo -->
       <div v-if="ubicacion" class="mapa-ubicacion">
         <h2 class="title">Última Ubicación</h2>
+        <!-- Componente de mapa para mostrar la ubicación del vehículo -->
         <MapComponent :lat="ubicacion.lat" :lon="ubicacion.lon" :prevLat="prevUbicacion ? prevUbicacion.lat : null"
           :prevLon="prevUbicacion ? prevUbicacion.lon : null" :placa="vehiculoSeleccionado.placa"
           :nombreVehiculo="vehiculoSeleccionado.marca" />
@@ -98,6 +104,7 @@
 import MapComponent from './M.Ubicacion/MapComponent.vue';
 import * as turf from '@turf/turf';
 
+// Definición del polígono de Ancash que delimita la región de interés
 const ancashPolygon = {
   type: "Feature",
   geometry: {
@@ -114,37 +121,40 @@ const ancashPolygon = {
   }
 };
 
-function getRandomCoordinateInAncash(center, radius = 0.01) { // Ajustamos el radio a 1 km
+// Función para generar una coordenada aleatoria dentro del polígono de Ancash
+function getRandomCoordinateInAncash(center, radius = 0.03) { // Ajustamos el radio a 3 km
   const point = turf.randomPoint(1, { bbox: [center[0] - radius, center[1] - radius, center[0] + radius, center[1] + radius] });
   return point.features[0].geometry.coordinates;
 }
 
+// Función para generar un estado y velocidad aleatorios del vehículo
 function getRandomSpeedAndState() {
-  const isMoving = Math.random() < 0.8; // 80% de probabilidad de estar en movimiento
+  const isMoving = Math.random() < 0.8; // 80% de probabilidad de que el vehículo esté en movimiento
   return {
-    estado: isMoving ? 'En movimiento' : 'En reposo',
+    estado: isMoving ? 'En movimiento' : 'En reposo', // Estado del vehículo
     velocidad: isMoving ? Math.floor(Math.random() * 41) + 60 : 0 // Velocidad entre 60 y 100 km/h si está en movimiento, 0 si está en reposo
   };
 }
 
 export default {
   components: {
-    MapComponent
+    MapComponent // Registro del componente MapComponent
   },
   data() {
     return {
-      filtroPlaca: '',
-      vehiculos: [],
-      vehiculoSeleccionado: null,
-      ubicacion: null,
-      prevUbicacion: null,
+      filtroPlaca: '', // Texto de filtro para la lista de vehículos
+      vehiculos: [], // Lista de vehículos
+      vehiculoSeleccionado: null, // Vehículo seleccionado
+      ubicacion: null, // Última ubicación del vehículo seleccionado
+      prevUbicacion: null, // Ubicación anterior del vehículo seleccionado
       lastLocations: {}, // Almacena las últimas ubicaciones conocidas por vehículo
-      estadoVehiculo: '',
-      velocidadVehiculo: '',
-      intervalId: null
+      estadoVehiculo: '', // Estado del vehículo (en movimiento o en reposo)
+      velocidadVehiculo: '', // Velocidad del vehículo
+      intervalId: null // ID del intervalo para actualizar la ubicación
     };
   },
   computed: {
+    // Computed property para filtrar la lista de vehículos según el texto de filtro
     vehiculosFiltrados() {
       return this.vehiculos.filter((vehiculo) =>
         vehiculo.placa.includes(this.filtroPlaca.toUpperCase())
@@ -152,54 +162,66 @@ export default {
     },
   },
   methods: {
+    // Método para cargar la lista de vehículos desde una API
     async cargarVehiculos() {
       try {
-        const response = await fetch('http://localhost:8069/api/vehiculos/listar');
-        this.vehiculos = await response.json();
+        const response = await fetch('http://localhost:8069/api/vehiculos/listar'); // Realiza una solicitud a la API para obtener la lista de vehículos
+        this.vehiculos = await response.json(); // Almacena la lista de vehículos en el estado del componente
       } catch (error) {
-        console.error('Error al cargar vehículos:', error);
+        console.error('Error al cargar vehículos:', error); // Muestra un error en la consola si falla la solicitud
       }
     },
+    // Método para seleccionar un vehículo de la lista
     async seleccionarVehiculo(vehiculo) {
-      this.vehiculoSeleccionado = vehiculo;
+      this.vehiculoSeleccionado = vehiculo; // Establece el vehículo seleccionado en el estado del componente
       if (this.lastLocations[vehiculo.id]) {
+        // Si ya hay ubicaciones almacenadas para este vehículo, las utiliza
         this.prevUbicacion = this.lastLocations[vehiculo.id].prevUbicacion;
         this.ubicacion = this.lastLocations[vehiculo.id].ubicacion;
         this.estadoVehiculo = this.lastLocations[vehiculo.id].estado;
         this.velocidadVehiculo = this.lastLocations[vehiculo.id].velocidad;
       } else {
+        // Si no hay ubicaciones almacenadas, establece los valores por defecto
         this.prevUbicacion = null;
         this.ubicacion = null;
         this.estadoVehiculo = '';
         this.velocidadVehiculo = '';
       }
 
-      // Llamar a buscarUbicacion() una vez al seleccionar el vehículo
+      // Llama a buscarUbicacion() una vez al seleccionar el vehículo
       await this.buscarUbicacion();
 
-      // Limpiar cualquier intervalo previo
+      // Limpia cualquier intervalo previo para evitar múltiples intervalos activos
       if (this.intervalId) {
         clearInterval(this.intervalId);
       }
 
-      // Iniciar un intervalo que actualiza la ubicación cada 5 segundos
+      // Inicia un intervalo que actualiza la ubicación cada 5 segundos
       this.intervalId = setInterval(this.buscarUbicacion, 5000);
     },
+    // Método para buscar la ubicación actual del vehículo
     async buscarUbicacion() {
-      const center = this.ubicacion ? [this.ubicacion.lon, this.ubicacion.lat] : [-77.532, -9.327]; // Centro de Ancash
-      const [lon, lat] = getRandomCoordinateInAncash(center, 0.01); // Ajustamos el radio a 1 km
+      // Establece el centro de la búsqueda en la ubicación actual o en el centro de Ancash
+      const center = this.ubicacion ? [this.ubicacion.lon, this.ubicacion.lat] : [-77.532, -9.327];
+      // Genera una nueva coordenada aleatoria dentro de un radio de 3 km del centro
+      const [lon, lat] = getRandomCoordinateInAncash(center, 0.03);
       try {
+        // Realiza una solicitud a la API para obtener la dirección de la nueva coordenada
         const response = await fetch(`https://us1.locationiq.com/v1/reverse.php?key=pk.445d029b86d0a62e62443cd6e2428c56&lat=${lat}&lon=${lon}&format=json`);
         const data = await response.json();
+        // Genera un nuevo estado y velocidad para el vehículo
         const { estado, velocidad } = getRandomSpeedAndState();
+        // Actualiza las ubicaciones anterior y actual del vehículo
         this.prevUbicacion = this.ubicacion;
         this.ubicacion = {
           lat: lat,
           lon: lon,
           direccion: data.display_name
         };
+        // Actualiza el estado y la velocidad del vehículo
         this.estadoVehiculo = estado;
         this.velocidadVehiculo = velocidad;
+        // Almacena las nuevas ubicaciones, estado y velocidad en el objeto lastLocations
         this.lastLocations[this.vehiculoSeleccionado.id] = {
           prevUbicacion: this.prevUbicacion,
           ubicacion: this.ubicacion,
@@ -207,7 +229,8 @@ export default {
           velocidad: this.velocidadVehiculo
         };
       } catch (error) {
-        console.error('Error al obtener la dirección:', error);
+        console.error('Error al obtener la dirección:', error); // Muestra un error en la consola si falla la solicitud
+        // Si falla la solicitud, genera una dirección genérica
         const { estado, velocidad } = getRandomSpeedAndState();
         this.prevUbicacion = this.ubicacion;
         this.ubicacion = {
@@ -226,16 +249,19 @@ export default {
       }
     }
   },
+  // Método que se ejecuta al crear el componente
   created() {
-    this.cargarVehiculos();
+    this.cargarVehiculos(); // Carga la lista de vehículos al crear el componente
   },
+  // Método que se ejecuta antes de destruir el componente
   beforeDestroy() {
     if (this.intervalId) {
-      clearInterval(this.intervalId);
+      clearInterval(this.intervalId); // Limpia el intervalo de actualización de ubicación
     }
   }
 };
 </script>
+
 
 <style scoped>
 /* Estilos CSS para la vista */

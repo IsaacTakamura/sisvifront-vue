@@ -1,38 +1,48 @@
 <template>
   <div class="centered-container">
+    <!-- Botón para mostrar el formulario de registro de choferes -->
     <button @click="toggleRegistrationForm" class="btn btn-primary">Registrar Chofer</button>
+    
+    <!-- Formulario de registro de choferes -->
     <div v-if="showRegistrationForm" class="registration-form">
       <form @submit.prevent="confirmRegisterDriver" class="form">
+        <!-- Campo para el primer nombre -->
         <div class="form-group">
           <label for="primerNombre" class="form-label">Primer Nombre</label>
           <input type="text" id="primerNombre" v-model="driver.primerNombre" class="form-control">
           <p v-if="errors.primerNombre" class="text-danger error-message">{{ errors.primerNombre }}</p>
         </div>
+        <!-- Campo para el segundo nombre -->
         <div class="form-group">
           <label for="segundoNombre" class="form-label">Segundo Nombre</label>
           <input type="text" id="segundoNombre" v-model="driver.segundoNombre" class="form-control">
           <p v-if="errors.segundoNombre" class="text-danger error-message">{{ errors.segundoNombre }}</p>
         </div>
+        <!-- Campo para el apellido paterno -->
         <div class="form-group">
           <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
           <input type="text" id="apellidoPaterno" v-model="driver.apellidoPaterno" class="form-control">
           <p v-if="errors.apellidoPaterno" class="text-danger error-message">{{ errors.apellidoPaterno }}</p>
         </div>
+        <!-- Campo para el apellido materno -->
         <div class="form-group">
           <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
           <input type="text" id="apellidoMaterno" v-model="driver.apellidoMaterno" class="form-control">
           <p v-if="errors.apellidoMaterno" class="text-danger error-message">{{ errors.apellidoMaterno }}</p>
         </div>
+        <!-- Campo para el DNI -->
         <div class="form-group">
           <label for="dni" class="form-label">DNI</label>
           <input type="text" id="dni" v-model="driver.dni" class="form-control">
           <p v-if="errors.dni" class="text-danger error-message">{{ errors.dni }}</p>
         </div>
+        <!-- Campo para la licencia de conducir -->
         <div class="form-group">
           <label for="licenciaConducir" class="form-label">Licencia de Conducir</label>
           <input type="text" id="licenciaConducir" v-model="driver.licenciaConducir" class="form-control">
           <p v-if="errors.licenciaConducir" class="text-danger error-message">{{ errors.licenciaConducir }}</p>
         </div>
+        <!-- Campo para la categoría de la licencia -->
         <div class="form-group">
           <label for="categoriaLicencia" class="form-label">Categoría de Licencia</label>
           <select id="categoriaLicencia" v-model="driver.categoriaLicencia" class="form-control">
@@ -42,26 +52,38 @@
           </select>
           <p v-if="errors.categoriaLicencia" class="text-danger error-message">{{ errors.categoriaLicencia }}</p>
         </div>
+        <!-- Campo para la fecha de vencimiento de la licencia -->
         <div class="form-group">
           <label for="fechaVencimientoLicencia" class="form-label">Fecha de Vencimiento de Licencia</label>
-          <input type="date" id="fechaVencimientoLicencia" v-model="driver.fechaVencimientoLicencia"
-            class="form-control">
-          <p v-if="errors.fechaVencimientoLicencia" class="text-danger error-message">{{ errors.fechaVencimientoLicencia
-            }}</p>
+          <input type="date" id="fechaVencimientoLicencia" v-model="driver.fechaVencimientoLicencia" class="form-control">
+          <p v-if="errors.fechaVencimientoLicencia" class="text-danger error-message">{{ errors.fechaVencimientoLicencia }}</p>
           <p v-if="dateError" class="text-danger error-message">{{ dateErrorMessage }}</p>
         </div>
+        <!-- Campo para el teléfono -->
         <div class="form-group">
           <label for="telefono" class="form-label">Teléfono</label>
           <input type="text" id="telefono" v-model="driver.telefono" class="form-control">
           <p v-if="errors.telefono" class="text-danger error-message">{{ errors.telefono }}</p>
         </div>
+        <!-- Botones de acción del formulario -->
         <div class="button-group">
           <button type="submit" class="btn btn-success">Registrar</button>
           <button @click="toggleRegistrationForm" class="btn btn-secondary">Cancelar</button>
         </div>
       </form>
     </div>
+
+    <!-- Campo de búsqueda -->
     <input type="text" v-model="search" placeholder="Buscar..." class="form-control my-3">
+    
+    <!-- Botones de filtro -->
+    <div class="filter-buttons">
+      <button @click="filterActive" class="btn btn-info">Mostrar Activos</button>
+      <button @click="filterAll" class="btn btn-secondary">Mostrar Todos</button>
+      <button @click="filterInactive" class="btn btn-danger">Mostrar Inactivos</button>
+    </div>
+    
+    <!-- Tabla de choferes -->
     <table class="table table-striped mt-3">
       <thead>
         <tr>
@@ -79,7 +101,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="driver in filteredDrivers" :key="driver.id">
+        <tr v-for="driver in filteredDrivers" :key="driver.id" :class="{ inactive: !driver.estado }">
           <td>{{ driver.id }}</td>
           <td>{{ driver.primerNombre }}</td>
           <td>{{ driver.segundoNombre }}</td>
@@ -92,17 +114,16 @@
           <td>{{ formatDate(driver.fechaVencimientoLicencia) }}</td>
           <td>
             <button @click="editDriver(driver.id)" class="btn btn-sm btn-warning">Editar</button>
-            <button @click="deleteDriver(driver.id)" class="btn btn-sm btn-danger">Eliminar</button>
+            <button @click="changeDriverState(driver.id)" class="btn btn-sm btn-danger">Cambiar Estado</button>
           </td>
         </tr>
       </tbody>
     </table>
-    <confirmation-modal :isVisible="showModal" message="¿Estás seguro de que deseas eliminar este chofer?"
-      @confirm="confirmDelete" @cancel="closeModal" />
-    <editar-chofer-modal :isVisible="showEditModal" :driver="selectedDriver" @close="closeEditModal"
-      @save="updateDriver" />
-    <confirmacion-registro-modal :isVisible="showConfirmRegisterModal" @close="closeConfirmRegisterModal"
-      @confirm="registerDriver" />
+
+    <!-- Modales de confirmación y edición -->
+    <confirmation-modal :isVisible="showModal" message="¿Estás seguro de que deseas cambiar el estado de este chofer?" @confirm="confirmChangeState" @cancel="closeModal" />
+    <editar-chofer-modal :isVisible="showEditModal" :driver="selectedDriver" @close="closeEditModal" @save="updateDriver" />
+    <confirmacion-registro-modal :isVisible="showConfirmRegisterModal" @close="closeConfirmRegisterModal" @confirm="registerDriver" />
   </div>
 </template>
 
@@ -119,10 +140,9 @@ export default {
     ConfirmacionRegistroModal
   },
   data() {
-    // Inicializa los datos del componente
     return {
-      drivers: [],
-      driver: {
+      drivers: [], // Lista de choferes
+      driver: { // Datos del chofer para registro y edición
         primerNombre: '',
         segundoNombre: '',
         apellidoPaterno: '',
@@ -133,24 +153,24 @@ export default {
         fechaVencimientoLicencia: '',
         telefono: ''
       },
-      search: '',
-      showModal: false,
-      showRegistrationForm: false,
-      currentDriverId: null,
-      dateError: false,
-      dateErrorMessage: 'La licencia está vencida.',
-      showEditModal: false,
-      selectedDriver: {},
-      showConfirmRegisterModal: false,
-      errors: {}
+      search: '', // Texto de búsqueda
+      showModal: false, // Control de visibilidad del modal de confirmación de cambio de estado
+      showRegistrationForm: false, // Control de visibilidad del formulario de registro
+      currentDriverId: null, // ID del chofer actual para cambio de estado
+      dateError: false, // Control de error de fecha
+      dateErrorMessage: 'La licencia está vencida.', // Mensaje de error de fecha
+      showEditModal: false, // Control de visibilidad del modal de edición
+      selectedDriver: {}, // Chofer seleccionado para editar
+      showConfirmRegisterModal: false, // Control de visibilidad del modal de confirmación de registro
+      errors: {}, // Errores de validación del formulario
+      filterOption: 'active' // Opción de filtro seleccionada (activos, todos, inactivos)
     };
   },
-  // Calcula los choferes filtrados por el término de búsqueda
   computed: {
     filteredDrivers() {
       return this.drivers.filter(driver => {
         const searchTerm = this.search.toLowerCase();
-        return (
+        const matchesSearch = (
           driver.primerNombre.toLowerCase().includes(searchTerm) ||
           driver.segundoNombre.toLowerCase().includes(searchTerm) ||
           driver.apellidoPaterno.toLowerCase().includes(searchTerm) ||
@@ -161,12 +181,19 @@ export default {
           driver.licenciaConducir.toLowerCase().includes(searchTerm) ||
           this.formatDate(driver.fechaVencimientoLicencia).toLowerCase().includes(searchTerm)
         );
+
+        if (this.filterOption === 'all') {
+          return matchesSearch;
+        } else if (this.filterOption === 'inactive') {
+          return matchesSearch && !driver.estado;
+        } else {
+          return matchesSearch && driver.estado;
+        }
       });
     }
   },
-  // Métodos del componente
-  // Se ejecutan al interactuar con el componente
   methods: {
+    // Método para obtener la lista de choferes desde la API
     fetchDrivers() {
       axios.get('http://localhost:8069/api/choferes/listar')
         .then(response => {
@@ -174,7 +201,7 @@ export default {
         })
         .catch(error => console.error("Error fetching drivers:", error));
     },
-    // Método para confirmar el registro de un chofer
+    // Método para validar el formulario de registro
     confirmRegisterDriver() {
       this.errors = {};
       let valid = true;
@@ -254,21 +281,21 @@ export default {
         })
         .catch(error => console.error("Failed to register driver:", error));
     },
-    // Método para eliminar un chofer
-    deleteDriver(id) {
+    // Método para cambiar el estado de un chofer
+    changeDriverState(id) {
       this.currentDriverId = id;
       this.showModal = true;
     },
-    // Método para confirmar la eliminación de un chofer
-    confirmDelete() {
-      axios.delete(`http://localhost:8069/api/choferes/eliminar/${this.currentDriverId}`)
+    // Método para confirmar el cambio de estado
+    confirmChangeState() {
+      axios.put(`http://localhost:8069/api/choferes/cambiar-estado/${this.currentDriverId}`)
         .then(response => {
           this.fetchDrivers();
           this.showModal = false;
         })
-        .catch(error => console.error("Error deleting driver:", error));
+        .catch(error => console.error("Error changing driver state:", error));
     },
-    // Método para cerrar el modal de confirmación
+    // Método para cerrar el modal de confirmación de cambio de estado
     closeModal() {
       this.showModal = false;
     },
@@ -276,7 +303,7 @@ export default {
     closeConfirmRegisterModal() {
       this.showConfirmRegisterModal = false;
     },
-    // Método para editar un chofer
+    // Método para obtener los datos de un chofer para editar
     editDriver(id) {
       axios.get(`http://localhost:8069/api/choferes/listar/${id}`)
         .then(response => {
@@ -286,7 +313,7 @@ export default {
         })
         .catch(error => console.error("Error fetching driver:", error));
     },
-    // Método para actualizar un chofer
+    // Método para actualizar los datos de un chofer
     updateDriver(driver) {
       const driverCopy = { ...driver };
       driverCopy.fechaVencimientoLicencia = this.adjustDate(driverCopy.fechaVencimientoLicencia);
@@ -303,7 +330,7 @@ export default {
       this.showEditModal = false;
       this.selectedDriver = {};
     },
-    // Método para formatear una fecha
+    // Método para formatear la fecha
     formatDate(dateString) {
       if (!dateString) return 'No disponible';
       const date = new Date(dateString);
@@ -313,7 +340,7 @@ export default {
         day: 'numeric'
       });
     },
-    // Método para formatear una fecha para un input de tipo date
+    // Método para formatear la fecha para el campo de entrada
     formatDateForInput(dateString) {
       if (!dateString) return '';
       const date = new Date(dateString);
@@ -329,120 +356,132 @@ export default {
       const inputDate = new Date(dateString);
       return inputDate > today;
     },
-    // Método para ajustar una fecha sumando un día
+    // Método para ajustar la fecha sumando un día
     adjustDate(dateString) {
       const date = new Date(dateString);
       date.setDate(date.getDate() + 1);
       return date.toISOString().split('T')[0];
     },
-    // Método para mostrar u ocultar el formulario de registro
+    // Método para alternar la visibilidad del formulario de registro
     toggleRegistrationForm() {
       this.showRegistrationForm = !this.showRegistrationForm;
+    },
+    // Método para filtrar choferes activos
+    filterActive() {
+      this.filterOption = 'active';
+    },
+    // Método para filtrar todos los choferes
+    filterAll() {
+      this.filterOption = 'all';
+    },
+    // Método para filtrar choferes inactivos
+    filterInactive() {
+      this.filterOption = 'inactive';
     }
   },
-  // Método que se ejecuta al cargar el componente
+  // Método que se ejecuta al crear el componente
   created() {
     this.fetchDrivers();
   }
 }
 </script>
 
-
 <style scoped>
+/* Estilo para los grupos de formulario */
 .form-group {
   margin-bottom: 1rem;
 }
 
+/* Estilo para los controles de formulario */
 .form-control {
   width: 70%;
-  /* Ajusta el ancho de los inputs a 70% */
   padding: 0.375rem 0.75rem;
   margin: auto;
   text-align: center;
-  /* Center text inside inputs */
 }
 
+/* Estilo para las etiquetas de formulario */
 .form-label {
   width: 100%;
-  /* O ajusta según tu preferencia */
   padding-right: 10px;
-  /* Espacio a la derecha del label */
   margin-right: 10px;
-  /* Añade más espacio a la derecha */
   text-align: center;
-  /* Alinea el texto a la derecha */
 }
 
+/* Estilo para el formulario de registro */
 .registration-form {
   width: 45%;
-  /* Ajusta el ancho según sea necesario */
   margin: 1rem auto;
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 0.25rem;
   background-color: #f8f9fa;
-  /* Light grey background */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow for depth */
 }
 
+/* Estilo para los botones */
 .btn-primary,
-.btn-secondary {
-  width: auto;
+.btn-secondary,
+.btn-info,
+.btn-danger {
+  width: 100px;
   padding: 0.5rem 1rem;
   margin: 0.2rem;
 }
 
-.btn-success,
-.btn-secondary {
+/* Estilo para el botón de registro */
+.btn-success {
   width: 150px;
-  /* Set a common width */
   height: 50px;
-  /* Set a common height */
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
   box-sizing: border-box;
-  /* Ensure padding and border are included in the dimensions */
 }
 
-.btn-danger {
-  width: auto;
-  padding: 0.5rem 1rem;
-  margin-top: 1rem;
-  background-color: #f44336;
-  /* Red for danger actions */
-  border: none;
-}
-
+/* Estilo para la tabla */
 .table {
   margin-top: 2rem;
-  /* More space above the table */
 }
 
+/* Estilo para el grupo de botones */
 .button-group {
   display: flex;
   justify-content: center;
-  /* Center buttons horizontally */
   gap: 10px;
-  /* Space between buttons */
   margin-top: 20px;
 }
 
+/* Estilo para los botones de filtro */
+.filter-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* Estilo para el contenedor centrado */
 .centered-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Estilo para el texto de error */
 .text-danger {
   color: red;
   font-size: 0.875rem;
 }
 
+/* Estilo para los mensajes de error */
 .error-message {
   text-align: center;
   margin-top: 0.25rem;
+}
+
+/* Estilo para los choferes inactivos */
+.inactive td:not(:last-child) {
+  opacity: 0.5;
 }
 </style>

@@ -1,14 +1,15 @@
 <template>
-    <div v-if="isVisible" class="modal-overlay" @click.self="cancel">
-      <div class="modal-content">
-        <p class="modal-message">{{ message }}</p>
-        <div class="modal-buttons">
-          <button @click="confirm" class="modal-button confirm-button">Aceptar</button>
-          <button @click="cancel" class="modal-button cancel-button">Cancelar</button>
-        </div>
+  <div v-if="isVisible" class="modal-overlay" @click.self="cancel">
+    <div class="modal-content">
+      <p class="modal-message">{{ message }}</p>
+      <div class="modal-buttons">
+        <button @click="confirm" class="modal-button confirm-button">Aceptar</button>
+        <button @click="cancel" class="modal-button cancel-button">Cancelar</button>
       </div>
     </div>
-  </template>
+  </div>
+</template>
+
 <script>
 export default {
   props: {
@@ -25,7 +26,7 @@ export default {
   }
 }
 </script>
-  
+
 <style scoped>
 .modal-overlay {
   position: fixed;
@@ -83,4 +84,3 @@ export default {
   opacity: 0.8;
 }
 </style>
-  
