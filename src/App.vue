@@ -19,7 +19,9 @@
         <li>
           <router-link to="/repuesto" class="nav-link" href="#">Repuesto Ingresar</router-link>
         </li>
-
+        <li>
+          <router-link to="/registrou" class="nav-link" href="#">Registrar Usuario</router-link>
+        </li>
         <li>
           <router-link to="/ubicacionv" class="nav-link" href="#">Ubicacion Vehiculo</router-link>
         </li>

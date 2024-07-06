@@ -1,0 +1,9 @@
+/* DriverTableSt.css */
+
+.table {
+    margin-top: 2rem;
+}
+
+.inactive td:not(:last-child) {
+    opacity: 0.5;
+}
