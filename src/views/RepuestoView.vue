@@ -55,6 +55,7 @@
 import axios from 'axios';
 export default {
   data() {
+    // Se define la propiedad repuestos como un arreglo vacío
     return {
       repuestos: [],
       filtroCodigoInterno: '',
@@ -62,6 +63,7 @@ export default {
       selectedRow: null,
     };
   },
+  // Se define la propiedad repuestos como un arreglo vacío
   computed: {
     repuestosFiltrados() {
       return this.repuestos.filter(repuesto =>
@@ -70,16 +72,19 @@ export default {
       );
     },
   },
+  // Se define el método fetchRepuestos que realiza una petición GET a la API para obtener los repuestos
   methods: {
     selectRow(repuesto) {
       this.selectedRow = repuesto;
     },
+    // Método para obtener los repuestos
     async fetchRepuestos() {
       const url = 'http://localhost:8069/api/repuestos/listar'; 
       const response = await axios.get(url);
       this.repuestos = response.data;
     },
   },
+  // Se llama al método fetchRepuestos al crear el componente
   created() {
     this.fetchRepuestos();
   },
