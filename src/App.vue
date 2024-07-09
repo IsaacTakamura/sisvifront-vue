@@ -1,4 +1,5 @@
 <template>
+  <!-- Barra superior horizontal -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <router-link to="/" class="navbar-brand" href="#">SISVI</router-link>
@@ -7,23 +8,44 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
         <li class="nav-item">
-          <router-link to="/ficha" class="nav-link active" aria-current="page" href="#">Ficha Técnica</router-link>
+          <router-link to="/registraractivos" class="nav-link" href="#">
+            <i class="fa-solid fa-plus"></i>
+            Registro
+          </router-link>
         </li>
+
         <li class="nav-item">
-          <router-link to="/registraractivos" class="nav-link" href="#">Activos</router-link>
+          <router-link to="/registro" class="nav-link active" aria-current="page" href="#">
+            <i class="fa-solid fa-car"></i>
+            Vehiculos
+          </router-link>
+        </li>
+
+        <li>
+          <router-link to="/historial" class="nav-link" href="#">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            Mantenimiento
+          </router-link>
         </li>
         <li>
-          <router-link to="/historial" class="nav-link" href="#">Historial de Mantenimiento</router-link>
+          <router-link to="/repuesto" class="nav-link" href="#">
+            <i class="fa-solid fa-gauge"></i>
+            Ingresar Repuesto
+          </router-link>
         </li>
         <li>
-          <router-link to="/repuesto" class="nav-link" href="#">Repuesto Ingresar</router-link>
+          <router-link to="/ubicacionv" class="nav-link" href="#">
+            <i class="fa-solid fa-location-dot"></i>
+            Ubicacion
+          </router-link>
         </li>
         <li>
-          <router-link to="/registrou" class="nav-link" href="#">Registrar Usuario</router-link>
-        </li>
-        <li>
-          <router-link to="/ubicacionv" class="nav-link" href="#">Ubicacion Vehiculo</router-link>
+          <router-link to="/choferesVehiculos" class="nav-link" href="#">
+            <i class="fa-solid fa-id-card"></i>
+            Conductores
+          </router-link>
         </li>
         
       </ul>

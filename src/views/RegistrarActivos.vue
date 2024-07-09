@@ -23,7 +23,7 @@ export default {
     return {
       // Se define la propiedad sections con un arreglo de objetos que contienen la información de cada sección
       sections: [
-        { title: 'REGISTRAR VEHICULO', image: require('../assets/vehicle.png'), button: 'REGISTRAR', route: '/registro' },
+        { title: 'REGISTRAR VEHICULO', image: require('../assets/vehicle.png'), button: 'REGISTRAR', route: '/ficha' },
         { title: 'REGISTRAR CONDUCTOR', image: require('../assets/driver.png'), button: 'REGISTRAR', route: '/registrou' },
         { title: 'REGISTRAR PRODUCTO', image: require('../assets/spear.png'), button: 'REGISTRAR', route: '/gestion' }
       ]

@@ -8,7 +8,8 @@ import RepuestoIngresoView from '../views/RepuestoIngresoView.vue'
 import RepuestoView from '../views/RepuestoView.vue'
 import Registroview from '../views/Registroview.vue'
 import UbicacionVehiculoView from '../views/UbicacionVehiculoView.vue'
-import RegistrarActivosView from '../views/RegistrarActivos.vue' 
+import RegistrarActivosView from '../views/RegistrarActivos.vue'
+import ChoferesVehiculosView from '../views/ChoferesVehiculosView.vue'
 
 const routes = [
   {
@@ -67,7 +68,12 @@ const routes = [
     path: '/ubicacionv',
     name: 'ubicacionv',
     component: UbicacionVehiculoView
-  }
+  },
+  {
+    path: '/choferesVehiculos',
+    name: 'choferesVehiculos',
+    component: ChoferesVehiculosView
+  },
 ]
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
