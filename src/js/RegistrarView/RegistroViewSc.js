@@ -111,7 +111,7 @@ export default {
         valid = false;
       }
       if (!this.driver.fechaVencimientoLicencia) {
-        this.errors.fechaVencimientoLicencia = 'Por favor, seleccione la fecha de vencimiento de la licencia.';
+        this.errors.fechaVencimientoLicencia = 'Por favor, seleccione Fecha-Vencimiento.';
         valid = false;
       } else if (!this.isFutureDate(this.driver.fechaVencimientoLicencia)) {
         this.dateError = true;

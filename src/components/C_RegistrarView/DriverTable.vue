@@ -31,9 +31,9 @@
           <td>{{ formatDate(driver.fechaVencimientoLicencia) }}</td>
           <td>
             <!-- Botón para editar el chofer -->
-            <button @click="$emit('edit', driver.id)" class="btn btn-sm btn-warning">Editar</button>
+            <button @click="$emit('edit', driver.id)" class="btn btn-sm btn-warning"><i class="fa-solid fa-pencil"></i></button>
             <!-- Botón para cambiar el estado del chofer -->
-            <button @click="$emit('c_est', driver.id)" class="btn btn-sm btn-danger">Cambiar Estado</button>
+            <button @click="$emit('c_est', driver.id)" class="btn btn-sm btn-danger"><i class="fas fa-toggle-on"></i></button>
           </td>
         </tr>
       </tbody>
