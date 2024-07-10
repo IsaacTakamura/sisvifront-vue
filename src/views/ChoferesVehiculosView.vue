@@ -7,12 +7,9 @@
                 <h1>Choferes</h1>
                 <p class="blockquote" >Seleccione un conductor</p>
                 <!--Barra de busqueda para filtrar por nombre de conductor-->
-                <input type="text" v-model="search" placeholder="Nombre deL Chofer" class="form-control">
-                <ul class="list-group
-                    list-group-flush">
-                    <li class="list-group
-                        list-group-item" v-for="chofer in choferes" @click="mostrarDatos(chofer)">
-                        {{chofer.nombre}}
+                <ChoferesListView :search="search" @update:search="search = $event"></ChoferesListView>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group list-group-item">
                     </li>
                 </ul>
 
@@ -22,12 +19,14 @@
                         <tr>
                             <th>#</th>
                             <th>Nombre</th>
+                            <th>Apellido</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
                         <tr v-for="chofer in choferes">
                             <td>{{chofer.id}}</td>
-                            <td>{{chofer.nombre}}</td>
+                            <td>{{chofer.primerNombre}}</td>
+                            <td>{{chofer.apellidoPaterno}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -39,9 +38,13 @@
 
                         <!--Aca va el cuadro con los datos del Conductor-->
                         <div class="col">
-                            <h1>
-                                Datos del Conductor
-                            </h1>
+                            
+                            <p>
+                                <blockquote>
+                                
+                                </blockquote>
+                            </p>
+                            <DatosConductorView/>
                         </div>
 
                         <!--Aca va los datos del vehiculo que esta asignado el conductor-->
@@ -58,3 +61,42 @@
         </div>
     </div>
 </template>
+<script> 
+import axios from 'axios';
+import DatosConductorView from './M.ListadoChoferesVehivulos/DatosConductorView.vue';
+import ChoferesList from './M.ListadoChoferesVehivulos/ChoferesListView.vue';
+
+export default {
+    components: {
+        DatosConductorView,
+        ChoferesList
+    },
+    data() {
+        return {
+            choferes: [],
+            search: ''
+        };
+    },
+    computed: {
+        filteredChoferes() {
+            return this.choferes.filter(chofer => {
+                return chofer.primerNombre.toLowerCase().includes(this.search.toLowerCase());
+            });
+        }
+    },
+    methods: {
+        async fetchChoferes() {
+            const url = 'http://localhost:8069/api/choferes/listar';  // Reemplaza esto con la URL de tu API
+            const response = await axios.get(url);
+            this.choferes = response.data;
+        },
+        seleccionarChofer(chofer) {
+            this.$emit('mostrar-datos', chofer);
+        }
+    },
+    created() {
+        this.fetchChoferes();
+    }
+};
+
+</script>
