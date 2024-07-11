@@ -1,7 +1,7 @@
 <template>
     <!-- Contenedor principal para la sección de mapa de ubicación -->
     <div class="mapa-ubicacion">
-      <h2 class="title">Última Ubicación</h2>
+      <h2 class="title">Mapa</h2>
       <!-- Componente MapComponent para mostrar el mapa con la ubicación -->
       <MapComponent 
         v-if="ubicacion && vehiculo"

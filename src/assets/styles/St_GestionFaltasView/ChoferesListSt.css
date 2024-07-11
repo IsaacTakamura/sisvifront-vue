@@ -1,0 +1,51 @@
+/* ChoferesListSt.css */
+
+.choferes-list {
+    width: 100%;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  .filtro-choferes {
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+  }
+  
+  .lista-contenedor {
+    width: 100%;
+    max-height: 400px;
+  }
+  
+  .lista-scrollable {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .list-group-item {
+    cursor: pointer;
+    margin-bottom: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #fff;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .list-group-item:hover {
+    background-color: #e1f5fe;
+    border-color: #0288d1;
+    color: #0288d1;
+  }
+  
+  .invisible-id {
+    display: none;
+  }
+  

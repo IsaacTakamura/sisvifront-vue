@@ -1,61 +1,91 @@
+/* SeleccionarPlacaSt.css */
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .seleccionar-placa {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.5em;
-    color: #333;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 0.375rem 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .filtro-placa,
-  .input-reducido {
-    width: 80%;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-  }
-  
-  .centered-label {
-    display: block;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .lista-contenedor {
-    width: 100%;
-    max-height: 150px;
-  }
-  
-  .lista-scrollable {
-    max-height: 150px;
-    overflow-y: auto;
-  }
-  
-  .list-group-item {
-    cursor: pointer;
-    margin-bottom: 5px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px;
-    background-color: #fff;
-    transition: background-color 0.3s ease;
-  }
-  
-  .list-group-item:hover {
-    background-color: #f1f1f1;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f7f9fc;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  animation: slideIn 0.5s ease-out;
+  width: 100%; /* Asegura que ocupe todo el espacio disponible */
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  color: #333;
+  font-weight: 600;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.form-control:focus {
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.filtro-placa,
+.input-reducido {
+  width: 100%; /* Asegura que ocupe todo el espacio disponible */
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+.centered-label {
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.lista-contenedor {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.lista-scrollable {
+  overflow-y: auto;
+}
+
+.list-group-item {
+  cursor: pointer;
+  margin-bottom: 5px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #fff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.list-group-item:hover {
+  background-color: #eaeaea;
+  transform: scale(1.05);
+}

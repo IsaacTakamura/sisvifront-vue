@@ -10,6 +10,8 @@ import Registroview from '../views/Registroview.vue'
 import UbicacionVehiculoView from '../views/UbicacionVehiculoView.vue'
 import RegistrarActivosView from '../views/RegistrarActivos.vue'
 import ChoferesVehiculosView from '../views/ChoferesVehiculosView.vue'
+import GestionFaltasView from '../views/GestionFaltasView.vue'
+import FallosVehicularesView from '../views/FallosVehicularesView.vue'
 
 const routes = [
   {
@@ -17,11 +19,11 @@ const routes = [
     name: 'home',
     component: HomeView
   },
-   {
+  {
     path: '/registraractivos',
     name: 'registraractivos',
     component: RegistrarActivosView
-   },
+  },
   {
     path: '/ficha',
     name: 'ficha',
@@ -69,6 +71,19 @@ const routes = [
     name: 'ubicacionv',
     component: UbicacionVehiculoView
   },
+
+  {
+    path: '/gestionfaltas',
+    name: 'gestionfaltas',
+    component: GestionFaltasView
+  },
+
+  {
+    path: '/fallovehicular',
+    name: 'fallovehicular',
+    component: FallosVehicularesView
+  },
+
   {
     path: '/choferesVehiculos',
     name: 'choferesVehiculos',

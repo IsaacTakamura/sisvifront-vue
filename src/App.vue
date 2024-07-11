@@ -41,6 +41,21 @@
             Ubicacion
           </router-link>
         </li>
+
+        <li>
+          <router-link to="/gestionfaltas" class="nav-link" href="#">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            Gestion Faltas
+          </router-link>
+        </li>
+
+        <li>
+          <router-link to="/fallovehicular" class="nav-link" href="#">
+            <i class="fas fa-car-crash"></i>
+            Fallos Vehiculares
+          </router-link>
+        </li>
+
         <li>
           <router-link to="/choferesVehiculos" class="nav-link" href="#">
             <i class="fa-solid fa-id-card"></i>
