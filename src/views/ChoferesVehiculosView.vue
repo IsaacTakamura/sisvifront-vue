@@ -96,7 +96,20 @@ export default {
     },
     created() {
         this.fetchChoferes();
+    },
+
+    //darle click a uno para luego mostrar sus datos en la parte derecha o pagina llamada DatosConductorView.vue
+    seleccionarChofer(chofer) {
+        this.$emit('mostrar-datos', chofer);
     }
+
+    
+
+
+
 };
+
+//darle click a uno para luego mostrar sus datos en la parte derecha o pagina llamada DatosConductorView.vue
+
 
 </script>

@@ -1,0 +1,94 @@
+.driver-license-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.license-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.license-info>div {
+    flex: 0 0 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.license-info span:first-child {
+    font-weight: bold;
+}
+
+.portrait {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.driver-license {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.license-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.license-info>div {
+    flex: 0 0 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.license-info span:first-child {
+    font-weight: bold;
+}
+
+.portrait {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
