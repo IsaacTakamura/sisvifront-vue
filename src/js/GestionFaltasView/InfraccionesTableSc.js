@@ -60,8 +60,8 @@ export default {
         day: 'numeric'
       });
     },
-    truncateText(text, length) {
-      return text.length > length ? text.substring(0, length) + '...' : text;
+    truncateObservaciones(observaciones) {
+      return observaciones.length > 20 ? observaciones.slice(0, 20) + '...' : observaciones;
     },
     changePage(page) {
       this.currentPage = page;
@@ -81,9 +81,27 @@ export default {
         await axios.put(`http://localhost:8069/api/infracciones/cambiar-estado/${id}`);
         this.fetchInfracciones();
         this.$emit('actualizar-strikes');
-        this.$emit('actualizar-choferes');  // Emitir evento para actualizar la lista de choferes
+        this.$emit('actualizar-choferes');
+        this.updateChoferState(); // Actualizar el estado del conductor si es necesario
       } catch (error) {
         console.error('Error al cambiar el estado de la infracción:', error);
+      }
+    },
+    async updateChoferState() {
+      try {
+        const response = await axios.get(`http://localhost:8069/api/infracciones/listar/chofer/${this.choferId}`);
+        const infracciones = response.data;
+        const strikes = infracciones.filter(infraccion => infraccion.estado).length;
+
+        if (strikes >= 5) {
+          await axios.put(`http://localhost:8069/api/choferes/cambiar-estado/${this.choferId}`, { estado: false });
+          this.$emit('actualizar-choferes');
+        } else if (strikes <= 4) {
+          await axios.put(`http://localhost:8069/api/choferes/cambiar-estado/${this.choferId}`, { estado: true });
+          this.$emit('actualizar-choferes');
+        }
+      } catch (error) {
+        console.error('Error al actualizar el estado del conductor:', error);
       }
     },
     toggleEstado() {

@@ -24,7 +24,7 @@
       <tbody>
         <tr v-for="infraccion in pagedInfracciones" :key="infraccion.id" :class="{ inactive: !infraccion.estado }">
           <td>{{ infraccion.vehiculo.placa }} - {{ infraccion.vehiculo.marca }} {{ infraccion.vehiculo.modelo }}</td>
-          <td>{{ truncateText(infraccion.observaciones, 30) }}</td>
+          <td>{{ truncateObservaciones(infraccion.observaciones) }}</td>
           <td>{{ infraccion.ubicacion }}</td>
           <td>{{ formatDate(infraccion.fechaRegistro) }}</td>
           <td>
