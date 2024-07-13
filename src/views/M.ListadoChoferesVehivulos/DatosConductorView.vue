@@ -10,9 +10,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="portrait">
-                        
-                    </div>
+                  <div class="center-container">
+                    <div class="portrait"></div>
+                    <!--combobox para seleccionar un numero de id para cargar los datos-->
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Seleccionar ID</option>
+                        <!--Aqui se cargara las opciones dinamicamentes-->
+                    </select>
+                  </div> 
                 </div>
     <div class="col-md-4 container text-left">
       <div class="conductor-identificate">
@@ -91,18 +96,32 @@
       };
     },
     mounted() {
-      axios.get('http://localhost:8069/api/choferes/listar/1')
-        .then((response) => {
-          this.dni = response.data.dni;
-          this.nombre = response.data.primerNombre;
-          this.apellido = response.data.apellidoPaterno;
-          this.Licencia = response.data.licencia;
-          this.Categoria = response.data.categoria;
-          this.Telefono = response.data.telefono;
-          this.SegundoNombre = response.data.segundoNombre;
-          this.SegundoApellido = response.data.apellidoMaterno;
-          this.FechaVencimiento = response.data.fechaVencimiento;
-        });
+
+      //cargar los datos del chofer seleccionado
+      //con el id del combobox seleccionado
+      document.querySelector('select').addEventListener('change', (event) => {
+        const id = event.target.value;
+        axios.get(`http://localhost:8069/api/choferes/listar/${id}`)
+          .then((response) => {
+            const chofer = response.data;
+            this.dni = chofer.dni;
+            this.nombre = chofer.primerNombre;
+            this.primerNombre = chofer.primerNombre;
+            this.apellido = chofer.apellidoPaterno;
+            this.SegundoApellido = chofer.apellidoMaterno;
+            this.Licencia = chofer.licenciaConducir;
+            this.Categoria = chofer.categoriaLicencia;
+            this.Telefono = chofer.telefono;
+            this.SegundoNombre = chofer.segundoNombre;
+            this.FechaVencimiento = new Date(chofer.fechaVencimientoLicencia).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+
+          });
+
+      });
+    });
     },
 
     methods: {
@@ -111,12 +130,27 @@
         const response = await axios.get(url);
         this.choferes = response.data;
       },
+      //cargar combobox con los id de los choferes
+    cargarChoferes() {
+      axios.get('http://localhost:8069/api/choferes/listar')
+        .then((response) => {
+          response.data.forEach((chofer) => {
+            const option = document.createElement('option');
+            option.value = chofer.id;
+            option.text = chofer.id;
+            document.querySelector('select').appendChild(option);
+          });
+        });
+    },
     },
 
-    //darle click a uno para luego mostrar sus datos en la parte derecha o pagina llamada DatosConductorView.vue
-    seleccionarChofer(chofer) {
-      this.$emit('mostrar-datos', chofer);
+    //cargar los datos del chofer seleccionado
+    created() {
+      this.fetchChoferes();
+      this.cargarChoferes();
     },
+
+
 
 
   };
@@ -148,7 +182,12 @@
   height: 100px;
   border-radius: 50%;
 }
-
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 </style>
   
   
