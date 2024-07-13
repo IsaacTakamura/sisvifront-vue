@@ -1,10 +1,9 @@
 export default {
-    name: 'ChoferDetails',
-    props: {
-      chofer: {
-        type: Object,
-        required: true
-      }
+  name: 'ChoferDetails',
+  props: {
+    chofer: {
+      type: Object,
+      required: true
     }
-  };
-  
+  }
+};

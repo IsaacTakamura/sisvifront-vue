@@ -4,13 +4,12 @@ export default {
   name: 'ChoferesList',
   data() {
     return {
-      searchQuery: '', // Filtro de búsqueda
-      choferes: [] // Lista de conductores
+      searchQuery: '',
+      choferes: []
     };
   },
   computed: {
     filteredChoferes() {
-      // Filtra la lista de conductores según el filtro de búsqueda
       const query = this.searchQuery.toLowerCase();
       return this.choferes.filter(chofer => 
         chofer.primerNombre.toLowerCase().includes(query) ||
@@ -23,21 +22,25 @@ export default {
   },
   methods: {
     async fetchChoferes() {
-      // Método para obtener la lista de conductores desde la API
       try {
         const response = await axios.get('http://localhost:8069/api/choferes/listar');
-        this.choferes = response.data;
+        const choferes = response.data;
+
+        for (let chofer of choferes) {
+          const infraccionesResponse = await axios.get(`http://localhost:8069/api/infracciones/listar/chofer/${chofer.id}`);
+          chofer.strikes = infraccionesResponse.data.filter(infraccion => infraccion.estado).length;
+        }
+
+        this.choferes = choferes;
       } catch (error) {
         console.error('Error al obtener los conductores:', error);
       }
     },
     selectChofer(chofer) {
-      // Método para seleccionar un conductor
       this.$emit('select', chofer);
     }
   },
   created() {
-    // Obtiene la lista de conductores cuando el componente es creado
     this.fetchChoferes();
   }
 };
