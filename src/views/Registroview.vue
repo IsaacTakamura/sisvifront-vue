@@ -51,6 +51,12 @@
       @close="closeConfirmRegisterModal" 
       @confirm="registerDriver">
     </confirmacion-registro-modal>
+
+    <!-- Nuevo modal para mostrar mensaje de infracciones excedidas -->
+    <exceed-infractions-modal 
+      :isVisible="showExceedInfractionsModal" 
+      @close="closeExceedInfractionsModal">
+    </exceed-infractions-modal>
   </div>
 </template>
 

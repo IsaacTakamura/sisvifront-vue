@@ -5,6 +5,7 @@ import ConfirmacionRegistroModal from '../../components/modals/M_RegistrarView/C
 import DriverForm from '../../components/C_RegistrarView/DriverForm.vue';
 import DriverTable from '../../components/C_RegistrarView/DriverTable.vue';
 import FilterButtons from '../../components/C_RegistrarView/FilterButtons.vue';
+import ExceedInfractionsModal from '../../components/modals/M_RegistrarView/ExceedInfractionsModal.vue';
 
 export default {
   components: {
@@ -13,12 +14,13 @@ export default {
     ConfirmacionRegistroModal,
     DriverForm,
     DriverTable,
-    FilterButtons
+    FilterButtons,
+    ExceedInfractionsModal
   },
   data() {
     return {
-      drivers: [], // Lista de choferes
-      driver: { // Datos del chofer para registro y edición
+      drivers: [],
+      driver: {
         primerNombre: '',
         segundoNombre: '',
         apellidoPaterno: '',
@@ -29,17 +31,18 @@ export default {
         fechaVencimientoLicencia: '',
         telefono: ''
       },
-      search: '', // Texto de búsqueda
-      showModal: false, // Control de visibilidad del modal de confirmación de cambio de estado
-      showRegistrationForm: false, // Control de visibilidad del formulario de registro
-      currentDriverId: null, // ID del chofer actual para cambio de estado
-      dateError: false, // Control de error de fecha
-      dateErrorMessage: 'La licencia está vencida.', // Mensaje de error de fecha
-      showEditModal: false, // Control de visibilidad del modal de edición
-      selectedDriver: {}, // Chofer seleccionado para editar
-      showConfirmRegisterModal: false, // Control de visibilidad del modal de confirmación de registro
-      errors: {}, // Errores de validación del formulario
-      filterOption: 'active' // Opción de filtro seleccionada (activos, todos, inactivos)
+      search: '',
+      showModal: false,
+      showRegistrationForm: false,
+      currentDriverId: null,
+      dateError: false,
+      dateErrorMessage: 'La licencia está vencida.',
+      showEditModal: false,
+      selectedDriver: {},
+      showConfirmRegisterModal: false,
+      errors: {},
+      filterOption: 'active',
+      showExceedInfractionsModal: false // Nuevo estado para controlar la visibilidad del nuevo modal
     };
   },
   computed: {
@@ -69,7 +72,6 @@ export default {
     }
   },
   methods: {
-    // Método para obtener la lista de choferes desde la API
     fetchDrivers() {
       axios.get('http://localhost:8069/api/choferes/listar')
         .then(response => {
@@ -77,7 +79,6 @@ export default {
         })
         .catch(error => console.error("Error fetching drivers:", error));
     },
-    // Método para validar el formulario de registro
     confirmRegisterDriver() {
       this.errors = {};
       let valid = true;
@@ -126,7 +127,6 @@ export default {
         this.showConfirmRegisterModal = true;
       }
     },
-    // Método para registrar un chofer
     registerDriver() {
       if (!this.isFutureDate(this.driver.fechaVencimientoLicencia)) {
         this.dateError = true;
@@ -134,7 +134,6 @@ export default {
       }
       this.dateError = false;
 
-      // Ajustar la fecha sumando un día
       const driverCopy = { ...this.driver };
       driverCopy.fechaVencimientoLicencia = this.adjustDate(driverCopy.fechaVencimientoLicencia);
 
@@ -157,12 +156,24 @@ export default {
         })
         .catch(error => console.error("Failed to register driver:", error));
     },
-    // Método para cambiar el estado de un chofer
     changeDriverState(id) {
       this.currentDriverId = id;
-      this.showModal = true;
+      const driver = this.drivers.find(d => d.id === id);
+      if (driver.estado === false) { // Intento de activación
+        axios.get(`http://localhost:8069/api/infracciones/listar/chofer/${id}`)
+          .then(response => {
+            const activeInfractions = response.data.filter(infraccion => infraccion.estado === true);
+            if (activeInfractions.length >= 5) {
+              this.showExceedInfractionsModal = true;
+            } else {
+              this.showModal = true;
+            }
+          })
+          .catch(error => console.error("Error fetching infractions:", error));
+      } else { // Intento de desactivación
+        this.showModal = true;
+      }
     },
-    // Método para confirmar el cambio de estado
     confirmChangeState() {
       axios.put(`http://localhost:8069/api/choferes/cambiar-estado/${this.currentDriverId}`)
         .then(response => {
@@ -171,15 +182,15 @@ export default {
         })
         .catch(error => console.error("Error changing driver state:", error));
     },
-    // Método para cerrar el modal de confirmación de cambio de estado
     closeModal() {
       this.showModal = false;
     },
-    // Método para cerrar el modal de confirmación de registro
     closeConfirmRegisterModal() {
       this.showConfirmRegisterModal = false;
     },
-    // Método para obtener los datos de un chofer para editar
+    closeExceedInfractionsModal() {
+      this.showExceedInfractionsModal = false;
+    },
     editDriver(id) {
       axios.get(`http://localhost:8069/api/choferes/listar/${id}`)
         .then(response => {
@@ -189,7 +200,6 @@ export default {
         })
         .catch(error => console.error("Error fetching driver:", error));
     },
-    // Método para actualizar los datos de un chofer
     updateDriver(driver) {
       const driverCopy = { ...driver };
       driverCopy.fechaVencimientoLicencia = this.adjustDate(driverCopy.fechaVencimientoLicencia);
@@ -201,12 +211,10 @@ export default {
         })
         .catch(error => console.error("Failed to update driver:", error));
     },
-    // Método para cerrar el modal de edición
     closeEditModal() {
       this.showEditModal = false;
       this.selectedDriver = {};
     },
-    // Método para formatear la fecha
     formatDate(dateString) {
       if (!dateString) return 'No disponible';
       const date = new Date(dateString);
@@ -216,7 +224,6 @@ export default {
         day: 'numeric'
       });
     },
-    // Método para formatear la fecha para el campo de entrada
     formatDateForInput(dateString) {
       if (!dateString) return '';
       const date = new Date(dateString);
@@ -225,30 +232,25 @@ export default {
       const day = String(date.getDate()).padStart(2, '0');
       return `${year}-${month}-${day}`;
     },
-    // Método para verificar si una fecha es futura
     isFutureDate(dateString) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       const inputDate = new Date(dateString);
       return inputDate > today;
     },
-    // Método para ajustar la fecha sumando un día
     adjustDate(dateString) {
       const date = new Date(dateString);
       date.setDate(date.getDate() + 1);
       return date.toISOString().split('T')[0];
     },
-    // Método para alternar la visibilidad del formulario de registro
     toggleRegistrationForm() {
       this.showRegistrationForm = !this.showRegistrationForm;
     },
-    // Método para establecer la opción de filtro
     setFilter(filterOption) {
       this.filterOption = filterOption;
     }
   },
-  // Método que se ejecuta al crear el componente
   created() {
     this.fetchDrivers();
   }
-}
+};
