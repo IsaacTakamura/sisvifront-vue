@@ -21,12 +21,7 @@
       :velocidadVehiculo="velocidadVehiculo">
       </mapa-ubicacion>
 
-      <alerta-modal
-        v-if="mostrarAlerta"
-        :show="mostrarAlerta"
-        :advertencia="advertenciaActual"
-        @close="cerrarAlerta">
-      </alerta-modal>
+      <notification-bar ref="notificationBar"></notification-bar>
     </div>
   </div>
 </template>

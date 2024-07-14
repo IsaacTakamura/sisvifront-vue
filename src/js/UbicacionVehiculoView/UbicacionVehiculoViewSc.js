@@ -1,7 +1,7 @@
 import SeleccionarPlaca from '../../components/C_UbicacionVehiculoView/SeleccionarPlaca.vue';
 import FichaTecnica from '../../components/C_UbicacionVehiculoView/FichaTecnica.vue';
 import MapaUbicacion from '../../components/C_UbicacionVehiculoView/MapaUbicacion.vue';
-import AlertaModal from '../../components/modals/M_UbicacionVehiculoView/AlertaModal.vue';
+import NotificationBar from '../../components/C_UbicacionVehiculoView/NotificationBar.vue';
 import * as turf from '@turf/turf';
 import fallas from '../../assets/json/obd_fallas.json'; // Importa el archivo JSON
 
@@ -61,7 +61,7 @@ export default {
     SeleccionarPlaca,
     FichaTecnica,
     MapaUbicacion,
-    AlertaModal
+    NotificationBar
   },
   data() {
     return {
@@ -74,8 +74,6 @@ export default {
       estadoVehiculo: '', // Estado del vehículo (en movimiento o en reposo)
       velocidadVehiculo: '', // Velocidad del vehículo
       intervalId: null, // ID del intervalo para actualizar la ubicación
-      mostrarAlerta: false, // Controla la visibilidad de la alerta
-      advertenciaActual: {}, // Datos de la advertencia actual
     };
   },
   computed: {
@@ -139,15 +137,17 @@ export default {
         if (advertencia !== 'Bajo') {
           const fallaSeleccionada = fallas.fallas_obd[Math.floor(Math.random() * fallas.fallas_obd.length)];
 
-          this.advertenciaActual = {
+          const advertenciaActual = {
             tipo: advertencia,
             codigo: fallaSeleccionada.codigo,
             descripcion: fallaSeleccionada.descripcion,
-            placa: this.vehiculoSeleccionado.placa,
-            modelo: this.vehiculoSeleccionado.modelo
+            vehiculo: {
+              placa: this.vehiculoSeleccionado.placa,
+              modelo: this.vehiculoSeleccionado.modelo
+            }
           };
 
-          this.mostrarAlerta = true;
+          this.$refs.notificationBar.addNotification(advertenciaActual);
 
           // Enviar los datos a la API para guardar la advertencia
           const averiaData = {
@@ -194,9 +194,6 @@ export default {
           velocidad: this.velocidadVehiculo
         };
       }
-    },
-    cerrarAlerta() {
-      this.mostrarAlerta = false;
     }
   },
   created() {
