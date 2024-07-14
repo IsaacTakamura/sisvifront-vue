@@ -1,11 +1,13 @@
 import VehiculosList from '../../components/C_FallosVehicularesView/VehiculosList.vue';
 import VehiculoDetails from '../../components/C_FallosVehicularesView/VehiculoDetails.vue';
+import TablaAverias from '../../components/C_FallosVehicularesView/TablaAverias.vue';
 
 export default {
   name: 'FallosVehicularesView',
   components: {
     VehiculosList,
-    VehiculoDetails
+    VehiculoDetails,
+    TablaAverias
   },
   data() {
     return {

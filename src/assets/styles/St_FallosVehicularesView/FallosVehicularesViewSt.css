@@ -1,3 +1,5 @@
+/* FallosVehicularesViewSt.css */
+
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f4f4f9;
@@ -10,13 +12,6 @@ body {
     padding: 20px;
     text-align: center;
 }
-
-.view-title {
-    font-size: 2em;
-    font-weight: bold;
-    color: #333;
-}
-
 
 .view-title {
     font-size: 2em;
@@ -48,19 +43,27 @@ body {
     width: 70%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
-.top-right,
-.bottom-right {
-    flex: 1;
+.top-right {
+    flex-grow: 1;
     margin-bottom: 20px;
     padding: 20px;
     border-radius: 10px;
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
     font-family: 'Roboto', sans-serif;
+}
+
+.bottom-right {
+    height: 300px; /* Ajuste para mantener la altura fija */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+    overflow-y: auto;
+    margin-top: 20px;
 }
 
 h2 {
