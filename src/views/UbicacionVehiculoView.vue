@@ -18,7 +18,15 @@
       :prevUbicacion="prevUbicacion" 
       :vehiculo="vehiculoSeleccionado"
       :estadoVehiculo="estadoVehiculo" 
-      :velocidadVehiculo="velocidadVehiculo"></mapa-ubicacion>
+      :velocidadVehiculo="velocidadVehiculo">
+      </mapa-ubicacion>
+
+      <alerta-modal
+        v-if="mostrarAlerta"
+        :show="mostrarAlerta"
+        :advertencia="advertenciaActual"
+        @close="cerrarAlerta">
+      </alerta-modal>
     </div>
   </div>
 </template>
