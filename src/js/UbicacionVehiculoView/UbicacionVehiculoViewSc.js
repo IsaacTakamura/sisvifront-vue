@@ -42,7 +42,7 @@ function getRandomAdvertencia() {
   const probabilidad = Math.random();
   let tipoAdvertencia = 'Bajo';
 
-  if (probabilidad < 0.5) { // Ajustamos la probabilidad a 50%
+  if (probabilidad < 0.4) { // Ajustamos la probabilidad a 40%
     const tipoProb = Math.random();
     if (tipoProb < 0.6) {
       tipoAdvertencia = 'Bajo';
@@ -75,7 +75,7 @@ export default {
       velocidadVehiculo: '', // Velocidad del vehículo
       intervalId: null, // ID del intervalo para actualizar la ubicación
       mostrarAlerta: false, // Controla la visibilidad de la alerta
-      advertenciaActual: {} // Datos de la advertencia actual
+      advertenciaActual: {}, // Datos de la advertencia actual
     };
   },
   computed: {
@@ -142,7 +142,9 @@ export default {
           this.advertenciaActual = {
             tipo: advertencia,
             codigo: fallaSeleccionada.codigo,
-            descripcion: fallaSeleccionada.descripcion
+            descripcion: fallaSeleccionada.descripcion,
+            placa: this.vehiculoSeleccionado.placa,
+            modelo: this.vehiculoSeleccionado.modelo
           };
 
           this.mostrarAlerta = true;
