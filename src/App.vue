@@ -10,6 +10,13 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         <li class="nav-item">
+          <router-link to="/dashboard" class="nav-link" href="#">
+            <i class="fa-solid fa-plus"></i>
+            Dashboard
+          </router-link>
+        </li>
+
+        <li class="nav-item">
           <router-link to="/registraractivos" class="nav-link" href="#">
             <i class="fa-solid fa-plus"></i>
             Registro
@@ -46,6 +53,13 @@
           <router-link to="/gestionfaltas" class="nav-link" href="#">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
             Gestion Faltas
+          </router-link>
+        </li>
+
+        <li>
+          <router-link to="/gestioninfraccion" class="nav-link" href="#">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            Gestion Infraccion
           </router-link>
         </li>
 

@@ -1,0 +1,39 @@
+/* General layout */
+.main-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+}
+
+.left-panel {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.right-panel {
+    flex: 3; /* Aumenta el valor flex para que los cuadros derecho ocupen más espacio */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.top-right,
+.bottom-right {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1; /* Permite que los cuadros se expandan para llenar el espacio disponible */
+}
+
+.top-right {
+    margin-bottom: 20px;
+}
+
+.bottom-right {
+    margin-top: 20px;
+}

@@ -26,11 +26,17 @@ export default {
         const response = await axios.get('http://localhost:8069/api/choferes/listar');
         const choferes = response.data;
 
-        for (let chofer of choferes) {
-          const infraccionesResponse = await axios.get(`http://localhost:8069/api/infracciones/listar/chofer/${chofer.id}`);
-          chofer.strikes = infraccionesResponse.data.filter(infraccion => infraccion.estado).length;
-        }
+        const promises = choferes.map(async (chofer) => {
+          try {
+            const infraccionesResponse = await axios.get(`http://localhost:8069/api/infracciones/listar/chofer/${chofer.id}`);
+            chofer.strikes = infraccionesResponse.data.filter(infraccion => infraccion.estado).length;
+          } catch (error) {
+            console.error(`Error al obtener infracciones para el chofer con ID ${chofer.id}:`, error);
+            chofer.strikes = 0; // Set strikes to 0 if there's an error fetching infractions
+          }
+        });
 
+        await Promise.all(promises);
         this.choferes = choferes;
       } catch (error) {
         console.error('Error al obtener los conductores:', error);

@@ -12,6 +12,8 @@ import RegistrarActivosView from '../views/RegistrarActivos.vue'
 import ChoferesVehiculosView from '../views/ChoferesVehiculosView.vue'
 import GestionFaltasView from '../views/GestionFaltasView.vue'
 import FallosVehicularesView from '../views/FallosVehicularesView.vue'
+import GestionarInfraccionesView from '../views/GestionarInfraccionesView.vue'
+import Dashboard from '../views/Dashboard.vue'
 
 const routes = [
   {
@@ -79,6 +81,12 @@ const routes = [
   },
 
   {
+    path: '/gestioninfraccion',
+    name: 'gestioninfraccion',
+    component: GestionarInfraccionesView
+  },
+
+  {
     path: '/fallovehicular',
     name: 'fallovehicular',
     component: FallosVehicularesView
@@ -88,6 +96,12 @@ const routes = [
     path: '/choferesVehiculos',
     name: 'choferesVehiculos',
     component: ChoferesVehiculosView
+  },
+  
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: Dashboard
   },
 ]
 const router = createRouter({
