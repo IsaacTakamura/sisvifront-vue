@@ -1,54 +1,61 @@
-/* VehiculoDetailsSt.css */
+/* Mejoras en VehiculoDetailsSt.css */
 
 .vehiculo-details {
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Sombra más suave */
     font-family: 'Roboto', sans-serif;
+    color: #333; /* Mejor contraste de texto */
 }
 
 .details-header {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
+    font-size: 2em; /* Tamaño de fuente más grande */
+    font-weight: 500; /* Peso de fuente menos intenso */
+    margin-bottom: 30px; /* Más espacio debajo del encabezado */
+    color: #040607; /* Color de acento para el encabezado */
 }
 
 .details-container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 20px; /* Espacio entre columnas sin usar el divisor */
 }
 
 .details-column {
     flex: 1;
+    padding: 0 15px; /* Espaciado interno para cada columna */
 }
 
-.divider {
-    width: 1px;
-    background-color: #ddd;
-    margin: 0 20px;
-}
+/* Eliminamos el .divider para usar gap en .details-container */
 
 .details-list {
     list-style: none;
     padding: 0;
+    margin: 0; /* Remover margen por defecto */
 }
 
 .details-list li {
     display: flex;
     justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+    padding: 12px 0; /* Aumentar el espaciado vertical */
+    border-bottom: 1px solid #eee; /* Color más suave para la línea */
 }
 
 .details-label {
-    font-weight: bold;
+    font-weight: 600; /* Peso de fuente más fuerte para etiquetas */
+    color: #555; /* Color oscuro para mejor contraste */
 }
 
 .details-value {
     flex: 1;
     text-align: right;
     padding-left: 20px;
+    color: #666; /* Color suavizado para los valores */
+}
+
+/* Añadir interactividad a los elementos */
+.details-list li:hover {
+    background-color: #f9f9f9; /* Resaltar elementos al pasar el mouse */
 }

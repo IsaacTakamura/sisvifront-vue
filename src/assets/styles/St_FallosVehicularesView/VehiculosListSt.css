@@ -1,54 +1,87 @@
-/* VehiculosListSt.css */
+/* Mejoras en VehiculosListSt.css */
 
-.vehiculo-details {
-  background-color: #191919;
-  /* Asegúrate de incluir cualquier otra propiedad CSS que necesites para este selector */
-}
 .vehiculos-list {
-    width: 100%;
-  }
-  
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+}
+
 .title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.5em;
-    color: #333;
-  }
-  
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.75em; /* Tamaño de fuente más grande */
+  color: #007bff; /* Color más vibrante */
+}
+
 .filtro-vehiculos {
-    width: 80%;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-  }
-  
+  width: 80%;
+  margin: 20px auto; /* Aumentar el margen superior */
+  display: block;
+  padding: 10px; /* Añadir padding para mayor espacio */
+  border-radius: 5px; /* Bordes redondeados */
+  border: 1px solid #ccc; /* Borde más sutil */
+  text-align: center;
+}
+
 .lista-contenedor {
-    width: 100%;
-    max-height: 400px;
-  }
-  
+  width: 100%;
+  max-height: 400px;
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave */
+}
+
 .lista-scrollable {
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  
+  max-height: 400px;
+  overflow-y: auto;
+}
+
 .list-group-item {
-    cursor: pointer;
-    margin-bottom: 5px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px;
-    background-color: #fff;
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-  }
-  
-.list-group-item:hover {
-    background-color: #e1f5fe;
-    border-color: #0288d1;
-    color: #0288d1;
-  }
-  
+  cursor: pointer;
+  margin-bottom: 5px;
+  text-align: center;
+  border: none; /* Remover bordes */
+  border-radius: 4px;
+  padding: 15px; /* Aumentar padding */
+  background-color: #f8f9fa; /* Color de fondo más suave */
+  transition: all 0.3s ease; /* Transición suavizada */
+}
+
+.list-group-item:hover, .list-group-item:focus {
+  background-color: #e9ecef; /* Color de fondo al pasar el mouse */
+  color: #0056b3; /* Cambiar color del texto */
+  transform: scale(1.02); /* Efecto de escala */
+}
+
 .invisible-id {
-    display: none;
-  }
+  display: none;
+}
+.input-group {
+  display: flex;
+  align-items: center; /* Alinea verticalmente los elementos del grupo */
+  width: 80%;
+  margin: 20px auto; /* Centra el grupo de entrada */
+}
+
+.input-group-prepend {
+  margin-right: -1px; /* Ajusta el margen para que el icono y el input estén juntos */
+}
+
+.input-group-text {
+  background-color: #eee; /* Establece un color de fondo para el icono */
+  border: 1px solid #ccc; /* Añade un borde que coincida con el input */
+  border-radius: 5px 0 0 5px; /* Bordes redondeados solo en el lado izquierdo */
+  padding: 15px; /* Espaciado interno para el icono */
+  display: flex;
+  align-items: center; /* Alinea verticalmente el icono */
+  justify-content: center; /* Alinea horizontalmente el icono */
+  height: 47px;
+}
+
+.filtro-vehiculos {
+  flex: 1; /* Permite que el input ocupe el espacio restante */
+  border-radius: 0 5px 5px 0; /* Bordes redondeados solo en el lado derecho */
+  border: 1px solid #ccc; /* Asegura que el borde del input coincida con el del icono */
+}
+
+.input-group-text i {
+  font-size: 24px; /* Ajusta el tamaño del icono */
+}

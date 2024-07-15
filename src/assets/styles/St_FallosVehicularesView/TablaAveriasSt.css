@@ -1,27 +1,58 @@
+/** Estilos generales para la tabla de averías */
 .tabla-averias {
-    padding: 20px;
-  }
-  
-  .form-control {
-    width: 50%;
-    margin-bottom: 20px;
-  }
-  
-  .table {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .pagination {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .page-item {
-    margin: 0 5px;
-  }
-  
-  .page-link {
-    cursor: pointer;
-  }
-  
+  padding: 20px;
+  background-color: #FFFFFF; /* Fondo blanco para el contenedor */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidad */
+  border-radius: 8px; /* Bordes redondeados */
+}
+
+/** Estilos para el control de búsqueda */
+.form-control {
+  width: 50%;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #DDDDDD; /* Borde sutil */
+  border-radius: 4px; /* Bordes redondeados para el input */
+}
+
+/** Estilos para la tabla */
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse; /* Colapsar bordes de la tabla */
+}
+
+.table th, .table td {
+  padding: 10px; /* Espaciado interno para celdas */
+  border-bottom: 1px solid #EEEEEE; /* Línea divisoria sutil entre filas */
+}
+
+.table thead th {
+  background-color: #F5F5F5; /* Fondo ligeramente gris para el encabezado */
+  color: #333333; /* Texto oscuro para contraste */
+}
+
+/** Estilos para la paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style-type: none; /* Remover estilos de lista */
+  padding: 0; /* Remover padding predeterminado */
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  cursor: pointer;
+  background-color: #FFFFFF; /* Fondo blanco para los enlaces */
+  border: 1px solid #DDDDDD; /* Borde sutil */
+  padding: 5px 10px;
+  border-radius: 4px; /* Bordes redondeados para los enlaces */
+  color: #007BFF; /* Color azul para el texto, añadiendo un toque tecnológico */
+}
+
+.page-link:hover {
+  background-color: #F5F5F5; /* Cambio de color al pasar el mouse */
+}
