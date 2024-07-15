@@ -158,7 +158,7 @@ export default {
           };
           console.log('Datos que se enviarán a la API:', averiaData);
 
-          const guardarResponse = await fetch('http://localhost:8069/api/averias/guardar', {
+          const guardarResponse = await fetch('http://localhost:8068/api/averias/guardar', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

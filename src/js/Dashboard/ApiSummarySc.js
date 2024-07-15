@@ -18,7 +18,7 @@ export default {
         const [choferes, vehiculos, averias, repuestos] = await Promise.all([
           axios.get('http://localhost:8069/api/choferes/listar'),
           axios.get('http://localhost:8069/api/vehiculos/listar'),
-          axios.get('http://localhost:8069/api/averias/listar'),
+          axios.get('http://localhost:8068/api/averias/listar'),
           axios.get('http://localhost:8069/api/repuestos/listar')
         ]);
 

@@ -37,7 +37,7 @@ export default {
   methods: {
     async fetchAverias() {
       try {
-        const response = await axios.get(`http://localhost:8069/api/averias/listarPorVehiculo/${this.vehiculoId}`);
+        const response = await axios.get(`http://localhost:8068/api/averias/listarPorVehiculo/${this.vehiculoId}`);
         this.averias = response.data;
       } catch (error) {
         console.error('Error al obtener las averías:', error);
