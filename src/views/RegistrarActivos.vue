@@ -23,9 +23,9 @@ export default {
     return {
       // Se define la propiedad sections con un arreglo de objetos que contienen la información de cada sección
       sections: [
-        { title: 'REGISTRAR VEHICULO', image: require('../assets/vehicle.png'), button: 'REGISTRAR', route: '/ficha' },
-        { title: 'REGISTRAR CONDUCTOR', image: require('../assets/driver.png'), button: 'REGISTRAR', route: '/registrou' },
-        { title: 'REGISTRAR PRODUCTO', image: require('../assets/spear.png'), button: 'REGISTRAR', route: '/gestion' }
+        { title: 'REGISTRAR VEHICULO', image: require('../assets/register-vehiculo.jpg'), button: 'REGISTRAR', route: '/ficha' },
+        { title: 'REGISTRAR CONDUCTOR', image: require('../assets/conductor.jpg'), button: 'REGISTRAR', route: '/registrou' },
+        { title: 'REGISTRAR PRODUCTO', image: require('../assets/piezas.jpg'), button: 'REGISTRAR', route: '/gestion' }
       ]
     }
   },
@@ -44,22 +44,28 @@ export default {
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background: #191919;
+  padding-top: 55px;
+  height: 100vh;
+
 }
 
 .container {
   display: flex;
+  flex-wrap: wrap; /* Permite que las tarjetas se ajusten y envuelvan */
   justify-content: center;
   gap: 20px;
 }
+
 
 .card {
   background-color: #1e1e2f;
   border-radius: 10px;
   padding: 20px;
-  width: 250px;
+  width: 400px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
 }
 
 .card h2 {
@@ -71,12 +77,19 @@ export default {
   background-color: #2a2a3f;
   padding: 10px;
   border-radius: 10px;
+  overflow: hidden;
+  height: 100%;
 }
 
 .image-container img {
   width: 100%;
+  max-height: 350px; /* Ajusta la altura máxima de las imágenes */
+  object-fit: cover; /* Asegura que la imagen cubra el espacio disponible sin distorsionarse */
   border-radius: 10px;
 }
+
+
+
 
 .controls {
   margin-top: 20px;

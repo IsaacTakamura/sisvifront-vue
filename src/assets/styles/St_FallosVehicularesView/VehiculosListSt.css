@@ -1,5 +1,9 @@
 /* VehiculosListSt.css */
 
+.vehiculo-details {
+  background-color: #191919;
+  /* Asegúrate de incluir cualquier otra propiedad CSS que necesites para este selector */
+}
 .vehiculos-list {
     width: 100%;
   }
