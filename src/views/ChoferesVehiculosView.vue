@@ -1,5 +1,5 @@
 <template>
-    <div id="2_Partes_Pagina" class="container text-center">
+    <div id="2_Partes_Pagina" class="right-panel text-center">
         <div class="row">
             <div class="col-md-3">
                 <!--Aqui va el listado de choferes-->
