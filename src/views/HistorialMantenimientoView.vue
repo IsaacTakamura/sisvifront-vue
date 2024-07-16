@@ -4,7 +4,12 @@
       <div class="box seleccionar-ingreso">
         <h3>Seleccionar Ingreso</h3>
         <h2>1. Filtrar por Placa:</h2>
-        <input type="text" id="placa" v-model="filtroPlaca" placeholder="Filtrar por Placa">
+        <input
+          type="text"
+          id="placa"
+          v-model="filtroPlaca"
+          placeholder="Filtrar por Placa"
+        />
         <h2>2. Seleccionar Registro de Ingreso:</h2>
         <div class="table-container">
           <table class="styled-table">
@@ -18,25 +23,56 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="mantenimiento in paginatedMantenimientos" :key="mantenimiento.id" @click="selectMantenimiento(mantenimiento)">
+              <tr
+                v-for="mantenimiento in paginatedMantenimientos"
+                :key="mantenimiento.id"
+                @click="selectMantenimiento(mantenimiento)"
+              >
                 <td>{{ mantenimiento.mantenimientoIngreso.id }}</td>
-                <td>{{ formatDate(mantenimiento.mantenimientoIngreso.fechaIngreso) }}</td>
-                <td>{{ getVehiculo(mantenimiento.mantenimientoIngreso.idVehiculo).placa }}</td>
-                <!--Mostrar el primer nombre del chofer-->
-                <td>{{ getChofer(mantenimiento.mantenimientoIngreso.idChofer).primerNombre }}</td>
-                <td>{{ getChofer(mantenimiento.mantenimientoIngreso.idChofer).dni }}</td>
+                <td>
+                  {{
+                    formatDate(mantenimiento.mantenimientoIngreso.fechaIngreso)
+                  }}
+                </td>
+                <td>
+                  {{
+                    getVehiculo(mantenimiento.mantenimientoIngreso.idVehiculo)
+                      .placa
+                  }}
+                </td>
+                <td>
+                  {{
+                    getChofer(mantenimiento.mantenimientoIngreso.idChofer)
+                      .primerNombre
+                  }}
+                </td>
+                <td>
+                  {{
+                    getChofer(mantenimiento.mantenimientoIngreso.idChofer).dni
+                  }}
+                </td>
               </tr>
             </tbody>
           </table>
           <div class="pagination">
-            <button @click="prevPage" :disabled="currentPage === 1">Anterior</button>
+            <button @click="prevPage" :disabled="currentPage === 1">
+              Anterior
+            </button>
             <span>Página {{ currentPage }} de {{ totalPages }}</span>
-            <button @click="nextPage" :disabled="currentPage === totalPages">Siguiente</button>
+            <button @click="nextPage" :disabled="currentPage === totalPages">
+              Siguiente
+            </button>
           </div>
           <div class="rows-per-page">
             <label for="rows">Filas por página:</label>
             <select id="rows" v-model="rowsPerPage" @change="changeRowsPerPage">
-              <option v-for="option in [5, 10, 15, 20]" :key="option" :value="option">{{ option }}</option>
+              <option
+                v-for="option in [5, 10, 15, 20]"
+                :key="option"
+                :value="option"
+              >
+                {{ option }}
+              </option>
             </select>
           </div>
         </div>
@@ -45,13 +81,16 @@
         <h3>Mantenimiento Realizado</h3>
         <div class="input-group">
           <label>Placa Vehículo:</label>
-          <input type="text" v-model="mantenimientoRealizado.placaVehiculo">
+          <input type="text" v-model="mantenimientoRealizado.placaVehiculo" />
           <label>DNI Chofer:</label>
-          <input type="text" v-model="mantenimientoRealizado.dniChofer">
+          <input type="text" v-model="mantenimientoRealizado.dniChofer" />
           <label>Kilometraje Ingresado:</label>
-          <input type="text" v-model="mantenimientoRealizado.kilometrajeIngresado">
+          <input
+            type="text"
+            v-model="mantenimientoRealizado.kilometrajeIngresado"
+          />
           <label>Observaciones:</label>
-          <input type="text" v-model="mantenimientoRealizado.observaciones">
+          <input type="text" v-model="mantenimientoRealizado.observaciones" />
         </div>
         <button @click="guardarMantenimiento">Guardar Mantenimiento</button>
       </div>
@@ -62,36 +101,42 @@
         <div v-if="vehiculoSeleccionado">
           <div class="input-group">
             <label>Imagen del vehículo:</label>
-            <input type="file" id="imagenVehiculo" accept="image/*">
+            <input type="file" id="imagenVehiculo" accept="image/*" />
           </div>
           <div class="input-group">
             <label>Ruta:</label>
-            <input type="text" v-model="vehiculoSeleccionado.img">
+            <input type="text" v-model="vehiculoSeleccionado.img" />
           </div>
           <div class="input-group">
             <div class="column">
               <label>Placa:</label>
-              <input type="text" v-model="vehiculoSeleccionado.placa">
+              <input type="text" v-model="vehiculoSeleccionado.placa" />
               <label>N° Motor:</label>
-              <input type="text" v-model="vehiculoSeleccionado.numMotor">
+              <input type="text" v-model="vehiculoSeleccionado.numMotor" />
               <label>N° Serie:</label>
-              <input type="text" v-model="vehiculoSeleccionado.numSerie">
+              <input type="text" v-model="vehiculoSeleccionado.numSerie" />
               <label>Color:</label>
-              <input type="text" v-model="vehiculoSeleccionado.color">
+              <input type="text" v-model="vehiculoSeleccionado.color" />
               <label>Marca:</label>
-              <input type="text" v-model="vehiculoSeleccionado.marca">
+              <input type="text" v-model="vehiculoSeleccionado.marca" />
             </div>
             <div class="column">
               <label>Modelo:</label>
-              <input type="text" v-model="vehiculoSeleccionado.modelo">
+              <input type="text" v-model="vehiculoSeleccionado.modelo" />
               <label>Año Fabricacion:</label>
-              <input type="text" v-model="vehiculoSeleccionado.anioFabricacion">
+              <input
+                type="text"
+                v-model="vehiculoSeleccionado.anioFabricacion"
+              />
               <label>Kilometraje:</label>
-              <input type="text" v-model="vehiculoSeleccionado.kilometraje">
+              <input type="text" v-model="vehiculoSeleccionado.kilometraje" />
               <label>Tipo de Combustible:</label>
-              <input type="text" v-model="vehiculoSeleccionado.tipoCombustible">
+              <input
+                type="text"
+                v-model="vehiculoSeleccionado.tipoCombustible"
+              />
               <label>Transmisión:</label>
-              <input type="text" v-model="vehiculoSeleccionado.transmision">
+              <input type="text" v-model="vehiculoSeleccionado.transmision" />
             </div>
           </div>
         </div>
