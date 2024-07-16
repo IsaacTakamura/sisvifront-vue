@@ -1,4 +1,3 @@
-<!-- Pag.Name=ChoferesVehiculosView.vue -->
 <template>
   <div id="2_Partes_Pagina" class="container text-center">
     <div class="row">
@@ -120,87 +119,8 @@
   </div>
 </template>
 
-<script>
-import axios from "axios";
-import DatosConductorView from "./M.ListadoChoferesVehivulos/DatosConductorView.vue";
-import ChoferesListView from "./M.ListadoChoferesVehivulos/ChoferesListView.vue";
-import perfilImg from "@/assets/styles/St_ChoferesVehiculosView/Perfil.jpg";
-
-export default {
-  components: {
-    DatosConductorView,
-    ChoferesListView,
-  },
-  data() {
-    return {
-      choferes: [],
-      search: "",
-      perfilImg: perfilImg,
-      selectedChofer: {
-        dni: "",
-        primerNombre: "",
-        apellidoPaterno: "",
-        licenciaConducir: "",
-        categoriaLicencia: "",
-        telefono: "",
-        segundoNombre: "",
-        apellidoMaterno: "",
-        fechaVencimientoLicencia: "",
-      },
-      vehiculo: {
-        placa: "",
-        numMotor: "",
-        numSerie: "",
-        marca: "",
-        modelo: "",
-        anioFabricacion: "",
-        color: "",
-        kilometraje: "",
-        tipoCombustible: "",
-        transmision: "",
-        img: "",
-        fechaRegistro: "",
-        fechaModificacion: "",
-      },
-      ingresos: [],
-    };
-  },
-  methods: {
-    async fetchChoferes() {
-      const url = "http://localhost:8069/api/choferes/listar"; // Reemplaza esto con la URL de tu API
-      const response = await axios.get(url);
-      this.choferes = response.data;
-    },
-    async fetchIngresos() {
-      const url = "http://localhost:8069/api/mantenimiento/ingreso/listar"; // Reemplaza esto con la URL de tu API
-      const response = await axios.get(url);
-      this.ingresos = response.data;
-    },
-    async fetchVehiculo(id) {
-      const url = `http://localhost:8069/api/vehiculos/listar/${id}`; // Reemplaza esto con la URL de tu API
-      const response = await axios.get(url);
-      this.vehiculo = response.data;
-    },
-    async mostrarDatosConductor(chofer) {
-      this.selectedChofer = chofer;
-      const ingreso = this.ingresos.find((i) => i.idChofer === chofer.id);
-      if (ingreso) {
-        await this.fetchVehiculo(ingreso.idVehiculo);
-      } else {
-        this.vehiculo = {};
-      }
-    },
-    getVehiculoImageUrl(img) {
-      try {
-        return require(`@/assets/vehiculos/${img}`);
-      } catch (e) {
-        return perfilImg;
-      }
-    },
-  },
-  async created() {
-    await this.fetchChoferes();
-    await this.fetchIngresos();
-  },
-};
-</script>
+<script src="@/js/ChoferesVehiculosView/ChoferesVehiculosViewSc.js"></script>
+<style
+  src="@/assets/styles/St_ChoferesListView/ChoferesVehiculosViewSt.css"
+  scoped
+></style>
