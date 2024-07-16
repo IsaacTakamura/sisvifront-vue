@@ -4,7 +4,6 @@ import FichaTecnicaView from '../views/FichaTecnicaView.vue'
 import RegistroDiarioView from '../views/RegistroDiarioView.vue'
 import AboutView from '../views/AboutView.vue'
 import HistorialMantenimientoView from '../views/HistorialMantenimientoView.vue'
-import RepuestoIngresoView from '../views/RepuestoIngresoView.vue'
 import RepuestoView from '../views/RepuestoView.vue'
 import Registroview from '../views/Registroview.vue'
 import UbicacionVehiculoView from '../views/UbicacionVehiculoView.vue'
@@ -48,13 +47,7 @@ const routes = [
     name: 'historial',
     component: HistorialMantenimientoView
   },
-  {
-    path: '/repuesto',
-    name: 'repuesto',
-
-    component: RepuestoIngresoView
-
-  },
+  
   {
     path: '/gestion',
     name: 'gestion',

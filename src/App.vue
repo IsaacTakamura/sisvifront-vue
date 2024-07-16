@@ -37,12 +37,7 @@
             Mantenimiento
           </router-link>
         </li>
-        <li class="nav-item"  style="margin-right: 15px;">
-          <router-link to="/repuesto" class="nav-link" href="#">
-            <i class="fa-solid fa-gauge"></i>
-            Ingresar Repuesto
-          </router-link>
-        </li>
+        
         <li class="nav-item"  style="margin-right: 15px;">
           <router-link to="/ubicacionv" class="nav-link" href="#">
             <i class="fa-solid fa-location-dot"></i>
