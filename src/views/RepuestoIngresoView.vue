@@ -109,8 +109,14 @@
 
 <style scoped>
 .container {
-  display: flex;
-  flex-direction: column;
+  max-width: 1200px; /* Limita el ancho máximo para una mejor lectura */
+  margin: auto; /* Centra el contenedor */
+  padding: 20px;
+  background-color: #f9f9f9; /* Fondo más claro para el contenedor */
+}
+
+.box {
+  overflow-x: auto; /* Agrega desplazamiento horizontal si es necesario */
 }
 
 .row {
@@ -118,79 +124,75 @@
   flex-direction: row;
 }
 
+/* Mejoras en el diseño para un aspecto más moderno y profesional */
+
+
+h1 {
+  color: #0056b3; /* Color más suave para el título */
+  text-align: center; /* Centra el título */
+  margin-bottom: 20px; /* Espacio debajo del título */
+}
+
 .box {
-  border: 1px solid black;
-  padding: 10px;
-  margin: 10px;
+  border: none; /* Elimina el borde */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave para dar profundidad */
+  padding: 20px;
+  margin: 20px 0; /* Mayor espaciado entre cajas */
+  background-color: white; /* Fondo blanco para las cajas */
 }
 
-#datos-documento {
-  flex: 1;
-}
-
-#referencias, #selecciona-repuestos {
-  flex: 1;
-}
-
-#registrar-ingreso {
-  flex: 1;
-}
-
-.form {
-  display: flex;
-  justify-content: space-between;
+.form, .form-column {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Diseño adaptable */
+  gap: 20px; /* Espaciado entre campos */
 }
 
 .form-field {
   display: flex;
   flex-direction: column;
-  margin: 10px;
 }
 
-.form-column {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-}
-
-.form-field {
-  margin: 10px 0;
-}
-
-input, select {
-  width: 100%;
+input[type="text"], input[type="date"], input[type="number"], select {
+  padding: 10px; /* Relleno más amplio para facilidad de interacción */
+  border: 1px solid #ced4da; /* Borde más sutil */
+  border-radius: 4px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de fuente mayor para mejor legibilidad */
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
+  margin-top: 20px; /* Espaciado superior para la tabla */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave para la tabla */
+  
 }
 
 th, td {
-  border: 1px solid black;
-  padding: 10px;
-}
-.label-row {
-  display: flex;
-  justify-content: space-between;
+  text-align: left; /* Alineación del texto a la izquierda */
+  border-bottom: 1px solid #ddd; /* Borde inferior más suave */
 }
 
-input {
-  width: 100%;
-  height: 20px; /* Hacer los campos de entrada más pequeños */
+th {
+  background-color: #f2f2f2; /* Fondo para los encabezados de tabla */
+  color: #333; /* Color de texto más oscuro para contraste */
 }
 
 .button-row {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
+  justify-content: space-between; /* Distribuye los botones a ambos extremos */
+  margin-top: 30px; /* Espaciado superior */
 }
 
 .blue-button {
-  background-color: darkblue;
-  color: white;
-  padding: 10px;
-  margin-left: 10px;
+  background-color: #007bff; /* Azul más brillante */
+  border: none; /* Elimina el borde */
+  border-radius: 4px; /* Bordes redondeados */
+  padding: 10px 15px; /* Relleno más amplio */
+  font-size: 16px; /* Tamaño de fuente mayor */
+  cursor: pointer; /* Cambia el cursor a puntero */
+  transition: background-color 0.3s; /* Transición suave del color de fondo */
+}
+
+.blue-button:hover {
+  background-color: #0056b3; /* Oscurece el botón al pasar el mouse */
 }
 
 </style>

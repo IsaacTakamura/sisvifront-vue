@@ -278,4 +278,104 @@ label {
     max-width: 100%;
     height: auto;
 }
+
+/**/
+/* Estilos Generales */
+.container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.border {
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.p-3 {
+    padding: 1rem;
+}
+
+/* Botones */
+button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Formularios */
+input[type="text"], input[type="file"], input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.uploaded-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Mejoras Visuales */
+.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.vh-100 {
+    min-height: 100vh;
+}
+
+/* Ajustes de Espaciado */
+.division, .form-group {
+    margin-bottom: 20px;
+}
 </style>

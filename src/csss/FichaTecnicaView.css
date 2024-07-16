@@ -1,27 +1,59 @@
+/* Mejoras en el diseño para un aspecto más profesional */
+
+/* Estilos generales para el formulario compacto */
 .compact-form .form-group {
-    margin-bottom: 0.5rem;
-    /* Reduce el margen inferior */
+    margin-bottom: 1rem; /* Espaciado más amplio entre campos */
 }
 
 .compact-form label {
-    font-size: 0.8rem;
-    /* Reduce el tamaño de la fuente */
+    font-size: 0.9rem; /* Tamaño de fuente ligeramente mayor */
+    font-weight: bold; /* Texto en negrita para mayor legibilidad */
+    color: #333; /* Color oscuro para mejorar el contraste */
 }
 
 .compact-form .form-control {
-    padding: 0.25rem 0.5rem;
-    /* Reduce el relleno */
-    font-size: 0.8rem;
-    /* Reduce el tamaño de la fuente */
+    padding: 0.5rem 1rem; /* Relleno más amplio para facilidad de interacción */
+    font-size: 0.9rem; /* Tamaño de fuente ligeramente mayor */
+    border: 1px solid #ced4da; /* Borde más sutil */
+    border-radius: 0.25rem; /* Bordes redondeados suaves */
+    background-color: #fff; /* Fondo blanco para los campos de entrada */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.075); /* Sombra interior sutil para profundidad */
 }
 
+/* Estilos para placeholders de imágenes */
 .image-placeholder {
     width: 100%;
     height: 200px;
-    background-color: grey;
+    background-color: #e9ecef; /* Color de fondo más suave */
+    border: 1px dashed #adb5bd; /* Borde punteado para sugerir acción */
+    border-radius: 0.25rem; /* Bordes redondeados */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6c757d; /* Color de texto suave */
+    font-size: 1rem; /* Tamaño de fuente mayor */
 }
 
+/* Estilos para la vista previa de imágenes */
 .image-preview img {
     max-width: 100%;
     height: auto;
+    border-radius: 0.25rem; /* Bordes redondeados suaves */
+    box-shadow: 0 4px 6px rgba(0,0,0,.1); /* Sombra exterior para destacar la imagen */
+}
+
+/* Botones con estilo más profesional */
+.btn-primary {
+    background-color: #007bff; /* Color azul brillante */
+    border-color: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem; /* Relleno más amplio */
+    font-size: 0.9rem; /* Tamaño de fuente mayor */
+    border-radius: 0.25rem; /* Bordes redondeados */
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out; /* Transición suave */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+    border-color: #004085;
 }

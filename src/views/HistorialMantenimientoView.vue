@@ -155,61 +155,77 @@ export default {
 <style scoped>
 .container {
   display: flex;
+  flex-wrap: wrap; /* Asegura una buena visualización en pantallas pequeñas */
 }
 
-.right-section {
-  width: 50%;
-}
-
-.left-section {
-  width: 50%;
+.right-section, .left-section {
+  flex: 1; /* Ocupa el espacio disponible de manera equitativa */
+  padding: 20px; /* Espaciado interno */
 }
 
 .box {
-  border: 1px solid #000;
-  margin: 10px;
-  padding: 10px;
+  background-color: #fff; /* Fondo blanco */
+  border: 1px solid #e0e0e0; /* Borde sutil */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave */
+  margin-bottom: 20px; /* Espaciado entre cajas */
+  padding: 20px; /* Espaciado interno */
 }
 
 .input-group {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  flex-wrap: wrap; /* Permite la envoltura de elementos */
+  margin-bottom: 20px; /* Espaciado entre grupos de entrada */
 }
 
 .input-group label {
-  width: 30%;
+  flex-basis: 30%; /* Base del tamaño para la etiqueta */
+  margin-right: 2%; /* Espaciado entre la etiqueta y el campo de entrada */
 }
 
-.input-group input {
-  width: 65%;
+.input-group input, .input-group select {
+  flex-basis: 68%; /* Base del tamaño para el campo de entrada */
+  padding: 8px; /* Relleno interno */
+  border: 1px solid #e0e0e0; /* Borde sutil */
+  border-radius: 4px; /* Bordes redondeados */
 }
+
 .table-container {
-  overflow-x: auto;
-  max-width: 90%;
-  margin: auto;
-  overflow: auto;
-  max-height: 500px;
+  overflow-x: auto; /* Permite desplazamiento horizontal */
+  max-width: 100%; /* Ancho máximo */
+  margin: auto; /* Centrado */
+  overflow-y: auto; /* Permite desplazamiento vertical */
+  max-height: 500px; /* Altura máxima */
 }
 
 .styled-table {
-  width: 50%;
-  border-collapse: collapse;
-  background-color: #7c7d80; 
+  width: 100%; /* Ancho completo */
+  border-collapse: collapse; /* Colapsa los bordes de la tabla */
+  background-color: #fff; /* Fondo blanco */
 }
 
 .styled-table td, .styled-table th {
-  padding: 10px;
-  border: 1px solid #000;
+  padding: 10px; /* Relleno interno */
+  border: 1px solid #e0e0e0; /* Borde sutil */
+  text-align: left; /* Alineación del texto */
 }
 
 .column {
   display: flex;
   flex-direction: column;
 }
-.input-group::after {
-  content: "";
-  clear: both;
-  display: table;
+
+/* Ajustes adicionales para botones y otros elementos si es necesario */
+button {
+  background-color: #007bff; /* Color de fondo */
+  color: #ffffff; /* Color de texto */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Relleno */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor en forma de mano */
+  transition: background-color 0.3s; /* Transición suave al cambiar el color de fondo */
+}
+
+button:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el ratón */
 }
 </style>
