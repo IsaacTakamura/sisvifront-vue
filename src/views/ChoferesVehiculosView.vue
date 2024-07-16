@@ -26,11 +26,10 @@
               <h1>Datos del Vehículo</h1>
               <div class="row">
                 <div class="col">
-                  <img
-                    :src="getVehiculoImageUrl(vehiculo.img)"
-                    alt="Perfil"
-                    class="img-fluid"
-                  />
+                  <div
+                    :style="{ backgroundImage: `url(${getVehiculoImageUrl(vehiculo.img)})` }"
+                    class="vehicle-image"
+                  ></div>
                 </div>
                 <div class="col">
                   <!-- Datos del vehículo -->
