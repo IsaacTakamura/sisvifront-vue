@@ -1,115 +1,206 @@
+<!-- Pag.Name=ChoferesVehiculosView.vue -->
 <template>
-    <div id="2_Partes_Pagina" class="container text-center">
-        <div class="row">
-            <div class="col-md-3">
-                <!--Aqui va el listado de choferes-->
-                <!--para luego darle click a uno para luego mostrar sus datos-->
-                <h1>Choferes</h1>
-                <p class="blockquote" >Seleccione un conductor</p>
-                <!--Barra de busqueda para filtrar por nombre de conductor-->
-                <ChoferesListView :search="search" @update:search="search = $event"></ChoferesListView>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group list-group-item">
-                    </li>
-                </ul>
-
-                <!--Tabla que tiene el numero id del chofer y su nombre-->
-                <table class="table table-striped table-bordered">
-                    <thead class="table-light">
-                        <tr>
-                            <th>#</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        <tr v-for="chofer in choferes">
-                            <td>{{chofer.id}}</td>
-                            <td>{{chofer.primerNombre}}</td>
-                            <td>{{chofer.apellidoPaterno}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+  <div id="2_Partes_Pagina" class="container text-center">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- Listado de choferes -->
+        <h1>Choferes</h1>
+        <p class="blockquote">Seleccione un conductor</p>
+        <!-- Barra de búsqueda para filtrar por nombre de conductor -->
+        <ChoferesListView
+          :search="search"
+          :choferes="choferes"
+          @update:search="search = $event"
+          @mostrar-datos="mostrarDatosConductor"
+        ></ChoferesListView>
+      </div>
+      <div class="col-md-9">
+        <!-- Datos del conductor y vehículo -->
+        <div class="container text-center">
+          <div class="row">
+            <!-- Datos del Conductor -->
+            <div class="col">
+              <DatosConductorView :chofer="selectedChofer" />
             </div>
-            <div class="col-sm-8">
-                <!--Aqui va 2 cuadros, que tiene los datos del conductor y el vehiculo-->
-                <div class="container text-center">
-                    <div row row-cols>
-
-                        <!--Aca va el cuadro con los datos del Conductor-->
-                        <div class="col">
-                            
-                            <p>
-                                <blockquote>
-                                
-                                </blockquote>
-                            </p>
-                            <DatosConductorView/>
-                        </div>
-
-                        <!--Aca va los datos del vehiculo que esta asignado el conductor-->
-                        <div class="col">
-                            <h1>
-                                Datos del Vehiculo
-                            </h1>
-                        </div>
-                    </div>
-
+            <!-- Datos del Vehículo -->
+            <div class="col">
+              <h1>Datos del Vehículo</h1>
+              <div class="row">
+                <div class="col">
+                  <img
+                    :src="getVehiculoImageUrl(vehiculo.img)"
+                    alt="Perfil"
+                    class="img-fluid"
+                  />
                 </div>
-                
+                <div class="col">
+                  <!-- Datos del vehículo -->
+                  <div class="container text-left">
+                    <div class="row">
+                      <div class="col">
+                        <span>Placa:</span>
+                        <span>{{ vehiculo.placa }}</span>
+                      </div>
+                      <div class="col">
+                        <span>Número de Motor:</span>
+                        <span>{{ vehiculo.numMotor }}</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <span>Número de Serie:</span>
+                        <span>{{ vehiculo.numSerie }}</span>
+                      </div>
+                      <div class="col">
+                        <span>Marca:</span>
+                        <span>{{ vehiculo.marca }}</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <span>Modelo:</span>
+                        <span>{{ vehiculo.modelo }}</span>
+                      </div>
+                      <div class="col">
+                        <span>Año de Fabricación:</span>
+                        <span>{{ vehiculo.anioFabricacion }}</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <span>Color:</span>
+                        <span>{{ vehiculo.color }}</span>
+                      </div>
+                      <div class="col">
+                        <span>Kilometraje:</span>
+                        <span>{{ vehiculo.kilometraje }}</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <span>Tipo de Combustible:</span>
+                        <span>{{ vehiculo.tipoCombustible }}</span>
+                      </div>
+                      <div class="col">
+                        <span>Transmisión:</span>
+                        <span>{{ vehiculo.transmision }}</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <span>Fecha de Registro:</span>
+                        <span>{{
+                          new Date(vehiculo.fechaRegistro).toLocaleDateString(
+                            "es-ES",
+                            { year: "numeric", month: "long", day: "numeric" }
+                          )
+                        }}</span>
+                      </div>
+                      <div class="col">
+                        <span>Fecha de Modificación:</span>
+                        <span>{{
+                          new Date(
+                            vehiculo.fechaModificacion
+                          ).toLocaleDateString("es-ES", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })
+                        }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
-<script> 
-import axios from 'axios';
-import DatosConductorView from './M.ListadoChoferesVehivulos/DatosConductorView.vue';
-import ChoferesList from './M.ListadoChoferesVehivulos/ChoferesListView.vue';
+
+<script>
+import axios from "axios";
+import DatosConductorView from "./M.ListadoChoferesVehivulos/DatosConductorView.vue";
+import ChoferesListView from "./M.ListadoChoferesVehivulos/ChoferesListView.vue";
+import perfilImg from "@/assets/styles/St_ChoferesVehiculosView/Perfil.jpg";
 
 export default {
-    components: {
-        DatosConductorView,
-        ChoferesList
+  components: {
+    DatosConductorView,
+    ChoferesListView,
+  },
+  data() {
+    return {
+      choferes: [],
+      search: "",
+      perfilImg: perfilImg,
+      selectedChofer: {
+        dni: "",
+        primerNombre: "",
+        apellidoPaterno: "",
+        licenciaConducir: "",
+        categoriaLicencia: "",
+        telefono: "",
+        segundoNombre: "",
+        apellidoMaterno: "",
+        fechaVencimientoLicencia: "",
+      },
+      vehiculo: {
+        placa: "",
+        numMotor: "",
+        numSerie: "",
+        marca: "",
+        modelo: "",
+        anioFabricacion: "",
+        color: "",
+        kilometraje: "",
+        tipoCombustible: "",
+        transmision: "",
+        img: "",
+        fechaRegistro: "",
+        fechaModificacion: "",
+      },
+      ingresos: [],
+    };
+  },
+  methods: {
+    async fetchChoferes() {
+      const url = "http://localhost:8069/api/choferes/listar"; // Reemplaza esto con la URL de tu API
+      const response = await axios.get(url);
+      this.choferes = response.data;
     },
-    data() {
-        return {
-            choferes: [],
-            search: ''
-        };
+    async fetchIngresos() {
+      const url = "http://localhost:8069/api/mantenimiento/ingreso/listar"; // Reemplaza esto con la URL de tu API
+      const response = await axios.get(url);
+      this.ingresos = response.data;
     },
-    computed: {
-        filteredChoferes() {
-            return this.choferes.filter(chofer => {
-                return chofer.primerNombre.toLowerCase().includes(this.search.toLowerCase());
-            });
-        }
+    async fetchVehiculo(id) {
+      const url = `http://localhost:8069/api/vehiculos/listar/${id}`; // Reemplaza esto con la URL de tu API
+      const response = await axios.get(url);
+      this.vehiculo = response.data;
     },
-    methods: {
-        async fetchChoferes() {
-            const url = 'http://localhost:8069/api/choferes/listar';  // Reemplaza esto con la URL de tu API
-            const response = await axios.get(url);
-            this.choferes = response.data;
-        },
-        seleccionarChofer(chofer) {
-            this.$emit('mostrar-datos', chofer);
-        }
+    async mostrarDatosConductor(chofer) {
+      this.selectedChofer = chofer;
+      const ingreso = this.ingresos.find((i) => i.idChofer === chofer.id);
+      if (ingreso) {
+        await this.fetchVehiculo(ingreso.idVehiculo);
+      } else {
+        this.vehiculo = {};
+      }
     },
-    created() {
-        this.fetchChoferes();
+    getVehiculoImageUrl(img) {
+      try {
+        return require(`@/assets/vehiculos/${img}`);
+      } catch (e) {
+        return perfilImg;
+      }
     },
-
-    //darle click a uno para luego mostrar sus datos en la parte derecha o pagina llamada DatosConductorView.vue
-    seleccionarChofer(chofer) {
-        this.$emit('mostrar-datos', chofer);
-    }
-
-    
-
-
-
+  },
+  async created() {
+    await this.fetchChoferes();
+    await this.fetchIngresos();
+  },
 };
-
-//darle click a uno para luego mostrar sus datos en la parte derecha o pagina llamada DatosConductorView.vue
-
-
 </script>
