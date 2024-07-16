@@ -8,7 +8,7 @@
   text-align: center;
   margin-bottom: 20px;
   font-size: 1.5em;
-  color: #333;
+  color: white;
 }
 
 .filtro-choferes {
@@ -41,18 +41,20 @@
 
 .list-group-item:hover {
   background-color: #ffeb3b; /* Cambiar el color al pasar el cursor por encima */
-  border-color: #0288d1;
-  color: #333; /* Cambiar el color del texto al pasar el cursor por encima */
+  
+  color: white; /* Cambiar el color del texto al pasar el cursor por encima */
 }
 
 .invisible-id {
   display: none;
 }
 
-.bg-success {
-  background-color: rgba(0, 128, 0, 0.2) !important; /* Fondo verde semitransparente */
-}
+/* .bg-success {
+  /* background-color: rgba(0, 128, 0, 0.2) !important; Fondo verde semitransparente */
+  /* color: white;
+} */
 
-.bg-danger {
-  background-color: rgba(255, 0, 0, 0.2) !important; /* Fondo rojo semitransparente */
-}
+/* .bg-danger { */
+  /* background-color: rgba(255, 0, 0, 0.2) !important; Fondo rojo semitransparente */
+/* color: skyblue;
+/* } */ 

@@ -3,7 +3,7 @@
     <div class="modal-container">
       <div class="modal-header">
         <h2>Registrar Infracción</h2>
-        <button @click="$emit('close')" class="close-button">&times;</button>
+        <button @click="$emit('close')" class="close-button" style="background: white; border-radius: 10% ;" >&times;</button>
       </div>
       <form @submit.prevent="handleSubmit">
         <div class="form-group">

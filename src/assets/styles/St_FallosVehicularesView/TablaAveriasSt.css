@@ -1,7 +1,7 @@
 /** Estilos generales para la tabla de averías */
 .tabla-averias {
   padding: 20px;
-  background-color: #FFFFFF; /* Fondo blanco para el contenedor */
+  background-color: #303030; /* Fondo blanco para el contenedor */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidad */
   border-radius: 8px; /* Bordes redondeados */
 }
@@ -28,8 +28,8 @@
 }
 
 .table thead th {
-  background-color: #F5F5F5; /* Fondo ligeramente gris para el encabezado */
-  color: #333333; /* Texto oscuro para contraste */
+  background-color: #353535; /* Fondo ligeramente gris para el encabezado */
+  color: white; /* Texto oscuro para contraste */
 }
 
 /** Estilos para la paginación */
