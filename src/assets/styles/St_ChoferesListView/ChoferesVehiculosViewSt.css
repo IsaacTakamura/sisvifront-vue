@@ -22,3 +22,17 @@
     margin-bottom: 10px;
   }
   
+  .vehicle-info span:first-child {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+  }
+  
+  .vehicle-info span:last-child {
+    display: inline-block;
+  }
+  
+  .vehicle-info {
+    text-align: left;
+  }
+  

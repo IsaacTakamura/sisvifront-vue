@@ -36,57 +36,57 @@
                   <!-- Datos del vehículo -->
                   <div class="container text-left">
                     <div class="row">
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Placa:</span>
                         <span>{{ vehiculo.placa }}</span>
                       </div>
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Número de Motor:</span>
                         <span>{{ vehiculo.numMotor }}</span>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Número de Serie:</span>
                         <span>{{ vehiculo.numSerie }}</span>
                       </div>
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Marca:</span>
                         <span>{{ vehiculo.marca }}</span>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Modelo:</span>
                         <span>{{ vehiculo.modelo }}</span>
                       </div>
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Año de Fabricación:</span>
                         <span>{{ vehiculo.anioFabricacion }}</span>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Color:</span>
                         <span>{{ vehiculo.color }}</span>
                       </div>
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Kilometraje:</span>
                         <span>{{ vehiculo.kilometraje }}</span>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Tipo de Combustible:</span>
                         <span>{{ vehiculo.tipoCombustible }}</span>
                       </div>
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Transmisión:</span>
                         <span>{{ vehiculo.transmision }}</span>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Fecha de Registro:</span>
                         <span>{{
                           new Date(vehiculo.fechaRegistro).toLocaleDateString(
@@ -95,7 +95,7 @@
                           )
                         }}</span>
                       </div>
-                      <div class="col">
+                      <div class="vehicle-info">
                         <span>Fecha de Modificación:</span>
                         <span>{{
                           new Date(
