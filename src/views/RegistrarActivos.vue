@@ -44,7 +44,7 @@ export default {
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   text-align: center;
-  background: #191919;
+  background: #141414;
   padding-top: 55px;
   height: 100vh;
 
@@ -59,22 +59,25 @@ export default {
 
 
 .card {
-  background-color: #1e1e2f;
+  background-color: #282828;
   border-radius: 10px;
   padding: 20px;
   width: 400px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
+  margin-top: 30px;
+  margin-left: 10px;
 }
 
 .card h2 {
   color: #fff;
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .image-container {
-  background-color: #2a2a3f;
+  background-color: #353535;
   padding: 10px;
   border-radius: 10px;
   overflow: hidden;
@@ -96,16 +99,17 @@ export default {
 }
 
 .controls button {
-  background-color: #ff5722;
+  background-color: red;
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .controls button:hover {
-  background-color: #e64a19;
+  background-color: #e10404e0;
 }
 </style>
