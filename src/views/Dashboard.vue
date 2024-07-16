@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background: #141414; padding-top: 20px">
     <header class="view-header">
       <h1 class="view-title">Dashboard</h1>
     </header>

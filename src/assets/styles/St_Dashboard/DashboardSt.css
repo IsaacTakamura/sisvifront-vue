@@ -8,7 +8,9 @@
   font-size: 2.5em;
   color: #333;
 }
-
+ .view-title {
+  color: white;
+}
 .row {
   display: flex;
   width: 100%;

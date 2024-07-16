@@ -1,59 +1,95 @@
-/* Mejoras en el diseño para un aspecto más profesional */
+/* Establece el color de fondo de la página */
 
-/* Estilos generales para el formulario compacto */
-.compact-form .form-group {
-    margin-bottom: 1rem; /* Espaciado más amplio entre campos */
-}
 
-.compact-form label {
-    font-size: 0.9rem; /* Tamaño de fuente ligeramente mayor */
-    font-weight: bold; /* Texto en negrita para mayor legibilidad */
-    color: #333; /* Color oscuro para mejorar el contraste */
-}
-
-.compact-form .form-control {
-    padding: 0.5rem 1rem; /* Relleno más amplio para facilidad de interacción */
-    font-size: 0.9rem; /* Tamaño de fuente ligeramente mayor */
-    border: 1px solid #ced4da; /* Borde más sutil */
-    border-radius: 0.25rem; /* Bordes redondeados suaves */
-    background-color: #fff; /* Fondo blanco para los campos de entrada */
-    box-shadow: inset 0 1px 2px rgba(0,0,0,.075); /* Sombra interior sutil para profundidad */
-}
-
-/* Estilos para placeholders de imágenes */
-.image-placeholder {
-    width: 100%;
-    height: 200px;
-    background-color: #e9ecef; /* Color de fondo más suave */
-    border: 1px dashed #adb5bd; /* Borde punteado para sugerir acción */
-    border-radius: 0.25rem; /* Bordes redondeados */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #6c757d; /* Color de texto suave */
-    font-size: 1rem; /* Tamaño de fuente mayor */
-}
-
-/* Estilos para la vista previa de imágenes */
-.image-preview img {
+.container {
+    margin: 0 auto;
+    padding: 0;
     max-width: 100%;
-    height: auto;
-    border-radius: 0.25rem; /* Bordes redondeados suaves */
-    box-shadow: 0 4px 6px rgba(0,0,0,.1); /* Sombra exterior para destacar la imagen */
+    background-color: #141414;
+    color: white;
+}
+.card {
+    background-color: #282828;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+.row {
+    display: flex;
+    gap: 40px; /* Añade una separación entre columnas */
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-bottom: 153px;
+    margin-top: 30px;
+
 }
 
-/* Botones con estilo más profesional */
+
+/* Ajusta el selector según tus necesidades o la estructura de tu HTML */
+.col-md-6, .col-md-5 { /* Asegúrate de que este selector coincida con tus clases de columnas */
+    background: #282828;
+    padding: 20px;
+    border-radius: 10px; 
+
+}
+
+.col-md-5 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-control, .btn-primary {
+    border: none;
+    color: white; /* Ajustado para mejorar la legibilidad */
+}
+
+.form-control::placeholder {
+    color: whitesmoke;
+}
+
+label {
+    color: white;
+}
+
 .btn-primary {
-    background-color: #007bff; /* Color azul brillante */
-    border-color: #007bff;
-    color: #fff;
-    padding: 0.5rem 1rem; /* Relleno más amplio */
-    font-size: 0.9rem; /* Tamaño de fuente mayor */
-    border-radius: 0.25rem; /* Bordes redondeados */
-    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out; /* Transición suave */
+    background-color: blue;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* Color más oscuro al pasar el mouse */
-    border-color: #004085;
+    background-color: #3e4a96;
+}
+
+.image-preview, .image-placeholder {
+    width: 100%;
+    min-height: 200px;
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 200px;
+}
+/* Mejoras en la sección de Detalles para separar los labels de sus inputs y ajustar el ancho de los inputs */
+
+/* Ajustes generales para mejorar la separación y el tamaño */
+.form-group {
+    margin-bottom: 15px; /* Añade espacio entre los campos del formulario */
+}
+
+.form-group label {
+    display: block; /* Hace que el label ocupe su propia línea */
+    margin-bottom: 5px; /* Espacio entre el label y el input */
+}
+
+/* Ajusta el ancho de los inputs para que no sean demasiado largos */
+.form-control {
+    width: 100%; /* Ajusta el ancho al 100% del contenedor padre, puedes cambiarlo según necesites */
+    max-width: 400px; /* Limita el ancho máximo para evitar inputs demasiado largos */
+    box-sizing: border-box; /* Asegura que el padding y border no expandan el elemento más allá de su ancho definido */
 }

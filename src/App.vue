@@ -1,6 +1,6 @@
 <template>
   <!-- Barra superior horizontal -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 0; height: 60px;">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="margin-bottom: 0; height: 60px; background-color: #18181c;">
   <div class="container-fluid">
     <router-link to="/" class="navbar-brand" href="#">
       <h1 style="font-size: 24px; font-weight: bold; margin-right: 100px;">SISVI</h1>
