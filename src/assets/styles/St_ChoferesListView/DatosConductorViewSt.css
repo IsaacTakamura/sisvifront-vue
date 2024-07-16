@@ -1,3 +1,5 @@
+/* Estilos minimalistas para DatosConductorView.vue */
+
 .portrait {
   width: 100px;
   height: 100px;
@@ -5,29 +7,15 @@
   margin-top: 20px;
   background-size: cover;
   background-position: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .driver-license {
   margin-top: 20px;
-}
-
-.img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-
-.FotoPerfil {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-
-.center-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .text-left {
@@ -36,7 +24,7 @@
 
 .conductor-identificate, .driver-first-name, .driver-last-name, .driver-licencia, .driver-category,
 .driver-telefono, .second-name, .second-last-name, .driver-fecha-vencimiento {
-  text-align: left;
+  margin-bottom: 10px;
 }
 
 .conductor-identificate span:first-child,
@@ -51,6 +39,7 @@
   display: inline-block;
   width: 150px;
   font-weight: bold;
+  color: #666;
 }
 
 .conductor-identificate span:last-child,
@@ -63,4 +52,5 @@
 .second-last-name span:last-child,
 .driver-fecha-vencimiento span:last-child {
   display: inline-block;
+  color: #333;
 }

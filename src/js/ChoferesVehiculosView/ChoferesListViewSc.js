@@ -1,37 +1,36 @@
 export default {
-    props: {
-      search: {
-        type: String,
-        required: true,
-      },
-      choferes: {
-        type: Array,
-        required: true,
-        default: () => [],
-      },
+  props: {
+    search: {
+      type: String,
+      required: true,
     },
-    data() {
-      return {
-        localSearch: this.search,
-      };
+    choferes: {
+      type: Array,
+      required: true,
+      default: () => [],
     },
-    computed: {
-      filteredChoferes() {
-        return this.choferes.filter((chofer) => {
-          return chofer.primerNombre
-            .toLowerCase()
-            .includes(this.localSearch.toLowerCase());
-        });
-      },
+  },
+  data() {
+    return {
+      localSearch: this.search,
+    };
+  },
+  computed: {
+    filteredChoferes() {
+      return this.choferes.filter((chofer) => {
+        return chofer.primerNombre
+          .toLowerCase()
+          .includes(this.localSearch.toLowerCase());
+      });
     },
-    methods: {
-      seleccionarChofer(chofer) {
-        this.$emit("mostrar-datos", chofer);
-      },
-      handleInput(event) {
-        this.localSearch = event.target.value;
-        this.$emit("update:search", this.localSearch);
-      },
+  },
+  methods: {
+    seleccionarChofer(chofer) {
+      this.$emit("mostrar-datos", chofer);
     },
-  };
-  
+    handleInput(event) {
+      this.localSearch = event.target.value;
+      this.$emit("update:search", this.localSearch);
+    },
+  },
+};
