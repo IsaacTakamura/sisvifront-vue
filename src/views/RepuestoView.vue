@@ -1,168 +1,19 @@
 <template>
-  <div class="container">
-    <h1 class="titulo">Gestión de Repuestos</h1>
-
-    <div class="box consultas-stock">
-        <h3>Consulta de Stock</h3>
-        <div class="input-row">
-          <div class="input-group">
-            <label for="codigo-interno">Filtro por Codigo Interno</label>
-            <input id="codigo-interno" type="text" v-model="filtroCodigoInterno">
-          </div>
-          <div class="input-group">
-            <label for="descripcion">Filtro por Descripcion</label>
-            <input id="descripcion" type="text" v-model="filtroDescripcion">
-          </div>
-        </div>
-        <table class="tabla-repuestos">
-          <thead>
-      <tr>
-        <th>ID</th>
-        <th>Código Interno</th>
-        <th>Descripción</th>
-        <th>Fabricante</th>
-        <th>Fecha de Fabricación</th>
-        <th>Cantidad en Stock</th>
-      </tr>
-    </thead>
-      <tbody>
-        <tr v-for="(repuesto, index) in repuestosFiltrados" :key="index">
-          <td>{{ repuesto.id }}</td>
-          <td>{{ repuesto.codigoInterno }}</td>
-          <td>{{ repuesto.descripcion }}</td>
-          <td>{{ repuesto.fabricante }}</td>
-          <td>{{ repuesto.fechaFabricacion }}</td>
-          <td>{{ repuesto.cantidadStock }}</td>
-
-
-        </tr>
-      </tbody>
-    </table>
-        
+  <div class="main-container">
+    <div class="header">
+      <button @click="openRegistrarModal" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+      <button @click="openAumentarStockModal" class="btn btn-primary"><i class="fa fa-arrow-up"></i></button>
+      <button @click="openRegistrarSalidaModal" class="btn btn-primary"><i class="fa fa-arrow-down"></i></button>
     </div>
-    <div class="box gestionar">
-        <h3>Gestionar</h3>
-        <div class="button-group">
-      <button class="btn">Administrar Repuestos</button>
-      <button class="btn">Registrar Ingreso</button>
-      <button class="btn">Registrar Salida</button>
-    </div>
-    </div>
+    <input type="text" v-model="searchQuery" placeholder="Buscar repuesto" class="form-control my-3 search-bar" />
+    <repuesto-table :repuestos="filteredRepuestos" :paginatedRepuestos="paginatedRepuestos"
+      :currentPage="currentPage" :totalPages="totalPages" @prev-page="prevPage" @next-page="nextPage" @edit="openEditModal" @refresh="fetchRepuestos" />
+    <registrar-repuesto-modal :isVisible="isRegistrarModalVisible" @close="closeRegistrarModal" @refresh="fetchRepuestos" />
+    <aumentar-stock-modal :isVisible="isAumentarStockModalVisible" @close="closeAumentarStockModal" :repuestos="repuestos" @refresh="fetchRepuestos" />
+    <registrar-salida-modal :isVisible="isRegistrarSalidaModalVisible" @close="closeRegistrarSalidaModal" :repuestos="repuestos" @refresh="fetchRepuestos" />
+    <editar-repuesto-modal :isVisible="isEditModalVisible" :repuestoId="selectedRepuestoId" @close="closeEditModal" @refresh="fetchRepuestos" />
   </div>
 </template>
 
-<script>
-import axios from 'axios';
-export default {
-  data() {
-    // Se define la propiedad repuestos como un arreglo vacío
-    return {
-      repuestos: [],
-      filtroCodigoInterno: '',
-      filtroDescripcion: '',
-      selectedRow: null,
-    };
-  },
-  // Se define la propiedad repuestos como un arreglo vacío
-  computed: {
-    repuestosFiltrados() {
-      return this.repuestos.filter(repuesto =>
-        repuesto.codigoInterno.includes(this.filtroCodigoInterno) &&
-        repuesto.descripcion.includes(this.filtroDescripcion)
-      );
-    },
-  },
-  // Se define el método fetchRepuestos que realiza una petición GET a la API para obtener los repuestos
-  methods: {
-    selectRow(repuesto) {
-      this.selectedRow = repuesto;
-    },
-    // Método para obtener los repuestos
-    async fetchRepuestos() {
-      const url = 'http://localhost:8069/api/repuestos/listar'; 
-      const response = await axios.get(url);
-      this.repuestos = response.data;
-    },
-  },
-  // Se llama al método fetchRepuestos al crear el componente
-  created() {
-    this.fetchRepuestos();
-  },
-};
-</script>
-
-<style scoped>
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.box {
-  width: 100%;
-  border: 1px solid #ccc;
-  margin-bottom: 20px;
-  padding: 20px;
-}
-
-.titulo {
-  color: blue;
-}
-
-.input-row {
-  display: flex;
-  justify-content: space-between;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.input-group input {
-  width: 40%;
-}
-
-table {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .btn {
-    background-color: #3a5f8f;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-  }
-  .tabla-repuestos {
-  width: 100%; 
-  border-collapse: collapse; 
-}
-
-.tabla-repuestos th, .tabla-repuestos td {
-  border: 1px solid #ddd; 
-  padding: 8px; 
-  text-align: center; 
-}
-
-.tabla-repuestos th {
-  background-color: #f2f2f2; 
-}
-  
-.tabla-repuestos tr:hover {
-  background-color: #f5f5f5; 
-  cursor: pointer;
-}
-
-  
-
-  
-</style>
+<script src="../js/RepuestoView/RepuestoViewSc.js"></script>
+<style scoped src="../assets/styles/St_RepuestoView/RepuestoViewSt.css"></style>
