@@ -48,7 +48,7 @@ export default {
           datasets: [{
             label: 'Cantidad de Mantenimientos',
             data,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            backgroundColor: 'rgba(75, 192, 192, 0.8)', // Increased opacity
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
             fill: false
@@ -57,7 +57,22 @@ export default {
         options: {
           scales: {
             y: {
-              beginAtZero: true
+              beginAtZero: true,
+              ticks: {
+                color: '#fff' // Make y-axis ticks white
+              }
+            },
+            x: {
+              ticks: {
+                color: '#fff' // Make x-axis ticks white
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: '#fff' // Make legend text white
+              }
             }
           }
         }

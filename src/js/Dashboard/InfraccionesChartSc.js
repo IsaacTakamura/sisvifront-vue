@@ -1,3 +1,4 @@
+// InfraccionesChartSc.js
 import axios from 'axios';
 import { Chart, registerables } from 'chart.js';
 
@@ -60,7 +61,7 @@ export default {
           datasets: [{
             label: 'Cantidad de Infracciones',
             data,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            backgroundColor: 'rgba(75, 192, 192, 0.8)', // Increased opacity
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
           }]
@@ -68,7 +69,22 @@ export default {
         options: {
           scales: {
             y: {
-              beginAtZero: true
+              beginAtZero: true,
+              ticks: {
+                color: '#fff' // Make y-axis ticks white
+              }
+            },
+            x: {
+              ticks: {
+                color: '#fff' // Make x-axis ticks white
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: '#fff' // Make legend text white
+              }
             }
           }
         }

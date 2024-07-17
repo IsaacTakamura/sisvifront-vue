@@ -8,6 +8,7 @@
     height: 100%;
     padding: 10px;
     box-sizing: border-box;
+    background-color: #2e2e2e; /* Un gris oscuro más claro */
   }
   
   .search-bar {
@@ -18,6 +19,8 @@
     max-width: 250px;
     box-sizing: border-box;
     text-align: center; /* Para centrar el texto en la barra de búsqueda */
+    background-color: #3e3e3e; /* Un gris oscuro más claro */
+    color: #fff;
   }
   
   .chart-container {

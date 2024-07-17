@@ -4,16 +4,19 @@
     margin: 0;
     padding: 10px;  /* Reducir el padding */
     box-sizing: border-box; /* Añade esto para asegurar que el padding no afecte el tamaño del contenedor */
+    background-color: #2e2e2e;
   }
   
   .search-bar {
     width: 100%;  /* Ajustar el ancho del filtro para que ocupe todo el ancho disponible */
     padding: 5px;  /* Reducir el padding */
     margin-bottom: 10px;  /* Reducir el margen inferior */
-    border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 0.8em;  /* Reducir el tamaño de la fuente */
     box-sizing: border-box; /* Añade esto para asegurar que el padding no afecte el tamaño del input */
+    background-color: #3e3e3e; /* Un gris oscuro más claro */
+    color: #fff; /* Asegurar que el texto sea visible */
+    border: 1px solid #fff; /* Añadir borde blanco */
   }
   
   #infraccionesChart {

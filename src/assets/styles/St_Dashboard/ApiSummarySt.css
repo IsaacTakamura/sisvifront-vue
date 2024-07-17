@@ -4,13 +4,14 @@
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background-color: #fff;
+    background-color: #2e2e2e;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: 'Roboto', sans-serif;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    margin-bottom: 20px;
   }
   
   .api-box {
@@ -18,11 +19,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 0 10px;
+    background-color: #2e2e2e; /* Un gris oscuro más claro */
+    color: #fff; /* Cambiar el color del texto a blanco */
+    border: 1px solid #fff; /* Añadir borde blanco */
+    border-radius: 10px; /* Para consistencia con los otros paneles */
+    padding: 20px; /* Para espacio interior */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para resaltar */
   }
   
   .api-icon {
@@ -34,10 +37,16 @@
   .api-count {
     font-size: 1.5em;
     font-weight: bold;
+    color: #fff;
   }
   
   .api-label {
     font-size: 1em;
-    color: #555;
+    color: #fff;
   }
   
+  .search-bar {
+    background-color: #3e3e3e; /* Un gris oscuro más claro */
+    color: #fff; /* Asegurar que el texto sea visible */
+    border: 1px solid #fff; /* Añadir borde blanco */
+}

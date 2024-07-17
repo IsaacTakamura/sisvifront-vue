@@ -1,3 +1,4 @@
+// AveriasPieChartSc.js
 import axios from 'axios';
 import { Chart, registerables } from 'chart.js';
 
@@ -40,12 +41,12 @@ export default {
       this.chartLabels = Object.keys(averiasCount);
       const data = Object.values(averiasCount).map(item => item.count);
       this.chartColors = [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
+        'rgba(255, 99, 132, 0.8)',  // Increased opacity
+        'rgba(54, 162, 235, 0.8)',  // Increased opacity
+        'rgba(255, 206, 86, 0.8)',  // Increased opacity
+        'rgba(75, 192, 192, 0.8)',  // Increased opacity
+        'rgba(153, 102, 255, 0.8)', // Increased opacity
+        'rgba(255, 159, 64, 0.8)'   // Increased opacity
       ];
 
       if (this.chart) {
@@ -61,7 +62,7 @@ export default {
             label: 'Tipos de Averías',
             data,
             backgroundColor: this.chartColors,
-            borderColor: this.chartColors.map(color => color.replace('0.2', '1')),
+            borderColor: this.chartColors.map(color => color.replace('0.8', '1')),
             borderWidth: 1
           }]
         },
@@ -69,7 +70,10 @@ export default {
           responsive: true,
           plugins: {
             legend: {
-              display: false
+              display: false,
+              labels: {
+                color: '#fff' // Make legend text white
+              }
             },
             tooltip: {
               callbacks: {
@@ -81,7 +85,7 @@ export default {
                 }
               }
             }
-          }
+          },
         }
       });
     }
