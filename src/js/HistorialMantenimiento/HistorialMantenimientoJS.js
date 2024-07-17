@@ -36,34 +36,16 @@ export default {
     },
   },
   methods: {
-    async fetchMantenimientos() {
-      const url = 'http://localhost:8069/api/mantenimiento/salida/listar';
+    async fetchData() {
       try {
-        const response = await axios.get(url);
-        this.mantenimientos = response.data;
-        console.log('Mantenimientos:', this.mantenimientos);
+        const mantenimientosResponse = await axios.get('http://localhost:8069/api/mantenimiento/salida/listar');
+        const vehiculosResponse = await axios.get('http://localhost:8069/api/vehiculos/listar');
+        const choferesResponse = await axios.get('http://localhost:8069/api/choferes/listar');
+        this.mantenimientos = mantenimientosResponse.data;
+        this.vehiculos = vehiculosResponse.data;
+        this.choferes = choferesResponse.data;
       } catch (error) {
-        console.error('Error fetching mantenimientos:', error);
-      }
-    },
-    async fetchVehiculos() {
-      const url = 'http://localhost:8069/api/vehiculos/listar';
-      try {
-        const response = await axios.get(url);
-        this.vehiculos = response.data;
-        console.log('Vehiculos:', this.vehiculos);
-      } catch (error) {
-        console.error('Error fetching vehiculos:', error);
-      }
-    },
-    async fetchChoferes() {
-      const url = 'http://localhost:8069/api/choferes/listar';
-      try {
-        const response = await axios.get(url);
-        this.choferes = response.data;
-        console.log('Choferes:', this.choferes);
-      } catch (error) {
-        console.error('Error fetching choferes:', error);
+        console.error('Error fetching data:', error);
       }
     },
     getVehiculo(id) {
@@ -82,10 +64,13 @@ export default {
       const vehiculo = this.getVehiculo(vehiculoId);
       if (vehiculo) {
         this.vehiculoSeleccionado = vehiculo;
-        this.mantenimientoRealizado.placaVehiculo = vehiculo.placa;
-        this.mantenimientoRealizado.dniChofer = this.getChofer(mantenimiento.mantenimientoIngreso.idChofer).dni;
-        this.mantenimientoRealizado.kilometrajeIngresado = mantenimiento.mantenimientoIngreso.kilometrajeIngresado;
-        this.mantenimientoRealizado.observaciones = mantenimiento.mantenimientoIngreso.observaciones;
+        const chofer = this.getChofer(mantenimiento.mantenimientoIngreso.idChofer);
+        this.mantenimientoRealizado = {
+          placaVehiculo: vehiculo.placa,
+          dniChofer: chofer ? chofer.dni : '',
+          kilometrajeIngresado: mantenimiento.mantenimientoIngreso.kilometrajeIngresado,
+          observaciones: mantenimiento.mantenimientoIngreso.observaciones,
+        };
       } else {
         try {
           const response = await axios.get(`http://localhost:8069/api/vehiculos/${vehiculoId}`);
@@ -96,12 +81,11 @@ export default {
       }
     },
     async guardarMantenimiento() {
-      const url = 'http://localhost:8069/api/mantenimiento/ingreso/guardar';
       try {
-        const response = await axios.post(url, this.mantenimientoRealizado);
+        const response = await axios.post('http://localhost:8069/api/mantenimiento/ingreso/guardar', this.mantenimientoRealizado);
         console.log('Mantenimiento guardado:', response.data);
         this.limpiarCampos();
-        window.location.reload(); // Recargar la página
+        window.location.reload();
       } catch (error) {
         console.error('Error guardando mantenimiento:', error);
       }
@@ -125,12 +109,10 @@ export default {
       }
     },
     changeRowsPerPage() {
-      this.currentPage = 1; // Reset page number to 1 when rows per page changes
+      this.currentPage = 1;
     }
   },
   created() {
-    this.fetchMantenimientos();
-    this.fetchVehiculos();
-    this.fetchChoferes();
+    this.fetchData();
   },
 };

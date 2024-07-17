@@ -1,0 +1,25 @@
+/* Estilos minimalistas para ChoferesListView.vue */
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 1em;
+  color: #333;
+}
+
+.list-group-item {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+
+.list-group-item:hover {
+  background-color: #f0f0f0;
+}

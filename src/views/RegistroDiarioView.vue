@@ -19,7 +19,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <button @click="registerNewPlate">Registrar nueva placa</button>
+                
             </div>
             <div class="col-5 border p-3">
                 <h5>FICHA TECNICA</h5>
@@ -230,9 +230,19 @@ export default {
         },
         // Método para obtener la imagen de un vehículo
         fetchImageData() {
-            axios.get('http://localhost:8069/api/vehiculos/listar')
+            axios.get('http://localhost:8069/api/vehiculos/imagen')
                 .then(response => {
                     this.imageUrl = response.data;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+        // Método para obtener el historial de mantenimiento
+        fetchMaintenanceHistory() {
+            axios.get('http://localhost:8069/api/mantenimiento/historial')
+                .then(response => {
+                    this.mantenimientos = response.data;
                 })
                 .catch(error => {
                     console.error(error);

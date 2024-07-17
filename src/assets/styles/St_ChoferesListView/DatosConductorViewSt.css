@@ -1,0 +1,56 @@
+/* Estilos minimalistas para DatosConductorView.vue */
+
+.portrait {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 20px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.driver-license {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-left {
+  text-align: left;
+}
+
+.conductor-identificate, .driver-first-name, .driver-last-name, .driver-licencia, .driver-category,
+.driver-telefono, .second-name, .second-last-name, .driver-fecha-vencimiento {
+  margin-bottom: 10px;
+}
+
+.conductor-identificate span:first-child,
+.driver-first-name span:first-child,
+.driver-last-name span:first-child,
+.driver-licencia span:first-child,
+.driver-category span:first-child,
+.driver-telefono span:first-child,
+.second-name span:first-child,
+.second-last-name span:first-child,
+.driver-fecha-vencimiento span:first-child {
+  display: inline-block;
+  width: 150px;
+  font-weight: bold;
+  color: #666;
+}
+
+.conductor-identificate span:last-child,
+.driver-first-name span:last-child,
+.driver-last-name span:last-child,
+.driver-licencia span:last-child,
+.driver-category span:last-child,
+.driver-telefono span:last-child,
+.second-name span:last-child,
+.second-last-name span:last-child,
+.driver-fecha-vencimiento span:last-child {
+  display: inline-block;
+  color: #333;
+}
