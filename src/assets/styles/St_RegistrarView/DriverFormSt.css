@@ -1,5 +1,4 @@
 /* DriverFormSt.css */
-
 .form-group {
   margin-bottom: 1rem;
   display: flex;
@@ -16,6 +15,8 @@
   border: 1px solid #ddd;
   box-sizing: border-box;
   transition: border-color 0.3s ease;
+  background-color: #fff; /* Fondo blanco */
+  color: black; /* Texto negro */
 }
 
 .form-control:focus {
@@ -28,6 +29,7 @@
   margin-right: 10px;
   text-align: center;
   font-weight: bold;
+  color: white;
 }
 
 .text-danger {
@@ -39,49 +41,51 @@
   text-align: center;
   margin-top: 0.25rem;
 }
+
 .registration-form {
-  width: 180%; /* Ajusta el ancho del formulario */
-  margin-left: -37%; /* Ajusta el margen izquierdo para mover el formulario hacia la izquierda */
-  margin-right: auto; /* Asegura que no haya margen derecho */
+  width: 180%;
+  margin-left: -37%;
+  margin-right: auto;
   padding: 1rem;
-  border: 1px solid #4769c0;
+  border: 1px solid #fff; /* Bordes blancos */
   border-radius: 10px;
-  background-color: #eef0ea;
+  background-color: #6f6e6e;
+  color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
-  .button-group {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .btn {
-    width: 100px;
-    padding: 0.5rem 1rem;
-    margin: 0.2rem;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100px;
+  padding: 0.5rem 1rem;
+  margin: 0.2rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-success {
-    background-color: #28a745;
-    color: white;
+  background-color: #28a745;
+  color: white;
 }
 
 .btn-success:hover {
-    background-color: #218838;
-    transform: scale(1.05);
+  background-color: #218838;
+  transform: scale(1.05);
 }
 
 .btn-secondary {
-    background-color: #6c757d;
-    color: white;
+  background-color: #6c757d;
+  color: white;
 }
 
 .btn-secondary:hover {
-    background-color: #545b62;
-    transform: scale(1.05);
+  background-color: #545b62;
+  transform: scale(1.05);
 }

@@ -1,4 +1,5 @@
 <template>
+  <div>
     <table class="table table-striped mt-3">
       <thead>
         <tr>
@@ -18,7 +19,7 @@
       </thead>
       <tbody>
         <!-- Iteración sobre la lista de choferes para generar las filas de la tabla -->
-        <tr v-for="driver in drivers" :key="driver.id" :class="{ inactive: !driver.estado }">
+        <tr v-for="driver in paginatedDrivers" :key="driver.id" :class="{ inactive: !driver.estado }">
           <td>{{ driver.id }}</td>
           <td>{{ driver.primerNombre }}</td>
           <td>{{ driver.segundoNombre }}</td>
@@ -38,7 +39,23 @@
         </tr>
       </tbody>
     </table>
-  </template>
+    <!-- Paginación -->
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" :class="{ disabled: currentPage === 1 }">
+          <button class="page-link" @click="prevPage">Previous</button>
+        </li>
+        <li class="page-item" v-for="page in totalPages" :key="page" :class="{ active: currentPage === page }">
+          <button class="page-link" @click="goToPage(page)">{{ page }}</button>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+          <button class="page-link" @click="nextPage">Next</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</template>
+
   
   <script src="../../js/RegistrarView/DriverTableSc.js"></script>
   

@@ -1,5 +1,4 @@
 /* EditarChoferModalSt.css */
-
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -14,7 +13,8 @@
 }
 
 .modal-content {
-    background: white;
+    background: #333333;
+    color: white;
     padding: 20px;
     border-radius: 10px;
     width: 400px;
@@ -63,6 +63,8 @@
     border: 1px solid #ddd;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
+    background-color: #444;
+    color: white;
 }
 
 .form-control:focus {

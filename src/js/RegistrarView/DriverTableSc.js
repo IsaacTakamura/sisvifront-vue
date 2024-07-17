@@ -1,27 +1,40 @@
 export default {
-    name: 'DriverTable',
-    props: {
-      drivers: Array,
+  props: ['drivers'],
+  data() {
+    return {
+      currentPage: 1,
+      itemsPerPage: 6
+    };
+  },
+  computed: {
+    totalPages() {
+      return Math.ceil(this.drivers.length / this.itemsPerPage);
     },
-    methods: {
-      // Método para emitir el evento 'edit' con el ID del chofer
-      editDriver(id) {
-        this.$emit('edit', id);
-      },
-      // Método para emitir el evento 'c_est' con el ID del chofer
-      c_estDriver(id) {
-        this.$emit('c_est', id);
-      },
-      // Método para formatear la fecha de vencimiento de la licencia
-      formatDate(dateString) {
-        if (!dateString) return 'No disponible';
-        const date = new Date(dateString);
-        return date.toLocaleDateString('es-ES', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        });
+    paginatedDrivers() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.drivers.slice(start, end);
+    }
+  },
+  methods: {
+    formatDate(date) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(date).toLocaleDateString('es-ES', options);
+    },
+    goToPage(page) {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+      }
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
       }
     }
-  };
-  
+  }
+};

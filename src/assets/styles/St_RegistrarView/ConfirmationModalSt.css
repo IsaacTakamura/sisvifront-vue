@@ -1,5 +1,4 @@
 /* ConfirmationModalSt.css */
-
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -14,7 +13,8 @@
 }
 
 .modal-content {
-    background: white;
+    background: #333333;
+    color: white;
     padding: 20px;
     border-radius: 10px;
     width: 400px;

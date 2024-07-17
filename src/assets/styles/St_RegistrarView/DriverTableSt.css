@@ -1,5 +1,4 @@
 /* DriverTableSt.css */
-
 .table {
     margin: 2rem auto;
     width: 95%;
@@ -7,6 +6,8 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
+    background-color: #333333;
+    color: white;
 }
 
 .table th, .table td {
@@ -16,7 +17,8 @@
 }
 
 .table th {
-    background-color: #f8f9fa;
+    background-color: #444444;
+    color: white;
     font-weight: bold;
 }
 
