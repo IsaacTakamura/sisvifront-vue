@@ -63,15 +63,15 @@
 
 .lista-contenedor {
   width: 100%;
-  max-height: 400px;
-  overflow: hidden;
+  max-height: 400px; /* Ajustado para asegurar que la lista completa sea visible */
+  overflow-y: auto; /* Añadido para permitir el scroll vertical */
   border: 1px solid #ddd;
   border-radius: 4px;
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .lista-scrollable {
-  overflow-y: auto;
+  width: 100%; /* Asegura que la lista ocupe todo el ancho disponible */
 }
 
 .list-group-item {
