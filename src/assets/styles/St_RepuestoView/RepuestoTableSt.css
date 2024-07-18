@@ -1,38 +1,41 @@
 .repuesto-table {
     width: 100%;
     margin-bottom: 20px;
+    background-color: #444;
+    color: white;
 }
-  
 .search-bar {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
     font-size: 16px;
     box-sizing: border-box;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
 }
-  
 table {
     width: 100%;
     border-collapse: collapse;
+    background-color: #333;
+    color: white;
 }
-  
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #555;
     padding: 8px;
     text-align: left;
 }
-  
 th {
-    background-color: #f2f2f2;
+    background-color: #444;
+    color: white;
 }
-  
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
 }
-  
 .pagination button {
     background-color: #007bff;
     border: none;
@@ -43,8 +46,7 @@ th {
     border-radius: 5px;
     font-size: 16px;
 }
-  
 .pagination button:disabled {
-    background-color: #ddd;
+    background-color: #555;
     cursor: not-allowed;
 }
