@@ -1,39 +1,29 @@
 /* FichaTecnicaSt.css */
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .ficha-tecnica {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #f7f9fc;
+  background: #333333; /* Fondo negro más claro */
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Ajusta la sombra para que sea más visible en fondo oscuro */
   animation: slideIn 0.5s ease-out;
-  width: 100%; /* Asegura que ocupe todo el espacio disponible */
+  width: 100%;
+  border: 1px solid #fff; /* Borde blanco */
 }
 
 .title {
   text-align: center;
   margin-bottom: 20px;
   font-size: 1.8em;
-  color: #333;
+  color: #fff; /* Texto blanco */
   font-weight: 600;
 }
 
 .ficha-form {
   width: 100%;
-  max-width: 400px; /* Aumenta el ancho máximo */
+  max-width: 400px;
   margin: 0 auto;
   text-align: center;
 }
@@ -47,16 +37,19 @@
   padding: 0.5rem 1rem;
   border: 1px solid #ddd;
   border-radius: 4px;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.1);
   transition: box-shadow 0.2s ease-in-out;
+  background-color: #444; /* Fondo del input más claro */
+  color: white; /* Texto blanco */
+  border: 1px solid white; /* Borde blanco */
 }
 
 .form-control:focus {
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.2);
 }
 
 .input-reducido {
-  width: 100%; /* Asegura que ocupe todo el espacio disponible */
+  width: 100%;
   margin: 0 auto;
   display: block;
   text-align: center;
@@ -68,11 +61,11 @@
   width: 100%;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #555;
+  color: #fff; /* Texto blanco */
 }
 
 .centered-text {
   text-align: center;
   font-weight: 500;
-  color: #333;
+  color: #fff; /* Texto blanco */
 }

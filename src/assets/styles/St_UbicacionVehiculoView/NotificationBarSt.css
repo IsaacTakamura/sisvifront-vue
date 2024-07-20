@@ -1,49 +1,51 @@
 .notification-bar {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    width: 300px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-  }
-  .toggle-button {
-    width: 100%;
-    padding: 10px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-  }
-  .notifications-list {
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  .notification-item {
-    position: relative;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: white;
-  }
-  .notification-item .close-button {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: none;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  .Alto {
-    border-left: 5px solid red;
-  }
-  .Mediano {
-    border-left: 5px solid orange;
-  }
-  .Bajo {
-    border-left: 5px solid green;
-  }
-  
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 300px;
+  border: 1px solid #fff; /* Borde blanco */
+  padding: 10px;
+  background-color: #333333; /* Fondo negro más claro */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Ajusta la sombra para que sea más visible en fondo oscuro */
+  z-index: 1000;
+  color: #fff; /* Texto blanco */
+}
+.toggle-button {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+.notifications-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+.notification-item {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #444; /* Fondo más claro */
+  color: white; /* Texto blanco */
+}
+.notification-item .close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: white; /* Texto blanco */
+}
+.Alto {
+  border-left: 5px solid red;
+}
+.Mediano {
+  border-left: 5px solid orange;
+}
+.Bajo {
+  border-left: 5px solid green;
+}

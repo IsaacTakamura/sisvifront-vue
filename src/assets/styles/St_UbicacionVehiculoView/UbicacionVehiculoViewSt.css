@@ -1,35 +1,40 @@
 /* UbicacionVehiculoViewSt.css */
 
+body, html {
+  background-color: #000000; /* Fondo negro */
+  color: white; /* Texto blanco */
+}
+
 .registro-diario {
   display: flex;
   justify-content: flex-start;
   padding: 20px;
-  background-color: #f1f1f1;
+  background-color: #000000; /* Fondo negro */
 }
 
 .contenedor {
   display: flex;
-  justify-content: space-between; /* Distribuye el espacio de manera equitativa */
+  justify-content: space-between;
   width: 100%;
-  gap: 20px; /* Añade un espacio entre los elementos */
+  gap: 20px;
 }
 
 .seleccionar-placa,
 .ficha-tecnica,
 .mapa-ubicacion {
-  width: 32%; /* Asegura que los cuadros ocupen más espacio */
-  border: 1px solid #ccc;
+  width: 32%;
+  border: 1px solid #fff; /* Borde blanco */
   padding: 20px;
   border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #333333; /* Fondo negro más claro */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Ajusta la sombra para que sea más visible en fondo oscuro */
 }
 
 .title {
   text-align: center;
   margin-bottom: 20px;
   font-size: 1.5em;
-  color: #333;
+  color: #fff; /* Texto blanco */
 }
 
 .btn-primary {
