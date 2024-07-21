@@ -9,17 +9,17 @@
   font-size: 1em;
   color: #333;
 }
-
+/*Estilos para la lista de chofere0*/
 .list-group-item {
   cursor: pointer;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   margin-bottom: 5px;
   background-color: #fff;
   transition: background-color 0.3s;
 }
 
 .list-group-item:hover {
-  background-color: #f0f0f0;
+  background-color: #808080;
 }

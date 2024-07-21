@@ -12,7 +12,7 @@
 
 .driver-license {
   margin-top: 20px;
-  background-color: #fff;
+  background-color: #282828;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -25,6 +25,7 @@
 .conductor-identificate, .driver-first-name, .driver-last-name, .driver-licencia, .driver-category,
 .driver-telefono, .second-name, .second-last-name, .driver-fecha-vencimiento {
   margin-bottom: 10px;
+  padding-right: 15px;
 }
 
 .conductor-identificate span:first-child,
@@ -39,7 +40,7 @@
   display: inline-block;
   width: 150px;
   font-weight: bold;
-  color: #666;
+  color: white;
 }
 
 .conductor-identificate span:last-child,
@@ -52,5 +53,5 @@
 .second-last-name span:last-child,
 .driver-fecha-vencimiento span:last-child {
   display: inline-block;
-  color: #333;
+  color: whitesmoke;
 }

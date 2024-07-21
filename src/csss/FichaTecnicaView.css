@@ -45,6 +45,7 @@
   
   label {
     color: white;
+    margin-top: 8px;
   }
   
   .btn-primary {
@@ -62,7 +63,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+   
     margin-bottom: 20px;
   }
   
@@ -78,6 +79,7 @@
   .form-group label {
     display: block; /* Hace que el label ocupe su propia línea */
     margin-bottom: 5px; /* Espacio entre el label y el input */
+    margin-top: 5px;;
   }
   
   .form-control {
