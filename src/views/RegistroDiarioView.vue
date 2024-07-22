@@ -72,33 +72,7 @@
 </div>
                 <div class="col">
                     
-                    <div class="row p-3" id="ht-mant">
-                        <h4>Historial de Mantenimiento</h4>
-                        <div style="overflow-x: auto;">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>F-Salida</th>
-                                        <th>Nvl-Daño</th>
-                                        <th>Nvl-Combustible</th>
-                                        <th>Nvl-Aceite</th>
-                                        <th>Km-Salida</th>
-                                        <th>Observaciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="mantenimientos in mantenimientos" :key="mantenimientos.id">
-                                        <td>{{ mantenimientos.fechaSalida }}</td>
-                                        <td>{{ mantenimientos.nivelDanio }}</td>
-                                        <td>{{ mantenimientos.nivelCombustible }}</td>
-                                        <td>{{ mantenimientos.nivelAceite }}</td>
-                                        <td>{{ mantenimientos.kilometrajeSalida }}</td>
-                                        <td>{{ mantenimientos.observaciones }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                   
                     <div class="row">
     <div class="division">
         <!-- espacio vacio para que no este muy pegado -->
