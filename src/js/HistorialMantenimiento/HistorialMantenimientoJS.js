@@ -18,8 +18,6 @@ export default {
       },
       currentPage: 1,
       rowsPerPage: 5,
-      alertSuccess: false,
-      alertError: false,
     };
   },
   computed: {
@@ -88,23 +86,23 @@ export default {
         const response = await axios.post('http://localhost:8069/api/mantenimiento/ingreso/guardar', this.mantenimientoRealizado);
         console.log('Mantenimiento guardado:', response.data);
         this.limpiarCampos();
-        this.alertSuccess = true;
-        this.alertError = false;
-        const modal = new bootstrap.Modal(document.getElementById('successModal'));
-        modal.show();
+        this.$toast.open({
+          message: 'Operación completada con éxito.',
+          type: 'success',
+          duration: 5000,
+          position: 'top-right'
+        });
         setTimeout(() => {
-          this.alertSuccess = false;
           window.location.reload();
         }, 3000);
       } catch (error) {
         console.error('Error guardando mantenimiento:', error);
-        this.alertSuccess = false;
-        this.alertError = true;
-        const modal = new bootstrap.Modal(document.getElementById('errorModal'));
-        modal.show();
-        setTimeout(() => {
-          this.alertError = false;
-        }, 3000);
+        this.$toast.open({
+          message: 'Error guardando mantenimiento.',
+          type: 'error',
+          duration: 5000,
+          position: 'top-right'
+        });
       }
     },
     limpiarCampos() {
