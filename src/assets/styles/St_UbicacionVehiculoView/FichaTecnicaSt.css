@@ -7,10 +7,10 @@
   background: #333333; /* Fondo negro más claro */
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Ajusta la sombra para que sea más visible en fondo oscuro */
   animation: slideIn 0.5s ease-out;
   width: 100%;
-  border: 1px solid #fff; /* Borde blanco */
+  border: none;
+ 
 }
 
 .title {
@@ -41,7 +41,6 @@
   transition: box-shadow 0.2s ease-in-out;
   background-color: #444; /* Fondo del input más claro */
   color: white; /* Texto blanco */
-  border: 1px solid white; /* Borde blanco */
 }
 
 .form-control:focus {

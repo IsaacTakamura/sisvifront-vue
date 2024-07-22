@@ -7,6 +7,10 @@ body, html {
     padding: 0;
   }
   
+  .app{
+    background: #141414;
+  }
+
   .centered-container {
     display: flex;
     flex-direction: column;

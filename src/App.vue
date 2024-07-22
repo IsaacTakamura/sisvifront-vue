@@ -10,55 +10,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-5 mb-lg-0">
-        <li class="nav-item" style="margin-right: 15px;">
-          <router-link to="/dashboard" class="nav-link" href="#">
-          <i class="fa-solid fa-chart-bar"></i>
-          Dashboard
-          </router-link>
-        </li>
-
-        <li class="nav-item" style="margin-right: 15px;">
-          <router-link to="/registraractivos" class="nav-link" href="#">
-            <i class="fa-solid fa-plus"></i>
-            Registro
-          </router-link>
-        </li>
-
-        <li class="nav-item" style="margin-right: 15px;">
-          <router-link to="/registro" class="nav-link" aria-current="page" href="#">
-            <i class="fa-solid fa-car"></i>
-            Vehiculos
-          </router-link>
-        </li>
-
-        <li class="nav-item"  style="margin-right: 15px;">
-          <router-link to="/historial" class="nav-link" href="#">
-            <i class="fa-solid fa-screwdriver-wrench"></i>
-            Mantenimiento
-          </router-link>
-        </li>
-        
-        <li class="nav-item"  style="margin-right: 15px;">
-          <router-link to="/ubicacionv" class="nav-link" href="#">
-            <i class="fa-solid fa-location-dot"></i>
-            Ubicacion
-          </router-link>
-        </li>
-
-        <li class="nav-item"  style="margin-right: 15px;">
-          <router-link to="/gestionfaltas" class="nav-link" href="#">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Gestion Faltas
-          </router-link>
-        </li>
-
-        <li class="nav-item"  style="margin-right: 15px;">
-          <router-link to="/fallovehicular" class="nav-link" href="#">
-            <i class="fas fa-car-crash"></i>
-            Fallos Vehiculares
-          </router-link>
-        </li>
-
         <li class="nav-item"  style="margin-right: 15px;">
           <router-link to="/choferesVehiculos" class="nav-link" href="#">
             <i class="fa-solid fa-id-card"></i>
@@ -66,12 +17,64 @@
           </router-link>
         </li>
         
+        <li class="nav-item" style="margin-right: 15px;">
+          <router-link to="/registraractivos" class="nav-link" href="#">
+            <i class="fa-solid fa-plus"></i>
+            Registro
+          </router-link>
+        </li>
+        
+        <li class="nav-item" style="margin-right: 15px;">
+          <router-link to="/registro" class="nav-link" aria-current="page" href="#">
+            <i class="fa-solid fa-car"></i>
+            Vehiculos
+          </router-link>
+        </li>
+        <li class="nav-item"  style="margin-right: 15px;">
+          <router-link to="/ubicacionv" class="nav-link" href="#">
+            <i class="fa-solid fa-location-dot"></i>
+            Ubicacion
+          </router-link>
+        </li>
+        <li class="nav-item"  style="margin-right: 15px;">
+          <router-link to="/gestionfaltas" class="nav-link" href="#">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            Gestion Faltas
+          </router-link>
+        </li>   
+        
+        <li class="nav-item"  style="margin-right: 15px;">
+          <router-link to="/fallovehicular" class="nav-link" href="#">
+            <i class="fas fa-car-crash"></i>
+            Fallos Vehiculares
+          </router-link>
+        </li>
+        <li class="nav-item"  style="margin-right: 15px;">
+          <router-link to="/historial" class="nav-link" href="#">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            Mantenimiento
+          </router-link>
+        </li>
+        <li class="nav-item" style="margin-right: 15px;">
+          <router-link to="/dashboard" class="nav-link" href="#">
+          <i class="fa-solid fa-chart-bar"></i>
+          Dashboard
+          </router-link>
+        </li>
+       <
+       <!--li para salir y regresar a home -->
+      <li class="nav-item" style="margin-right: 15px;">
+        <router-link to="/home" class="nav-link" href="./components/HelloWorld.vue">
+          <i class="fa-solid fa-sign-out" style="color: red;"></i>
+          Salir
+        </router-link>
+      </li>
       </ul>
       
     </div>
   </div>
 </nav>
-  <router-view/>
+<router-view/>
 </template>
 
 <style>

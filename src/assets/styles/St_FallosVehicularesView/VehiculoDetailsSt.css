@@ -12,7 +12,7 @@
     font-size: 2em; /* Tamaño de fuente más grande */
     font-weight: 500; /* Peso de fuente menos intenso */
     margin-bottom: 30px; /* Más espacio debajo del encabezado */
-    color: cyan; /* Color de acento para el encabezado */
+   color: white;
 }
 
 .details-container {

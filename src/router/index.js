@@ -78,16 +78,16 @@ const routes = [
     component: FallosVehicularesView
   },
 
-  {
-    path: '/choferesVehiculos',
-    name: 'choferesVehiculos',
-    component: ChoferesVehiculosView
-  },
   
   {
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard
+  },
+  {
+    path: '/choferesVehiculos',
+    name: 'choferesVehiculos',
+    component: ChoferesVehiculosView
   },
 ]
 const router = createRouter({

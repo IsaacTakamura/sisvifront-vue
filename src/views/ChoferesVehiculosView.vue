@@ -15,7 +15,7 @@
             @mostrar-datos="mostrarDatosConductor"
           ></ChoferesListView>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9" >
           <!-- Datos del conductor y vehículo -->
           <div class="container text-center">
             <div class="row">

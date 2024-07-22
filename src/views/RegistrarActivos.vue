@@ -55,6 +55,7 @@ export default {
   flex-wrap: wrap; /* Permite que las tarjetas se ajusten y envuelvan */
   justify-content: center;
   gap: 20px;
+  padding-bottom: 25px;
 }
 
 
