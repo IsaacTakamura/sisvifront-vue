@@ -1,6 +1,39 @@
 <template>
   <div class="app">
     <div class="container">
+      <!-- Modales de Bootstrap para los mensajes -->
+      <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Operación completada con éxito.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="errorModalLabel">Error</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Error guardando mantenimiento.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="right-section">
         <div class="box seleccionar-ingreso">
           <h3>Seleccionar Ingreso</h3>
@@ -32,7 +65,9 @@
                   <td>{{ mantenimiento.mantenimientoIngreso.id }}</td>
                   <td>
                     {{
-                      formatDate(mantenimiento.mantenimientoIngreso.fechaIngreso)
+                      formatDate(
+                        mantenimiento.mantenimientoIngreso.fechaIngreso
+                      )
                     }}
                   </td>
                   <td>
@@ -56,17 +91,29 @@
               </tbody>
             </table>
             <div class="pagination">
-              <button id="btn-pg"  @click="prevPage" :disabled="currentPage === 1">
+              <button
+                id="btn-pg"
+                @click="prevPage"
+                :disabled="currentPage === 1"
+              >
                 Anterior
               </button>
               <span id="pagx">Página {{ currentPage }} de {{ totalPages }}</span>
-              <button  id="btn-pg" @click="nextPage" :disabled="currentPage === totalPages">
+              <button
+                id="btn-pg"
+                @click="nextPage"
+                :disabled="currentPage === totalPages"
+              >
                 Siguiente
               </button>
             </div>
             <div class="rows-per-page">
               <label for="rows" id="fl-pags">Filas por página:</label>
-              <select id="rows" v-model="rowsPerPage" @change="changeRowsPerPage">
+              <select
+                id="rows"
+                v-model="rowsPerPage"
+                @change="changeRowsPerPage"
+              >
                 <option
                   v-for="option in [5, 10, 15, 20]"
                   :key="option"
@@ -102,7 +149,12 @@
           <div v-if="vehiculoSeleccionado">
             <div class="input-group">
               <label>Imagen del vehículo:</label>
-              <input type="file" id="imagenVehiculo" accept="image/*" />
+              <div
+                :style="{
+                  backgroundImage: `url(${getVehicleImage(vehiculoSeleccionado.img)})`,
+                }"
+                class="vehicle-image"
+              ></div>
             </div>
             <div class="input-group">
               <label>Ruta:</label>

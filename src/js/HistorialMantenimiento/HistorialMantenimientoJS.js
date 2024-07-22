@@ -1,4 +1,5 @@
 import axios from 'axios';
+import defaultVehicleImg from "@/assets/images/default-vehicle.jpg";
 
 export default {
   data() {
@@ -17,6 +18,8 @@ export default {
       },
       currentPage: 1,
       rowsPerPage: 5,
+      alertSuccess: false,
+      alertError: false,
     };
   },
   computed: {
@@ -85,9 +88,23 @@ export default {
         const response = await axios.post('http://localhost:8069/api/mantenimiento/ingreso/guardar', this.mantenimientoRealizado);
         console.log('Mantenimiento guardado:', response.data);
         this.limpiarCampos();
-        window.location.reload();
+        this.alertSuccess = true;
+        this.alertError = false;
+        const modal = new bootstrap.Modal(document.getElementById('successModal'));
+        modal.show();
+        setTimeout(() => {
+          this.alertSuccess = false;
+          window.location.reload();
+        }, 3000);
       } catch (error) {
         console.error('Error guardando mantenimiento:', error);
+        this.alertSuccess = false;
+        this.alertError = true;
+        const modal = new bootstrap.Modal(document.getElementById('errorModal'));
+        modal.show();
+        setTimeout(() => {
+          this.alertError = false;
+        }, 3000);
       }
     },
     limpiarCampos() {
@@ -110,9 +127,20 @@ export default {
     },
     changeRowsPerPage() {
       this.currentPage = 1;
+    },
+    getVehicleImage(img) {
+      if (img) {
+        try {
+          return require(`@/assets/vehiculos/${img}`);
+        } catch (e) {
+          return defaultVehicleImg;
+        }
+      } else {
+        return defaultVehicleImg;
+      }
     }
   },
   created() {
     this.fetchData();
-  },
+  }
 };
