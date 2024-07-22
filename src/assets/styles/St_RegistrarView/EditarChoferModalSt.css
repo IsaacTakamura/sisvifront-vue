@@ -10,6 +10,8 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    padding: 20px; /* Agregar padding para margen alrededor del modal */
+    box-sizing: border-box; /* Asegurar que el padding no afecte el tamaño del modal */
 }
 
 .modal-content {
@@ -17,10 +19,12 @@
     color: white;
     padding: 20px;
     border-radius: 10px;
-    width: 400px;
+    width: 400px; /* Mantener el ancho del modal original */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, opacity 0.3s ease;
+    max-height: 100%; /* Asegurar que el modal no exceda la altura de la pantalla */
+    overflow-y: auto; /* Agregar scroll si el contenido excede la altura del modal */
 }
 
 .modal-buttons {
@@ -54,17 +58,21 @@
     transform: scale(1.05);
 }
 
+.form-group label {
+    color: #cccccc; /* Cambiar el color de los labels a un gris claro */
+}
+
 .form-control {
     width: 100%;
     padding: 0.375rem 0.75rem;
     margin: auto;
     text-align: center;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #555; /* Cambiar el borde a un gris oscuro */
     box-sizing: border-box;
     transition: border-color 0.3s ease;
-    background-color: #444;
-    color: white;
+    background-color: white; /* Cambiar el fondo de los inputs a blanco */
+    color: black; /* Cambiar el color del texto a negro */
 }
 
 .form-control:focus {

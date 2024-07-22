@@ -18,7 +18,6 @@ body, html {
     background-color: #333333; /* Fondo negro más claro para el contenedor */
     color: white; /* Texto blanco */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 120vh;
   }
   
   .centered-button {
